@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: var(--font-alexandria);
+  @apply font-alexandria bg-black text-white;
 }
 
 .container {

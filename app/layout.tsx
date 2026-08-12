@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   title: "ذا كابيتال سويتس - The Capital Suites",
   description:
     "خيارك المميز في المملكة العربية السعودية للضيافة المتميزة وإدارة الأصول الفندقية.",
+  icons: {
+    icon: "/logo.png",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -20,6 +23,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       dir="rtl"
       className={`${alexandria.variable} h-full antialiased`}
     >
+      <head>
+        <link rel="icon" href="/logo.png" />
+      </head>
       <body className="min-h-full flex flex-col">
         <main>{children}</main>
       </body>
