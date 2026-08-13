@@ -15,16 +15,16 @@ export default function HeroSection() {
       </span>
       <span className="absolute left-0 top-0 w-full h-full bg-black/70 -z-10"></span>
 
-      <div className="container">
-        <h1 className="text-3xl md:text-6xl font-extrabold text-[#F8F8F8] text-center md:text-right leading-[50px] md:leading-[80px]">
-          ذا كابيتــــــال سويتــــــس <br /> للضيافــــة والفندقـــة
+      <div className="container text-center">
+        <h1 className="text-3xl md:text-6xl font-extrabold text-[#F8F8F8] leading-[50px] md:leading-[80px]">
+          إلي ملاك العقـــــارات
         </h1>
-        <p className="text-xl text-center md:text-right md:text-4xl font-extralight text-[#E7DECA] mt-4">
-          ادارة تــرفــع القــيــمــــة... وضـــيـــافة تــصــنـــع
-          التـــجــربــة
+        <p className="text-xl md:text-4xl font-extralight text-[#E7DECA] mt-4 max-w-4xl md:leading-[48px] mx-auto">
+          سلمنا موقع الان وعزز ارباحك مع خدمة ضيافة متميزة واهتمام فائق بموقعك
+          لتعزيز ارباحك
         </p>
 
-        <div className="mt-8 md:flex items-center gap-4 max-md:space-y-4">
+        {/* <div className="mt-8 md:flex items-center gap-4 max-md:space-y-4">
           <Link
             href="#"
             className="bg-white w-full text-black rounded-md px-14 py-3 flex items-center justify-center gap-4 md:w-fit hover:opacity-80 duration-75"
@@ -69,7 +69,7 @@ export default function HeroSection() {
               </svg>
             </span>
           </Link>
-        </div>
+        </div> */}
       </div>
 
       <span className="absolute bottom-0 left-0 w-full h-20 -z-10 bg-linear-to-t from-black to-transparent"></span>
