@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Alexandria } from "next/font/google";
 import "./globals.css";
+import Footer from "@/components/global/Footer";
 
 const alexandria = Alexandria({
   variable: "--font-alexandria",
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body className="min-h-full flex flex-col">
         <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );
