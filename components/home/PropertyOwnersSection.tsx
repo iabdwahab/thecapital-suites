@@ -1,17 +1,27 @@
 import Link from "next/link";
 
-export default function PropertyOwnersSection() {
+export default async function PropertyOwnersSection() {
+  const sectionHeadingRes = await fetch(
+    `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/section-info/176?_fields=id,acf&acf_format=standard`,
+  );
+  const sectionHeading: {
+    id: number;
+    acf: {
+      title: string;
+      description: string;
+    };
+  } = await sectionHeadingRes.json();
+
   return (
     <section className="container py-20">
       <span className="text-[14px] text-[#C9A455] text-center block">
         لملاك العقارات والمستثمرين
       </span>
-      <h2 className="font-bold text-3xl md:text-4xl text-[#E0BC78] text-center mt-4 leading-[46px]">
-        سلّم عقارك لنا... وشاهد نتائج مبهرة <br /> ودخــــلاً لا يُضــــــاهى
+      <h2 className="font-bold max-w-2xl mx-auto text-3xl md:text-4xl text-[#E0BC78] text-center mt-4 leading-[46px]">
+        {sectionHeading.acf.title}
       </h2>
       <p className="text-[#C8BFB0] font-light text-center text-lg mt-4">
-        إدارة فندقية احترافية تحوّل عقارك إلى مصدر دخل مستقر، بشفافية كاملة
-        وعقود موثقة تحفظ حقوقك.
+        {sectionHeading.acf.description}
       </p>
 
       <div className="max-md:space-y-3 md:flex items-center justify-center mt-10 gap-4 flex-wrap">

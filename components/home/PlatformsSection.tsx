@@ -1,5 +1,5 @@
 export default async function PlatformsSection() {
-  const res = await fetch(
+  const platformsListRes = await fetch(
     `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/booking-platforms?_fields=id,acf&acf_format=standard`,
   );
   const platformsList: {
@@ -17,15 +17,26 @@ export default async function PlatformsSection() {
         platform_8: string;
       };
     };
-  }[] = await res.json();
+  }[] = await platformsListRes.json();
+
+  const sectionHeadingRes = await fetch(
+    `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/section-info/175?_fields=id,acf&acf_format=standard`,
+  );
+  const sectionHeading: {
+    id: number;
+    acf: {
+      title: string;
+      description: string;
+    };
+  } = await sectionHeadingRes.json();
 
   return (
     <section className="py-20 container">
       <h2 className="font-bold text-3xl md:text-4xl text-[#E0BC78] text-center mt-4 leading-[46px]">
-        ندير عقارك على أكثر من 20 منصة عالمية وعربية{" "}
+        {sectionHeading.acf.title}
       </h2>
       <p className="text-[#C8BFB0] font-light text-center text-lg mt-4">
-        حضور واسع يعني حجوزات أكثر. ودخلاً أعلى لك
+        {sectionHeading.acf.description}
       </p>
 
       <div className="mt-10 border text-center border-[#c9a45541] rounded-2xl grid md:grid-cols-2 lg:grid-cols-4">

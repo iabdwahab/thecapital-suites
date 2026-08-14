@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 export default async function FeaturesSection() {
-  const res = await fetch(
+  const featuresListRes = await fetch(
     `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/dealing-features?_fields=id,acf&acf_format=standard`,
   );
   const featuresList: {
@@ -11,7 +11,18 @@ export default async function FeaturesSection() {
       title: string;
       description: string;
     };
-  }[] = await res.json();
+  }[] = await featuresListRes.json();
+
+  const sectionHeadingRes = await fetch(
+    `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/section-info/174?_fields=id,acf&acf_format=standard`,
+  );
+  const sectionHeading: {
+    id: number;
+    acf: {
+      title: string;
+      description: string;
+    };
+  } = await sectionHeadingRes.json();
 
   return (
     <section className="py-10 container">
@@ -24,10 +35,10 @@ export default async function FeaturesSection() {
           className="w-25 h-25 object-contain mx-auto"
         />
         <h2 className="font-bold text-3xl md:text-4xl text-[#E0BC78] text-center mt-2">
-          مميزات التعامل معنا
+          {sectionHeading.acf.title}
         </h2>
         <p className="text-[#A09080] font-light text-center text-lg mt-2">
-          ما يجعل ملاك العقارات يثقون بنا
+          {sectionHeading.acf.description}
         </p>
       </div>
 
