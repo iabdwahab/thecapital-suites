@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Alexandria } from "next/font/google";
+import { thamnyahFont } from "./fonts";
 import "./globals.css";
 import Footer from "@/components/global/Footer";
 
@@ -22,7 +23,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="ar"
       dir="rtl"
-      className={`${alexandria.variable} h-full antialiased`}
+      className={`${alexandria.variable} ${thamnyahFont.variable} h-full antialiased `}
     >
       <head>
         <link rel="icon" href="/logo.png" />

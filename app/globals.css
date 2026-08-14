@@ -2,6 +2,7 @@
 
 @theme inline {
   --font-alexandria: var(--font-alexandria);
+  --font-thamnyah: var(--font-thamnyah);
 }
 
 body {
