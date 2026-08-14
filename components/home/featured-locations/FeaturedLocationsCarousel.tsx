@@ -36,6 +36,8 @@ export default function FeaturedLocationsCarousel({
     featuredLocationsList[0]?.id ?? null,
   );
   const swiperRef = useRef<SwiperType | null>(null);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
 
   const activeLocation = featuredLocationsList.find(
     (location) => location.id === activeLocationId,
@@ -46,6 +48,11 @@ export default function FeaturedLocationsCarousel({
         (image): image is string => image !== false,
       )
     : [];
+
+  const updateNavState = (swiper: SwiperType) => {
+    setIsBeginning(swiper.isBeginning);
+    setIsEnd(swiper.isEnd);
+  };
 
   return (
     <>
@@ -69,13 +76,14 @@ export default function FeaturedLocationsCarousel({
       {imagesList.length != 0 ? (
         <>
           {/* Swiper carousel */}
-
           <div className="mt-10 cursor-grabbing">
             <Swiper
               modules={[Navigation]}
-              onBeforeInit={(swiper) => {
+              onSwiper={(swiper) => {
                 swiperRef.current = swiper;
+                updateNavState(swiper);
               }}
+              onSlideChange={updateNavState}
               spaceBetween={16}
               slidesPerView={1}
               breakpoints={{
@@ -103,7 +111,8 @@ export default function FeaturedLocationsCarousel({
           <div className="flex justify-center gap-2 mt-10">
             <button
               onClick={() => swiperRef.current?.slidePrev()}
-              className="border border-[#d9d9d92a] rounded-full p-3 cursor-pointer hover:opacity-80"
+              disabled={isBeginning}
+              className="border border-[#d9d9d92a] rounded-full p-3 cursor-pointer hover:opacity-80 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:opacity-30"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -122,7 +131,8 @@ export default function FeaturedLocationsCarousel({
             </button>
             <button
               onClick={() => swiperRef.current?.slideNext()}
-              className="border border-[#d9d9d92a] rounded-full p-3 cursor-pointer hover:opacity-80"
+              disabled={isEnd}
+              className="border border-[#d9d9d92a] rounded-full p-3 cursor-pointer hover:opacity-80 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:opacity-30"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
