@@ -1,4 +1,5 @@
 import Image from "next/image";
+import FeaturedLocationsCarousel from "./FeaturedLocationsCarousel";
 
 export default async function FeaturedLocations() {
   const featuredLocationsListRes = await fetch(
@@ -31,7 +32,10 @@ export default async function FeaturedLocations() {
         مواقعنـــــا المميـــــزة
       </h2>
 
-      <div className="bg-[#3d29003b] w-fit mx-auto border border-[#3D2900] p-3 md:p-2 rounded-xl md:rounded-full flex flex-wrap justify-center items-center gap-2">
+      <FeaturedLocationsCarousel
+        featuredLocationsList={featuredLocationsList}
+      />
+      {/* <div className="bg-[#3d29003b] w-fit mx-auto border border-[#3D2900] p-3 md:p-2 rounded-xl md:rounded-full flex flex-wrap justify-center items-center gap-2">
         {featuredLocationsList.map((location) => (
           <button
             key={location.id}
@@ -95,7 +99,7 @@ export default async function FeaturedLocations() {
             />
           </svg>
         </button>
-      </div>
+      </div> */}
     </section>
   );
 }

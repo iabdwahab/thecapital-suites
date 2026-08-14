@@ -1,5 +1,5 @@
 import ContactForm from "@/components/home/ContactForm";
-import FeaturedLocations from "@/components/home/FeaturedLocations";
+import FeaturedLocations from "@/components/home/featured-locations/FeaturedLocations";
 import FeaturesSection from "@/components/home/FeaturesSection";
 import HeroSection from "@/components/home/HeroSection";
 import PlatformsSection from "@/components/home/PlatformsSection";
