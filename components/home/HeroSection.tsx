@@ -1,7 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function HeroSection() {
+export default async function HeroSection() {
+  const sectionHeadingRes = await fetch(
+    `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/section-info/180?_fields=id,acf&acf_format=standard`,
+  );
+  const sectionHeading: {
+    id: number;
+    acf: {
+      title: string;
+      description: string;
+    };
+  } = await sectionHeadingRes.json();
+
   return (
     <section className="min-h-screen py-20 flex flex-col justify-center relative">
       <span>
@@ -16,12 +27,11 @@ export default function HeroSection() {
       <span className="absolute left-0 top-0 w-full h-full bg-black/70 -z-10"></span>
 
       <div className="container">
-        <h1 className="text-3xl md:text-6xl font-extrabold text-[#F8F8F8] text-center md:text-right leading-[50px] md:leading-[80px]">
-          ذا كابيتــــــال سويتــــــس <br /> للضيافــــة والفندقـــة
+        <h1 className="text-3xl md:text-6xl font-extrabold max-w-5xl text-[#F8F8F8] text-center md:text-right leading-[50px] md:leading-[80px]">
+          {sectionHeading.acf.title}
         </h1>
         <p className="text-xl text-center md:text-right md:text-4xl font-extralight text-[#E7DECA] mt-4">
-          ادارة تــرفــع القــيــمــــة... وضـــيـــافة تــصــنـــع
-          التـــجــربــة
+          {sectionHeading.acf.description}
         </p>
 
         <div className="mt-8 md:flex items-center gap-4 max-md:space-y-4">

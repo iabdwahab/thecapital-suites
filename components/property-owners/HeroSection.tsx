@@ -1,7 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function HeroSection() {
+export default async function HeroSection() {
+  const sectionHeadingRes = await fetch(
+    `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/section-info/178?_fields=id,acf&acf_format=standard`,
+  );
+  const sectionHeading: {
+    id: number;
+    acf: {
+      title: string;
+      description: string;
+    };
+  } = await sectionHeadingRes.json();
+
   return (
     <section className="min-h-screen py-20 flex flex-col justify-center relative">
       <span>
@@ -17,11 +28,10 @@ export default function HeroSection() {
 
       <div className="container text-center">
         <h1 className="text-3xl md:text-6xl font-extrabold text-[#F8F8F8] leading-[50px] md:leading-[80px]">
-          إلي ملاك العقـــــارات
+          {sectionHeading.acf.title}
         </h1>
         <p className="text-xl md:text-4xl font-extralight text-[#E7DECA] mt-4 max-w-4xl md:leading-[48px] mx-auto">
-          سلمنا موقع الان وعزز ارباحك مع خدمة ضيافة متميزة واهتمام فائق بموقعك
-          لتعزيز ارباحك
+          {sectionHeading.acf.description}
         </p>
 
         {/* <div className="mt-8 md:flex items-center gap-4 max-md:space-y-4">
