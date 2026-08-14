@@ -1,6 +1,7 @@
 import ContactForm from "@/components/home/ContactForm";
 import FeaturesSection from "@/components/home/FeaturesSection";
 import HeroSection from "@/components/home/HeroSection";
+import PlatformsSection from "@/components/home/PlatformsSection";
 import PropertyOwnersSection from "@/components/home/PropertyOwnersSection";
 
 export default function Home() {
@@ -9,6 +10,7 @@ export default function Home() {
       <HeroSection />
       <PropertyOwnersSection />
       <FeaturesSection />
+      <PlatformsSection />
       <section className="container py-20 grid lg:grid-cols-[570px_1fr] gap-4">
         <div>
           <h2 className="text-[#E0BC78] mb-8 text-6xl font-extrabold leading-[70px]">
