@@ -30,7 +30,10 @@ export default async function PlatformsSection() {
 
       <div className="mt-10 border text-center border-[#c9a45541] rounded-2xl grid md:grid-cols-2 lg:grid-cols-4">
         {platformsList.map((platform) => (
-          <div className="p-8 md:p-10  space-y-2 border-l border-[#c9a45541]">
+          <div
+            key={platform.id}
+            className="p-8 md:p-10  space-y-2 border-l border-[#c9a45541]"
+          >
             <h4 className="text-[#C9A455] font-bold">{platform.acf.title}</h4>
             <hr className="border-[#c9a45541]" />
             <ul className="text-[#C0B09A] space-y-2">
