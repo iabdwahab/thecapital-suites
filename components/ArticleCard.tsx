@@ -1,16 +1,30 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function ArticleCard() {
+export default function ArticleCard({
+  id,
+  title,
+  description,
+  brief,
+  image,
+  date,
+}: {
+  id: number;
+  title: string;
+  description: string;
+  brief: string;
+  image: string | false;
+  date: string;
+}) {
   return (
     <article className="px-3 py-3 bg-[#202020] rounded-md">
       <div className="w-full h-[230px] relative overflow-hidden rounded-md">
         <Link
-          href="#"
+          href={`/articles/${id}`}
           className="group block w-full h-full relative overflow-hidden rounded-md"
         >
           <Image
-            src="/article-placeholder.jpg"
+            src={image || "/article-placeholder.jpg"}
             alt="article"
             width={400}
             height={200}
@@ -24,25 +38,28 @@ export default function ArticleCard() {
         </Link>
       </div>
       <div className="space-y-2 pt-4 px-1">
-        <span className="block w-fit rounded-full bg-[#FFAA0012] text-[#FFAA00] px-2 py-1 border-[#FFAA00] border-[1px] text-[11px] font-light">
-          4/5/2027
-        </span>
+        {date && (
+          <span className="block w-fit rounded-full bg-[#FFAA0012] text-[#FFAA00] px-2 py-1 border-[#FFAA00] border-[1px] text-[11px] font-light">
+            {new Date(date).toLocaleDateString("ar-EG", {
+              dateStyle: "short",
+            })}
+          </span>
+        )}
         <h3 className="text-[#F8F8F8] font-normal">
           <Link
-            href="#"
+            href={`/articles/${id}`}
             className="hover:underline hover:text-[#FFAA00] transition duration-100"
           >
-            إطلاق مرحلة جديدة من المشروع
+            {title}
           </Link>
         </h3>
         <p className="text-[#888888BF] text-[14px] leading-[21px] font-light">
-          العمل مع شركتكم كان تجربة استثنائية حقًّا، أدبع مصمموكم الداخليون
-          إبداعًا لافتًا في تفصيلة.
+          {brief}
         </p>
       </div>
       <div className="px-2 pb-2">
         <Link
-          href="#"
+          href={`/articles/${id}`}
           className="block w-fit p-2 mr-auto rounded-full bg-[#202020] border border-[#d9d9d95b] hover:bg-[#FFAA0012] hover:text-[#FFAA00] hover:border-[#FFAA00] transition duration-200"
         >
           <svg
