@@ -4,12 +4,14 @@ import FeaturesSection from "@/components/home/FeaturesSection";
 import HeroSection from "@/components/home/HeroSection";
 import PlatformsSection from "@/components/home/PlatformsSection";
 import PropertyOwnersSection from "@/components/home/PropertyOwnersSection";
+import WhyusSection from "@/components/home/WhyusSection";
 
 export default function Home() {
   return (
     <>
       <HeroSection />
       <FeaturedLocations />
+      <WhyusSection />
       <PropertyOwnersSection />
       <FeaturesSection />
       <PlatformsSection />
