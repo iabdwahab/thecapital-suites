@@ -1,7 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function WhyusSection() {
+export default async function WhyusSection() {
+  const whyusListRes = await fetch(
+    `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/whyus-section?_fields=id,acf&acf_format=standard`,
+  );
+  const whyusList: {
+    id: number;
+    acf: {
+      title: string;
+      description: string;
+      icon: string | false;
+    };
+  }[] = await whyusListRes.json();
+
   return (
     <section className="py-20 relative overflow-hidden">
       <Image
@@ -34,131 +46,38 @@ export default function WhyusSection() {
           className="mx-auto mb-10 w-30"
         />
 
-        <h2 className="font-thamnyah max-w-4xl leading-[60px] mx-auto text-center font-black text-5xl  bg-linear-to-l from-white to-80% to-[#bdbdbd] bg-clip-text text-transparent">
+        <h2 className="font-thamnyah max-w-4xl leading-[60px] mx-auto text-center font-black text-4xl md:text-5xl  bg-linear-to-l from-white to-80% to-[#bdbdbd] bg-clip-text text-transparent">
           خيارك المميز في المملكة للضـيافـــــة المتميـــــزة وإدارة الأصول
           الفندقية
         </h2>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 mt-20 gap-20">
-          <div className="flex gap-4">
-            <div>
-              <Image
-                src="/whyus-icon.svg"
-                alt="Why Us Icon"
-                width={100}
-                height={100}
-                className="w-10 h-10"
-              />
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 mt-20 gap-10 lg:gap-20">
+          {whyusList.map((item) => (
+            <div className="flex gap-4">
+              <div>
+                <Image
+                  src="/whyus-icon.svg"
+                  alt="Why Us Icon"
+                  width={100}
+                  height={100}
+                  className="w-10 h-10"
+                />
+              </div>
+              <div>
+                <h3 className="font-thamnyah font-medium text-3xl">
+                  {item.acf.title}
+                </h3>
+                <p className="font-alexandria font-light text-lg mt-3">
+                  {item.acf.description}
+                </p>
+              </div>
             </div>
-            <div>
-              <h3 className="font-thamnyah font-medium text-3xl">
-                الابتكــــــــار
-              </h3>
-              <p className="font-alexandria font-light text-lg mt-3">
-                تبني التكنولوجيا الحديثة وتحسين العمليات
-              </p>
-            </div>
-          </div>
-          <div className="flex gap-4">
-            <div>
-              <Image
-                src="/whyus-icon.svg"
-                alt="Why Us Icon"
-                width={100}
-                height={100}
-                className="w-10 h-10"
-              />
-            </div>
-            <div>
-              <h3 className="font-thamnyah font-medium text-3xl">
-                الابتكــــــــار
-              </h3>
-              <p className="font-alexandria font-light text-lg mt-3">
-                تبني التكنولوجيا الحديثة وتحسين العمليات
-              </p>
-            </div>
-          </div>
-          <div className="flex gap-4">
-            <div>
-              <Image
-                src="/whyus-icon.svg"
-                alt="Why Us Icon"
-                width={100}
-                height={100}
-                className="w-10 h-10"
-              />
-            </div>
-            <div>
-              <h3 className="font-thamnyah font-medium text-3xl">
-                الابتكــــــــار
-              </h3>
-              <p className="font-alexandria font-light text-lg mt-3">
-                تبني التكنولوجيا الحديثة وتحسين العمليات
-              </p>
-            </div>
-          </div>
-          <div className="flex gap-4">
-            <div>
-              <Image
-                src="/whyus-icon.svg"
-                alt="Why Us Icon"
-                width={100}
-                height={100}
-                className="w-10 h-10"
-              />
-            </div>
-            <div>
-              <h3 className="font-thamnyah font-medium text-3xl">
-                الابتكــــــــار
-              </h3>
-              <p className="font-alexandria font-light text-lg mt-3">
-                تبني التكنولوجيا الحديثة وتحسين العمليات
-              </p>
-            </div>
-          </div>
-          <div className="flex gap-4">
-            <div>
-              <Image
-                src="/whyus-icon.svg"
-                alt="Why Us Icon"
-                width={100}
-                height={100}
-                className="w-10 h-10"
-              />
-            </div>
-            <div>
-              <h3 className="font-thamnyah font-medium text-3xl">
-                الابتكــــــــار
-              </h3>
-              <p className="font-alexandria font-light text-lg mt-3">
-                تبني التكنولوجيا الحديثة وتحسين العمليات
-              </p>
-            </div>
-          </div>
-          <div className="flex gap-4">
-            <div>
-              <Image
-                src="/whyus-icon.svg"
-                alt="Why Us Icon"
-                width={100}
-                height={100}
-                className="w-10 h-10"
-              />
-            </div>
-            <div>
-              <h3 className="font-thamnyah font-medium text-3xl">
-                الابتكــــــــار
-              </h3>
-              <p className="font-alexandria font-light text-lg mt-3">
-                تبني التكنولوجيا الحديثة وتحسين العمليات
-              </p>
-            </div>
-          </div>
+          ))}
         </div>
 
         <Link
           href="/booking"
-          className="bg-white text-lg mx-auto mt-15 flex items-center gap-2 w-fit text-black py-2 px-14"
+          className="bg-white text-lg mx-auto mt-15 flex items-center rounded-lg gap-2 w-fit text-black py-2 px-14"
         >
           <span>احجز الآن</span>
           <span>
