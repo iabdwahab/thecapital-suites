@@ -105,8 +105,8 @@ export default async function Footer() {
       </span>
       <span className="absolute left-0 top-0 w-full h-full bg-black/70 -z-10"></span>
 
-      <div className="container lg:grid lg:grid-cols-[1fr_200px_1fr] lg:gap-10">
-        <div className="w-fit mx-auto max-lg:mb-10">
+      <div className="container lg:grid lg:grid-cols-[1fr_1fr] lg:gap-4">
+        <div className="w-fit max-lg:mx-auto max-lg:mb-10">
           <Image
             src={footerData.acf.logo || "/logo.png"}
             alt="Logo"
@@ -139,7 +139,7 @@ export default async function Footer() {
           </ul>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 lg:col-start-3">
+        <div className="grid md:grid-cols-2 gap-6 ">
           <div>
             <h4 className="text-2xl mb-4">
               {footerData.acf.column_links.title || "روابط سريعة"}
