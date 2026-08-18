@@ -10,6 +10,12 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/wp-content/**",
       },
+      {
+        protocol: "https",
+        hostname: "salmon-reindeer-627957.hostingersite.com",
+        port: "",
+        pathname: "/wp-content/uploads/**",
+      },
     ],
     dangerouslyAllowLocalIP: true,
   },

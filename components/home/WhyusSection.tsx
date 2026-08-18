@@ -53,7 +53,7 @@ export default async function WhyusSection() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 mt-20 gap-10 lg:gap-20">
           {whyusList.map((item) => (
-            <div className="flex gap-4">
+            <div key={item.id} className="flex gap-4">
               <div>
                 <Image
                   src="/whyus-icon.svg"
