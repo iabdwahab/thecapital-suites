@@ -12,13 +12,16 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "salmon-reindeer-627957.hostingersite.com",
+        hostname: "wp.thecapitalsuites.sa",
         port: "",
         pathname: "/wp-content/uploads/**",
       },
     ],
+    unoptimized: true,
     dangerouslyAllowLocalIP: true,
   },
+
+  output: "export",
 };
 
 export default nextConfig;

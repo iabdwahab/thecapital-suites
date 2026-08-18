@@ -1,0 +1,60 @@
+# .github/workflows/deploy.yml
+
+name: Next.js Static Build and SFTP Deploy
+
+on:
+  push:
+    branches:
+      - main # Trigger the workflow on pushes to the main branch
+  workflow_dispatch: # Manual trigger from GitHub UI
+  repository_dispatch:
+    types: [wordpress_trigger] # Triggered by your WordPress plugin
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code from the repository
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up the correct Node.js version
+      - name: 🧱 Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20" # Specify the Node.js version your project uses
+          cache: "npm"
+
+      # Step 3: Install project dependencies
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      # Step 4: Build the Next.js static files
+      # This step assumes your package.json has "build": "next build" and
+      # your next.config.js has output: 'export' to generate the 'out' folder.
+      - name: 🛠️ Build Static Files
+        run: npm run build
+
+        env:
+          # 🚨 NEXT_PUBLIC_ is needed for client-side code in Next.js
+          NEXT_PUBLIC_WORDPRESS_API_URL: https://wp.thecapitalsuites.sa/wp-json/wp/v2
+
+      # Step 5: Deploy the contents of the 'out' folder to the host via FTP/SFTP
+      # We use a community action for robust file transfer.
+      - name: 🚀 Deploy to Host via FTP/SFTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: 21
+          # The local directory is the 'out' folder created by the build step
+          local-dir: ./out/
+          # Use --delete to remove old files on the host that are no longer in the 'out' folder
+          # This ensures a clean sync.
+          args: --delete --skip-transfer-all
+
+      # Optional: Clean up the generated files on the runner after deployment
+      - name: Clean up files
+        run: rm -rf ./out
