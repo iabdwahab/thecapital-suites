@@ -10,6 +10,14 @@ export default async function HeroSection() {
     acf: {
       title: string;
       description: string;
+      link_1: {
+        text: string;
+        href: string;
+      };
+      link_2: {
+        text: string;
+        href: string;
+      };
     };
   } = await sectionHeadingRes.json();
 
@@ -36,10 +44,10 @@ export default async function HeroSection() {
 
         <div className="mt-8 md:flex items-center gap-4 max-md:space-y-4">
           <Link
-            href="#"
+            href={sectionHeading.acf.link_1.href || "/"}
             className="bg-white w-full text-black rounded-md px-14 py-3 flex items-center justify-center gap-4 md:w-fit hover:opacity-80 duration-75"
           >
-            <span>احجز الآن</span>
+            <span>{sectionHeading.acf.link_1.text}</span>
             <span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -58,10 +66,10 @@ export default async function HeroSection() {
             </span>
           </Link>
           <Link
-            href="#"
+            href={sectionHeading.acf.link_2.href || "/"}
             className="bg-transparent w-full text-white border border-white rounded-md px-10 py-3 flex items-center justify-center gap-4 md:w-fit hover:opacity-80 duration-75"
           >
-            <span>تواصل معنا</span>
+            <span>{sectionHeading.acf.link_2.text}</span>
             <span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

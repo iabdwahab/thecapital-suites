@@ -2,6 +2,21 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default async function WhyusSection() {
+  const sectionDataRef = await fetch(
+    `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/section-info/177?_fields=id,acf&acf_format=standard`,
+  );
+  const sectionData: {
+    id: number;
+    acf: {
+      title: string;
+      description: string;
+      link: {
+        text: string;
+        href: string;
+      };
+    };
+  } = await sectionDataRef.json();
+
   const whyusListRes = await fetch(
     `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/whyus-section?_fields=id,acf&acf_format=standard`,
   );
@@ -15,7 +30,7 @@ export default async function WhyusSection() {
   }[] = await whyusListRes.json();
 
   return (
-    <section className="py-20 relative overflow-hidden">
+    <section className="py-20 z-10 relative overflow-hidden">
       <Image
         src="/whyus-background.jpg"
         alt="Why Us Background"
@@ -34,7 +49,7 @@ export default async function WhyusSection() {
         alt="Lines Pattern"
         width={1440}
         height={643}
-        className="absolute w-full h-full left-0 bottom-0 z-10 "
+        className="absolute w-full h-full  left-0 bottom-0 -z-10 "
       />
 
       <div className="container">
@@ -47,8 +62,7 @@ export default async function WhyusSection() {
         />
 
         <h2 className="font-thamnyah max-w-4xl leading-[60px] mx-auto text-center font-black text-4xl md:text-5xl  bg-linear-to-l from-white to-80% to-[#bdbdbd] bg-clip-text text-transparent">
-          خيارك المميز في المملكة للضـيافـــــة المتميـــــزة وإدارة الأصول
-          الفندقية
+          {sectionData.acf.title}
         </h2>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 mt-20 gap-10 lg:gap-20">
@@ -76,10 +90,10 @@ export default async function WhyusSection() {
         </div>
 
         <Link
-          href="/booking"
+          href={sectionData.acf.link.href}
           className="bg-white text-lg mx-auto mt-15 flex items-center rounded-lg gap-2 w-fit text-black py-2 px-14"
         >
-          <span>احجز الآن</span>
+          <span>{sectionData.acf.link.text}</span>
           <span>
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -15,7 +15,10 @@ export default function Home() {
       <PropertyOwnersSection />
       <FeaturesSection />
       <PlatformsSection />
-      <section className="container py-20 grid lg:grid-cols-[570px_1fr] gap-4">
+      <section
+        id="contact"
+        className="container py-20 grid lg:grid-cols-[570px_1fr] gap-4 scroll-mt-10"
+      >
         <div>
           <h2 className="text-[#E0BC78] mb-8 text-6xl font-extrabold leading-[70px]">
             تواصل <br /> معنــــــــا
