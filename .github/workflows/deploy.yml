@@ -23,7 +23,7 @@ jobs:
       - name: 🧱 Setup Node.js Environment
         uses: actions/setup-node@v4
         with:
-          node-version: "20" # Specify the Node.js version your project uses
+          node-version: "24" # Specify the Node.js version your project uses
           cache: "npm"
 
       # Step 3: Install project dependencies
