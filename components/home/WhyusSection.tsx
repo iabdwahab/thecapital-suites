@@ -90,10 +90,10 @@ export default async function WhyusSection() {
         </div>
 
         <Link
-          href={sectionData.acf.link.href}
+          href={sectionData.acf.link?.href}
           className="bg-white text-lg mx-auto mt-15 flex items-center rounded-lg gap-2 w-fit text-black py-2 px-14"
         >
-          <span>{sectionData.acf.link.text}</span>
+          <span>{sectionData.acf.link?.text}</span>
           <span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
