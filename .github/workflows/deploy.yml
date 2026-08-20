@@ -38,12 +38,12 @@ jobs:
 
         env:
           # 🚨 NEXT_PUBLIC_ is needed for client-side code in Next.js
-          NEXT_PUBLIC_WORDPRESS_API_URL: https://wp.thecapitalsuites.sa/wp-json/wp/v2
+          NEXT_PUBLIC_WORDPRESS_API_URL: https://wp.thecapitalsuites.sa/wp-json/acf/v3
 
       # Step 5: Deploy the contents of the 'out' folder to the host via FTP/SFTP
       # We use a community action for robust file transfer.
       - name: 🚀 Deploy to Host via FTP/SFTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
