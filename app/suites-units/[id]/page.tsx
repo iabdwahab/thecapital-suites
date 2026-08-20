@@ -1,0 +1,107 @@
+import Image from "next/image";
+
+export async function generateStaticParams() {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/featured-locations/?_fields=id,acf,date&acf_format=standard`,
+  );
+
+  const data: {
+    id: number;
+    acf: {
+      title: string;
+      images: {
+        image_1: string | false;
+        image_2: string | false;
+        image_3: string | false;
+        image_4: string | false;
+        image_5: string | false;
+        image_6: string | false;
+        image_7: string | false;
+        image_8: string | false;
+        image_9: string | false;
+        image_10: string | false;
+      };
+      descripiton: string;
+      video: string | false;
+    };
+  }[] = await res.json();
+
+  return data.map((post) => ({
+    id: post.id.toString(),
+  }));
+}
+
+export default async function LocationPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/featured-locations/${id}?_fields=id,acf&acf_format=standard`,
+  );
+
+  const locationData: {
+    acf: {
+      title: string;
+      images: {
+        image_1: string | false;
+        image_2: string | false;
+        image_3: string | false;
+        image_4: string | false;
+        image_5: string | false;
+        image_6: string | false;
+        image_7: string | false;
+        image_8: string | false;
+        image_9: string | false;
+        image_10: string | false;
+      };
+      descripiton: string;
+      video: string | false;
+    };
+  } = await res.json();
+
+  console.log(id);
+
+  return (
+    <>
+      <section className="min-h-screen py-20 flex flex-col justify-center relative">
+        <span>
+          <Image
+            src="/home-hero-image.jpg"
+            alt="Hero Image"
+            width={4096}
+            height={2736}
+            className="absolute inset-0 w-full h-full object-cover -z-10"
+          />
+        </span>
+        <span className="absolute left-0 top-0 w-full h-full bg-black/70 -z-10"></span>
+
+        <div className="container text-center">
+          <h1 className="text-3xl md:text-6xl font-extrabold text-[#F8F8F8] leading-[50px] md:leading-[80px]">
+            {locationData.acf.title}
+          </h1>
+          <p className="text-xl md:text-4xl font-extralight text-[#E7DECA] mt-4 max-w-4xl md:leading-[48px] mx-auto">
+            {locationData.acf.descripiton ||
+              "مجموعة من البنايات الفاخرة بتصاميم معمارية فريدة"}
+          </p>
+        </div>
+
+        <span className="absolute bottom-0 left-0 w-full h-20 -z-10 bg-linear-to-t from-black to-transparent"></span>
+      </section>
+
+      <section className="min-h-screen container py-10">
+        <div className="w-full h-120 overflow-hidden -mt-40 bg-white relative rounded-3xl">
+          <video
+            src={locationData.acf.video || "/suites-units-video.mp4"}
+            className="absolute top-0 left-0 w-full h-full object-cover object-center"
+            autoPlay
+            loop
+            muted
+          ></video>
+        </div>
+      </section>
+    </>
+  );
+}

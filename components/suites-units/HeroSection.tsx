@@ -27,7 +27,7 @@ export default async function HeroSection() {
       <span className="absolute left-0 top-0 w-full h-full bg-black/70 -z-10"></span>
 
       <div className="container text-center">
-        <h1 className="text-3xl md:text-6xl font-extrabold text-[#F8F8F8] leading-[50px] md:leading-[80px]">
+        <h1 className="text-3xl max-w-4xl mx-auto md:text-6xl font-extrabold text-[#F8F8F8] leading-[50px] md:leading-[80px]">
           {sectionHeading.acf.title}
         </h1>
         <p className="text-xl md:text-4xl font-extralight text-[#E7DECA] mt-4 max-w-4xl md:leading-[48px] mx-auto">

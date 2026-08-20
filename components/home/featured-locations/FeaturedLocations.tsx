@@ -22,6 +22,8 @@ export default async function FeaturedLocations() {
         image_9: string | false;
         image_10: string | false;
       };
+      descripiton: string;
+      video: string | false;
     };
   }[] = await featuredLocationsListRes.json();
   console.log("Featured Locations List:", featuredLocationsList);
