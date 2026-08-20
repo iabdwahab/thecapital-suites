@@ -4,6 +4,7 @@ import { thamnyahFont } from "./fonts";
 import "./globals.css";
 import Footer from "@/components/global/Footer";
 import Header from "@/components/global/header/Header";
+import NextTopLoader from "nextjs-toploader";
 
 const alexandria = Alexandria({
   variable: "--font-alexandria",
@@ -30,6 +31,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <link rel="icon" href="/logo.png" />
       </head>
       <body className="">
+        <NextTopLoader color="#fff" />
         <main className="relative">
           <Header />
           {children}
