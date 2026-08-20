@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
@@ -83,6 +84,7 @@ export default function FeaturedLocationsCarousel({
                 swiperRef.current = swiper;
                 updateNavState(swiper);
               }}
+              noSwiping={true}
               onSlideChange={updateNavState}
               spaceBetween={16}
               slidesPerView={1}
@@ -93,15 +95,18 @@ export default function FeaturedLocationsCarousel({
             >
               {imagesList.map((image, index) => (
                 <SwiperSlide key={index}>
-                  <div className="h-60 rounded-xl overflow-hidden relative">
+                  <Link
+                    href={`/suites-units/${activeLocation?.id}`}
+                    className="block h-60 rounded-xl overflow-hidden relative group"
+                  >
                     <Image
                       src={image || "/home-hero-image.jpg"}
-                      alt="Featured Locations"
+                      alt={activeLocation?.acf.title ?? "Featured Locations"}
                       width={1200}
                       height={800}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
-                  </div>
+                  </Link>
                 </SwiperSlide>
               ))}
             </Swiper>
