@@ -133,6 +133,67 @@ export default function GallerySection({
             />
           </div>
         </div>
+        <div
+          className={`flex items-center mx-auto w-fit mt-4 gap-2 md:hidden ${imagesList.length <= 3 ? "hidden" : ""}`}
+        >
+          <button
+            onClick={() => {
+              if (imagesIndexes[0] > 0) {
+                setImagesIndexes([
+                  imagesIndexes[0] - 1,
+                  imagesIndexes[1] - 1,
+                  imagesIndexes[2] - 1,
+                ]);
+              }
+            }}
+            disabled={imagesIndexes[0] === 0}
+            className="border border-[#d9d9d92a] rounded-full p-3 cursor-pointer hover:opacity-80 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:opacity-30"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-6 rotate-180"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+              />
+            </svg>
+          </button>
+
+          <button
+            onClick={() => {
+              if (imagesIndexes[2] < imagesList.length - 1) {
+                setImagesIndexes([
+                  imagesIndexes[0] + 1,
+                  imagesIndexes[1] + 1,
+                  imagesIndexes[2] + 1,
+                ]);
+              }
+            }}
+            disabled={imagesIndexes[2] === imagesList.length - 1}
+            className="border border-[#d9d9d92a] rounded-full p-3 cursor-pointer hover:opacity-80 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:opacity-30"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
     </section>
   );
