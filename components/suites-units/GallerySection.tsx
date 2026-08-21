@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 
 export default function GallerySection({
   images,
@@ -16,11 +19,15 @@ export default function GallerySection({
     image_10: string | false;
   };
 }) {
+  const [imagesIndexes] = useState<number[]>([0, 1, 2]);
+
+  const imagesList = Object.values(images).filter((image) => image !== false);
+
   return (
     <section className="container py-10 grid md:grid-cols-[300px_1fr] gap-6">
       <div className="rounded-md overflow-hidden hidden md:block">
         <Image
-          src={images.image_1 || "/images/placeholder.jpg"}
+          src={imagesList[imagesIndexes[0]] || "/images/placeholder.jpg"}
           alt="Image 1"
           width={500}
           height={500}
@@ -33,9 +40,11 @@ export default function GallerySection({
             صور حقيقية <br /> من خدماتنــــــا
           </h2>
 
-          <div className="flex items-center gap-2">
+          <div
+            className={`flex items-center gap-2 ${imagesList.length <= 3 ? "hidden" : ""}`}
+          >
             <button
-              // onClick={() => swiperRef.current?.slidePrev()}
+              // onClick={() => }
               // disabled={isBeginning}
               className="border border-[#d9d9d92a] rounded-full p-3 cursor-pointer hover:opacity-80 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:opacity-30"
             >
@@ -80,7 +89,7 @@ export default function GallerySection({
 
         <div className="rounded-md overflow-hidden block md:hidden mt-6">
           <Image
-            src={images.image_1 || "/images/placeholder.jpg"}
+            src={imagesList[imagesIndexes[0]] || "/images/placeholder.jpg"}
             alt="Image 1"
             width={500}
             height={500}
@@ -91,7 +100,7 @@ export default function GallerySection({
         <div className="grid md:grid-cols-2 gap-4 mt-6">
           <div className="rounded-md overflow-hidden">
             <Image
-              src={images.image_1 || "/images/placeholder.jpg"}
+              src={imagesList[imagesIndexes[1]] || "/images/placeholder.jpg"}
               alt="Image 1"
               width={500}
               height={500}
@@ -100,7 +109,7 @@ export default function GallerySection({
           </div>
           <div className="rounded-md overflow-hidden">
             <Image
-              src={images.image_1 || "/images/placeholder.jpg"}
+              src={imagesList[imagesIndexes[2]] || "/images/placeholder.jpg"}
               alt="Image 1"
               width={500}
               height={500}
