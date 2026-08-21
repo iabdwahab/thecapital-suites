@@ -25,7 +25,7 @@ export default function HeaderClient({ data }: { data: HeaderData }) {
   const links = Object.values(data.acf.links);
 
   return (
-    <header className="text-[#F8F8F8] fixed left-1/2 -translate-x-1/2 rounded-xl lg:rounded-full top-2 z-50 w-[calc(100%-20px)] lg:container bg-[rgba(255,255,255,0.1)] backdrop-blur-xl">
+    <header className="text-[#F8F8F8] [text-shadow:0_2px_8px_rgba(0,0,0,0.6)] fixed left-1/2 -translate-x-1/2 rounded-xl lg:rounded-full top-2 z-50 w-[calc(100%-20px)] lg:container bg-[rgba(255,255,255,0.1)] backdrop-blur-xl">
       {/* top row */}
       <div className="flex items-center justify-between px-6 lg:px-10! py-3">
         <Link href="/" className="block">
