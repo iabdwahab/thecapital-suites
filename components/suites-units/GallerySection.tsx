@@ -19,7 +19,7 @@ export default function GallerySection({
     image_10: string | false;
   };
 }) {
-  const [imagesIndexes] = useState<number[]>([0, 1, 2]);
+  const [imagesIndexes, setImagesIndexes] = useState<number[]>([0, 1, 2]);
 
   const imagesList = Object.values(images).filter((image) => image !== false);
 
@@ -44,8 +44,16 @@ export default function GallerySection({
             className={`flex items-center gap-2 ${imagesList.length <= 3 ? "hidden" : ""}`}
           >
             <button
-              // onClick={() => }
-              // disabled={isBeginning}
+              onClick={() => {
+                if (imagesIndexes[0] > 0) {
+                  setImagesIndexes([
+                    imagesIndexes[0] - 1,
+                    imagesIndexes[1] - 1,
+                    imagesIndexes[2] - 1,
+                  ]);
+                }
+              }}
+              disabled={imagesIndexes[0] === 0}
               className="border border-[#d9d9d92a] rounded-full p-3 cursor-pointer hover:opacity-80 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:opacity-30"
             >
               <svg
@@ -65,8 +73,16 @@ export default function GallerySection({
             </button>
 
             <button
-              // onClick={() => swiperRef.current?.slideNext()}
-              // disabled={isEnd}
+              onClick={() => {
+                if (imagesIndexes[2] < imagesList.length - 1) {
+                  setImagesIndexes([
+                    imagesIndexes[0] + 1,
+                    imagesIndexes[1] + 1,
+                    imagesIndexes[2] + 1,
+                  ]);
+                }
+              }}
+              disabled={imagesIndexes[2] === imagesList.length - 1}
               className="border border-[#d9d9d92a] rounded-full p-3 cursor-pointer hover:opacity-80 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:opacity-30"
             >
               <svg
