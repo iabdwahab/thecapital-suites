@@ -1,3 +1,4 @@
+import GallerySection from "@/components/suites-units/GallerySection";
 import Image from "next/image";
 
 export async function generateStaticParams() {
@@ -91,7 +92,7 @@ export default async function LocationPage({
         <span className="absolute bottom-0 left-0 w-full h-20 -z-10 bg-linear-to-t from-black to-transparent"></span>
       </section>
 
-      <section className="min-h-screen container py-10">
+      <section className="min-h-screen container ">
         <div className="w-full h-120 overflow-hidden -mt-40 bg-white relative rounded-3xl">
           <video
             src={locationData.acf.video || "/suites-units-video.mp4"}
@@ -102,6 +103,8 @@ export default async function LocationPage({
           ></video>
         </div>
       </section>
+
+      <GallerySection images={locationData.acf.images} />
     </>
   );
 }
