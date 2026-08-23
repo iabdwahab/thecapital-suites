@@ -6,6 +6,8 @@ import Footer from "@/components/global/Footer";
 import Header from "@/components/global/header/Header";
 import NextTopLoader from "nextjs-toploader";
 
+import "leaflet/dist/leaflet.css";
+
 const alexandria = Alexandria({
   variable: "--font-alexandria",
   subsets: ["latin"],

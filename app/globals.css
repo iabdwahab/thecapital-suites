@@ -12,3 +12,17 @@ body {
 .container {
   @apply max-w-7xl mx-auto px-4;
 }
+
+.dark-map .leaflet-tile-pane {
+  filter: invert(1) hue-rotate(180deg) brightness(0.95) contrast(0.9);
+}
+
+.dark-map {
+  background: #1a1a1a;
+}
+
+/* منع الـ invert يأثر على الماركرز والبوباب */
+.dark-map .leaflet-marker-icon,
+.dark-map .leaflet-popup {
+  filter: invert(1) hue-rotate(180deg);
+}
