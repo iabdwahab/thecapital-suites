@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { MapContainer, Marker, Tooltip, TileLayer } from "react-leaflet";
 import L from "leaflet";
 
 type Location = {
@@ -60,7 +60,9 @@ export default function Map() {
       />
       {locations.map((loc) => (
         <Marker key={loc.name} position={loc.position} icon={redIcon}>
-          <Popup>{loc.name}</Popup>
+          <Tooltip permanent direction="bottom" offset={[48, 0]}>
+            {loc.name}
+          </Tooltip>
         </Marker>
       ))}
     </MapContainer>
