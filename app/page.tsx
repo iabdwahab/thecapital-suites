@@ -2,7 +2,7 @@ import MapLoader from "@/components/global/MapLoader";
 import ContactForm from "@/components/home/ContactForm";
 import FeaturedLocations from "@/components/home/featured-locations/FeaturedLocations";
 import FeaturesSection from "@/components/home/FeaturesSection";
-import StudyRequestForm from "@/components/home/Form";
+import StudyRequestForm from "@/components/StudyRequestForm";
 import HeroSection from "@/components/home/HeroSection";
 import PlatformsSection from "@/components/home/PlatformsSection";
 import PropertyOwnersSection from "@/components/home/PropertyOwnersSection";
@@ -40,7 +40,7 @@ export default function Home() {
           </div>
         </div>
         <ContactForm />
-        <StudyRequestForm />
+        {/* <StudyRequestForm /> */}
       </section>
     </>
   );
