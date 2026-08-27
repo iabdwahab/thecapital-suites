@@ -2,6 +2,7 @@ import MapLoader from "@/components/global/MapLoader";
 import ContactForm from "@/components/home/ContactForm";
 import FeaturedLocations from "@/components/home/featured-locations/FeaturedLocations";
 import FeaturesSection from "@/components/home/FeaturesSection";
+import StudyRequestForm from "@/components/home/Form";
 import HeroSection from "@/components/home/HeroSection";
 import PlatformsSection from "@/components/home/PlatformsSection";
 import PropertyOwnersSection from "@/components/home/PropertyOwnersSection";
@@ -25,7 +26,7 @@ export default function Home() {
             تواصل <br /> معنــــــــا
           </h2>
 
-          <div className="w-full h-90 rounded-2xl overflow-hidden">
+          <div className="w-full h-90 rounded-2xl overflow-hidden z-10 relative">
             <MapLoader />
             {/* <iframe
               src={
@@ -39,6 +40,7 @@ export default function Home() {
           </div>
         </div>
         <ContactForm />
+        <StudyRequestForm />
       </section>
     </>
   );
