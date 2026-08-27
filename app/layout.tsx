@@ -7,6 +7,7 @@ import Header from "@/components/global/header/Header";
 import NextTopLoader from "nextjs-toploader";
 
 import "leaflet/dist/leaflet.css";
+import { ToastContainer } from "react-toastify";
 
 const alexandria = Alexandria({
   variable: "--font-alexandria",
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="">
         <NextTopLoader color="#fff" />
         <main className="relative">
+          <ToastContainer />
           <Header />
           {children}
           <Footer />

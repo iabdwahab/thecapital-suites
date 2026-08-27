@@ -2,12 +2,13 @@
 
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import emailjs from "@emailjs/browser";
 
 interface ContactFormData {
-  name: string;
-  phone: string;
+  full_name: string;
+  phone_number: string;
   email: string;
-  additional_details: string;
+  message: string;
 }
 
 export default function ContactForm() {
@@ -18,40 +19,30 @@ export default function ContactForm() {
     reset,
   } = useForm<ContactFormData>({
     defaultValues: {
-      name: "",
-      phone: "",
+      full_name: "",
+      phone_number: "",
       email: "",
-      additional_details: "",
+      message: "",
     },
   });
 
   async function onSubmit(data: ContactFormData) {
-    const finalFormData = new FormData();
-    finalFormData.append("full-name", data.name);
-    finalFormData.append("email", data.email);
-    finalFormData.append("phone", data.phone);
-    finalFormData.append("message", data.additional_details);
-    finalFormData.append("_wpcf7_unit_tag", "wpcf7-f507-p123-o1");
-
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_WORDPRESS_URL}/wp-json/contact-form-7/v1/contact-forms/507/feedback`,
+      await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
         {
-          method: "POST",
-          body: finalFormData,
+          full_name: data.full_name,
+          phone_number: data.phone_number,
+          email: data.email,
+          message: data.message,
+          form_title: "الصفحة الرئيسية",
         },
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
       );
 
-      const responseData = await res.json();
-
-      if (responseData.status === "mail_sent") {
-        toast.success("تم إرسال رسالتك بنجاح!", { position: "top-right" });
-        reset();
-      } else {
-        toast.error(`فشل في إرسال الرسالة: ${responseData.message}`, {
-          position: "top-right",
-        });
-      }
+      toast.success("تم إرسال رسالتك بنجاح!", { position: "top-right" });
+      reset();
     } catch (error) {
       toast.error("حدث خطأ غير متوقع أثناء الإرسال.", {
         position: "top-right",
@@ -72,12 +63,12 @@ export default function ContactForm() {
             id="name"
             placeholder="أدخل اسمك الكامل"
             className={`bg-black border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
-              errors.name ? "border-red-500" : "border-[#c6c6cd3f]"
+              errors.full_name ? "border-red-500" : "border-[#c6c6cd3f]"
             }`}
-            {...register("name", { required: "يجب إدخال الاسم." })}
+            {...register("full_name", { required: "يجب إدخال الاسم." })}
           />
-          {errors.name && (
-            <p className="text-sm text-red-500">{errors.name.message}</p>
+          {errors.full_name && (
+            <p className="text-sm text-red-500">{errors.full_name.message}</p>
           )}
         </div>
 
@@ -89,9 +80,9 @@ export default function ContactForm() {
             placeholder="+966 5X XXX XXXX"
             dir="ltr"
             className={`bg-black border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
-              errors.phone ? "border-red-500" : "border-[#c6c6cd3f]"
+              errors.phone_number ? "border-red-500" : "border-[#c6c6cd3f]"
             }`}
-            {...register("phone", {
+            {...register("phone_number", {
               required: "يجب إدخال رقم الجوال.",
               pattern: {
                 value: /^[0-9+\-() ]+$/,
@@ -103,8 +94,10 @@ export default function ContactForm() {
               },
             })}
           />
-          {errors.phone && (
-            <p className="text-sm text-red-500">{errors.phone.message}</p>
+          {errors.phone_number && (
+            <p className="text-sm text-red-500">
+              {errors.phone_number.message}
+            </p>
           )}
         </div>
       </div>
@@ -134,23 +127,21 @@ export default function ContactForm() {
       </div>
 
       <div className="flex flex-col gap-2 mt-3">
-        <label htmlFor="additional_details">تفاصيل إضافية</label>
+        <label htmlFor="message">الرسالة</label>
         <textarea
-          id="additional_details"
-          placeholder="أي تفاصيل أخرى تود إضافتها عن العقار.."
+          id="message"
+          placeholder="أدخل رسالتك..."
           className={`bg-black border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] resize-none ${
-            errors.additional_details ? "border-red-500" : "border-[#c6c6cd3f]"
+            errors.message ? "border-red-500" : "border-[#c6c6cd3f]"
           }`}
           rows={6}
-          {...register("additional_details", {
-            required: "يجب إدخال التفاصيل.",
+          {...register("message", {
+            required: "يجب إدخال الرسالة.",
             minLength: { value: 10, message: "الرسالة قصيرة جدًا." },
           })}
         ></textarea>
-        {errors.additional_details && (
-          <p className="text-sm text-red-500">
-            {errors.additional_details.message}
-          </p>
+        {errors.message && (
+          <p className="text-sm text-red-500">{errors.message.message}</p>
         )}
       </div>
 
