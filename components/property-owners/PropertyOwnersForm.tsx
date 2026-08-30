@@ -56,7 +56,7 @@ export default function PropertyOwnersForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="bg-white py-8 px-6 border border-[#C6C6CD] rounded-md"
+      className="bg-black text-white py-8 px-6 border border-[#c6c6cd4b] rounded-md"
     >
       <div className="grid md:grid-cols-2 gap-3">
         <div className="flex flex-col gap-2">
@@ -65,8 +65,8 @@ export default function PropertyOwnersForm() {
             type="text"
             id="name"
             placeholder="أدخل اسمك الكامل"
-            className={`bg-[#F7F9FB] border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
-              errors.name ? "border-red-500" : "border-[#C6C6CD]"
+            className={`bg-black border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
+              errors.name ? "border-red-500" : "border-[#c6c6cd4b]"
             }`}
             {...register("name", { required: "يجب إدخال الاسم." })}
           />
@@ -82,8 +82,8 @@ export default function PropertyOwnersForm() {
             id="phone"
             placeholder="+966 5X XXX XXXX"
             dir="ltr"
-            className={`bg-[#F7F9FB] border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
-              errors.phone ? "border-red-500" : "border-[#C6C6CD]"
+            className={`bg-black border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
+              errors.phone ? "border-red-500" : "border-[#c6c6cd4b]"
             }`}
             {...register("phone", {
               required: "يجب إدخال رقم الجوال.",
@@ -110,8 +110,8 @@ export default function PropertyOwnersForm() {
             type="text"
             id="property_type"
             placeholder="اختر نوع العقار"
-            className={`bg-[#F7F9FB] border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
-              errors.property_type ? "border-red-500" : "border-[#C6C6CD]"
+            className={`bg-black border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
+              errors.property_type ? "border-red-500" : "border-[#c6c6cd4b]"
             }`}
             {...register("property_type", {
               required: "يجب إدخال نوع العقار.",
@@ -130,8 +130,8 @@ export default function PropertyOwnersForm() {
             type="text"
             id="property_location"
             placeholder="اختر موقع العقار"
-            className={`bg-[#F7F9FB] border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
-              errors.property_location ? "border-red-500" : "border-[#C6C6CD]"
+            className={`bg-black border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
+              errors.property_location ? "border-red-500" : "border-[#c6c6cd4b]"
             }`}
             {...register("property_location", {
               required: "يجب إدخال موقع العقار.",
@@ -150,8 +150,8 @@ export default function PropertyOwnersForm() {
         <textarea
           id="additional_details"
           placeholder="أي تفاصيل أخرى تود إضافتها عن العقار.."
-          className={`bg-[#F7F9FB] border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] resize-none ${
-            errors.additional_details ? "border-red-500" : "border-[#C6C6CD]"
+          className={`bg-black border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] resize-none ${
+            errors.additional_details ? "border-red-500" : "border-[#c6c6cd4b]"
           }`}
           rows={6}
           {...register("additional_details", {
@@ -169,7 +169,7 @@ export default function PropertyOwnersForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full mt-8 flex items-center justify-center gap-2 bg-black text-white px-8 py-3 rounded-lg cursor-pointer hover:opacity-90 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] disabled:opacity-60"
+        className="w-full mt-8 flex items-center justify-center gap-2 bg-[#B37700] text-white px-8 py-3 rounded-lg cursor-pointer hover:opacity-90 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] disabled:opacity-60"
       >
         <span>{isSubmitting ? "جاري الإرسال..." : "إرسال الطلب"}</span>
         {!isSubmitting && (

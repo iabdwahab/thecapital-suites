@@ -34,7 +34,7 @@ export default function HeaderClient({ data }: { data: HeaderData }) {
             alt="Logo"
             width={200}
             height={200}
-            className="w-16"
+            className="w-20"
           />
         </Link>
 

@@ -2,11 +2,11 @@ import PropertyOwnersForm from "./PropertyOwnersForm";
 
 export default function PropertyOwnersSection() {
   return (
-    <section className="bg-white text-black py-6 lg:py-20">
-      <div className="container bg-[#F7F9FB] border border-[#c6c6cd7e] p-10! rounded-lg  lg:grid lg:grid-cols-[480px_1fr] gap-4">
+    <section className="bg-black text-white py-6 lg:py-20">
+      <div className="container bg-black border border-[#c6c6cd28] p-10! rounded-lg  lg:grid lg:grid-cols-[480px_1fr] gap-4">
         <div className="pt-6 lg:pt-10">
           <h2 className="text-3xl">نموذج تقديم العقار</h2>
-          <p className="text-[#45464D] mt-6">
+          <p className="text-white mt-6">
             املأ النموذج التالي ببياناتك وتفاصيل عقارك، وسيقوم فريقنا المختص
             بالتواصل معك في أقرب وقت لمناقشة خطة الإدارة الأنسب لك.
           </p>
@@ -30,10 +30,8 @@ export default function PropertyOwnersSection() {
                 </svg>
               </div>
               <div>
-                <h4 className="text-lg font-medium text-[#191C1E]">
-                  دعم فني مخصص
-                </h4>
-                <p className="text-[#45464D]">
+                <h4 className="text-lg font-medium text-white">دعم فني مخصص</h4>
+                <p className="text-white">
                   فريقنا متواجد للرد على استفساراتكم.
                 </p>
               </div>
@@ -56,12 +54,8 @@ export default function PropertyOwnersSection() {
                 </svg>
               </div>
               <div>
-                <h4 className="text-lg font-medium text-[#191C1E]">
-                  سرية تامة
-                </h4>
-                <p className="text-[#45464D]">
-                  بياناتك محمية ولن يتم مشاركتها.
-                </p>
+                <h4 className="text-lg font-medium text-white">سرية تامة</h4>
+                <p className="text-white">بياناتك محمية ولن يتم مشاركتها.</p>
               </div>
             </div>
           </div>

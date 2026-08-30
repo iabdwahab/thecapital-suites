@@ -8,11 +8,11 @@ export default function PropertyOwnersPage() {
       <HeroSection />
       <PropertyOwnersSection />
 
-      <section className="bg-white text-black py-6 lg:py-10">
-        <div className="container bg-[#F7F9FB] border border-[#c6c6cd7e] p-10! rounded-lg  lg:grid lg:grid-cols-[480px_1fr] gap-4">
+      <section className="bg-black text-white  py-6 lg:py-10">
+        <div className="container bg-black border border-[#c6c6cd4b] p-10! rounded-lg  lg:grid lg:grid-cols-[480px_1fr] gap-4">
           <div className="pt-6 lg:pt-10">
             <h2 className="text-3xl">نموذج دراسة المبنى </h2>
-            <p className="text-[#45464D] mt-6">
+            <p className="text-white mt-6">
               املأ النموذج التالي ببياناتك وتفاصيل عقارك، وسيقوم فريقنا المختص
               بالتواصل معك في أقرب وقت لدراسة المبنى من حيث الإيرادات و
               المصروفات المتوقعة.
@@ -37,10 +37,10 @@ export default function PropertyOwnersPage() {
                   </svg>
                 </div>
                 <div>
-                  <h4 className="text-lg font-medium text-[#191C1E]">
+                  <h4 className="text-lg font-medium text-white">
                     دعم فني مخصص
                   </h4>
-                  <p className="text-[#45464D]">
+                  <p className="text-white">
                     فريقنا متواجد للرد على استفساراتكم.
                   </p>
                 </div>
@@ -63,12 +63,8 @@ export default function PropertyOwnersPage() {
                   </svg>
                 </div>
                 <div>
-                  <h4 className="text-lg font-medium text-[#191C1E]">
-                    سرية تامة
-                  </h4>
-                  <p className="text-[#45464D]">
-                    بياناتك محمية ولن يتم مشاركتها.
-                  </p>
+                  <h4 className="text-lg font-medium text-white">سرية تامة</h4>
+                  <p className="text-white">بياناتك محمية ولن يتم مشاركتها.</p>
                 </div>
               </div>
             </div>

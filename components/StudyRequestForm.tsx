@@ -106,7 +106,7 @@ export default function StudyRequestForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="bg-white py-8 px-6 border text-black border-[#C6C6CD] rounded-md"
+      className="bg-black py-8 px-6 border text-white border-[#c6c6cd4b] rounded-md"
     >
       {/* البيانات الأساسية */}
       <div className="grid md:grid-cols-2 gap-3">
@@ -116,8 +116,8 @@ export default function StudyRequestForm() {
             type="text"
             id="client_name"
             placeholder="أدخل اسمك الكامل"
-            className={`bg-[#F7F9FB] border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
-              errors.client_name ? "border-red-500" : "border-[#C6C6CD]"
+            className={`bg-black border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
+              errors.client_name ? "border-red-500" : "border-[#c6c6cd4b]"
             }`}
             {...register("client_name", { required: "يجب إدخال الاسم." })}
           />
@@ -133,8 +133,8 @@ export default function StudyRequestForm() {
             id="phone"
             placeholder="+966 5X XXX XXXX"
             dir="ltr"
-            className={`bg-[#F7F9FB] border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
-              errors.phone ? "border-red-500" : "border-[#C6C6CD]"
+            className={`bg-black border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
+              errors.phone ? "border-red-500" : "border-[#c6c6cd4b]"
             }`}
             {...register("phone", {
               required: "يجب إدخال رقم الجوال.",
@@ -158,8 +158,8 @@ export default function StudyRequestForm() {
             type="text"
             id="region"
             placeholder="أدخل المنطقة"
-            className={`bg-[#F7F9FB] border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
-              errors.region ? "border-red-500" : "border-[#C6C6CD]"
+            className={`bg-black border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
+              errors.region ? "border-red-500" : "border-[#c6c6cd4b]"
             }`}
             {...register("region", { required: "يجب إدخال المنطقة." })}
           />
@@ -174,8 +174,8 @@ export default function StudyRequestForm() {
             type="email"
             id="email"
             placeholder="أدخل بريدك الإلكتروني"
-            className={`bg-[#F7F9FB] border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
-              errors.email ? "border-red-500" : "border-[#C6C6CD]"
+            className={`bg-black border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
+              errors.email ? "border-red-500" : "border-[#c6c6cd4b]"
             }`}
             {...register("email", {
               required: "البريد الإلكتروني مطلوب",
@@ -199,7 +199,7 @@ export default function StudyRequestForm() {
             id="website_url"
             placeholder="أدخل رابط الموقع (إن وجد)"
             dir="ltr"
-            className="bg-[#F7F9FB] border border-[#C6C6CD] p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD]"
+            className="bg-black border border-[#c6c6cd4b] p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD]"
             {...register("website_url")}
           />
         </div>
@@ -210,8 +210,8 @@ export default function StudyRequestForm() {
             type="number"
             id="buildings_count"
             placeholder="أدخل عدد العمائر"
-            className={`bg-[#F7F9FB] border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
-              errors.buildings_count ? "border-red-500" : "border-[#C6C6CD]"
+            className={`bg-black border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
+              errors.buildings_count ? "border-red-500" : "border-[#c6c6cd4b]"
             }`}
             {...register("buildings_count", {
               required: "يجب إدخال عدد العمائر.",
@@ -235,7 +235,7 @@ export default function StudyRequestForm() {
               type="number"
               id="studio_count"
               placeholder="0"
-              className="bg-[#F7F9FB] border border-[#C6C6CD] p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD]"
+              className="bg-black border border-[#c6c6cd4b] p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD]"
               {...register("studio_count")}
             />
           </div>
@@ -246,7 +246,7 @@ export default function StudyRequestForm() {
               type="number"
               id="one_bedroom_count"
               placeholder="0"
-              className="bg-[#F7F9FB] border border-[#C6C6CD] p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD]"
+              className="bg-black border border-[#c6c6cd4b] p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD]"
               {...register("one_bedroom_count")}
             />
           </div>
@@ -257,7 +257,7 @@ export default function StudyRequestForm() {
               type="number"
               id="two_bedroom_count"
               placeholder="0"
-              className="bg-[#F7F9FB] border border-[#C6C6CD] p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD]"
+              className="bg-black border border-[#c6c6cd4b] p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD]"
               {...register("two_bedroom_count")}
             />
           </div>
@@ -268,7 +268,7 @@ export default function StudyRequestForm() {
               type="number"
               id="three_bedroom_count"
               placeholder="0"
-              className="bg-[#F7F9FB] border border-[#C6C6CD] p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD]"
+              className="bg-black border border-[#c6c6cd4b] p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD]"
               {...register("three_bedroom_count")}
             />
           </div>
@@ -280,7 +280,7 @@ export default function StudyRequestForm() {
             type="text"
             id="other_units"
             placeholder="اكتب وصف الوحدات الأخرى إن وجدت"
-            className="bg-[#F7F9FB] border border-[#C6C6CD] p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD]"
+            className="bg-black border border-[#c6c6cd4b] p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD]"
             {...register("other_units")}
           />
         </div>
@@ -386,7 +386,7 @@ export default function StudyRequestForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full mt-8 flex items-center justify-center gap-2 bg-black text-white px-8 py-3 rounded-lg cursor-pointer hover:opacity-90 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] disabled:opacity-60"
+        className="w-full mt-8 flex items-center justify-center gap-2 bg-[#B37700] text-white px-8 py-3 rounded-lg cursor-pointer hover:opacity-90 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] disabled:opacity-60"
       >
         <span>{isSubmitting ? "جاري الإرسال..." : "إرسال الطلب"}</span>
       </button>
