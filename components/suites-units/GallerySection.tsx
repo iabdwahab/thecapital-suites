@@ -6,18 +6,7 @@ import { useState } from "react";
 export default function GallerySection({
   images,
 }: {
-  images: {
-    image_1: string | false;
-    image_2: string | false;
-    image_3: string | false;
-    image_4: string | false;
-    image_5: string | false;
-    image_6: string | false;
-    image_7: string | false;
-    image_8: string | false;
-    image_9: string | false;
-    image_10: string | false;
-  };
+  images: Record<string, string | false>;
 }) {
   const [imagesIndexes, setImagesIndexes] = useState<number[]>([0, 1, 2]);
 
@@ -113,8 +102,8 @@ export default function GallerySection({
           />
         </div>
 
-        <div className="grid md:grid-cols-2 gap-4 mt-6">
-          <div className="rounded-md overflow-hidden">
+        <div className="grid md:grid-cols-2  gap-4 mt-6">
+          <div className="rounded-md max-h-75 overflow-hidden">
             <Image
               src={imagesList[imagesIndexes[1]] || "/images/placeholder.jpg"}
               alt="Image 1"
@@ -123,7 +112,7 @@ export default function GallerySection({
               className="w-full h-full object-cover"
             />
           </div>
-          <div className="rounded-md overflow-hidden">
+          <div className="rounded-md max-h-75 overflow-hidden">
             <Image
               src={imagesList[imagesIndexes[2]] || "/images/placeholder.jpg"}
               alt="Image 1"

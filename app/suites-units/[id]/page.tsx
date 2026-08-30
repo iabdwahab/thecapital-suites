@@ -46,18 +46,7 @@ export default async function LocationPage({
   const locationData: {
     acf: {
       title: string;
-      images: {
-        image_1: string | false;
-        image_2: string | false;
-        image_3: string | false;
-        image_4: string | false;
-        image_5: string | false;
-        image_6: string | false;
-        image_7: string | false;
-        image_8: string | false;
-        image_9: string | false;
-        image_10: string | false;
-      };
+      images: Record<string, string | false>;
       descripiton: string;
       video: string | false;
     };
