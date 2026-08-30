@@ -8,6 +8,7 @@ import NextTopLoader from "nextjs-toploader";
 
 import "leaflet/dist/leaflet.css";
 import { ToastContainer } from "react-toastify";
+import WhatsAppLink from "@/components/global/WhatsAppLink";
 
 const alexandria = Alexandria({
   variable: "--font-alexandria",
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <ToastContainer />
           <Header />
           {children}
+          <WhatsAppLink />
           <Footer />
         </main>
       </body>
