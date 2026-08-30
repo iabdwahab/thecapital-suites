@@ -1,4 +1,5 @@
 import GallerySection from "@/components/suites-units/GallerySection";
+import VideosList from "@/components/suites-units/VideosList";
 import Image from "next/image";
 
 export async function generateStaticParams() {
@@ -49,6 +50,7 @@ export default async function LocationPage({
       images: Record<string, string | false>;
       descripiton: string;
       video: string | false;
+      videos_list: Record<string, string | false>;
     };
   } = await res.json();
 
@@ -94,6 +96,7 @@ export default async function LocationPage({
       </section>
 
       <GallerySection images={locationData.acf.images} />
+      <VideosList videos={locationData.acf.videos_list} />
     </>
   );
 }
