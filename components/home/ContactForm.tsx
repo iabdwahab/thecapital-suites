@@ -2,7 +2,6 @@
 
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import emailjs from "@emailjs/browser";
 
 interface ContactFormData {
   full_name: string;
@@ -27,22 +26,33 @@ export default function ContactForm() {
   });
 
   async function onSubmit(data: ContactFormData) {
+    const finalFormData = new FormData();
+    finalFormData.append("full_name", data.full_name);
+    finalFormData.append("phone_number", data.phone_number);
+    finalFormData.append("email", data.email);
+    finalFormData.append("message", data.message);
+    finalFormData.append("_wpcf7_unit_tag", "wpcf7-1003-p0-o1");
+
     try {
-      await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+      const res = await fetch(
+        `https://wp.thecapitalsuites.sa/wp-json/contact-form-7/v1/contact-forms/1003/feedback`,
         {
-          full_name: data.full_name,
-          phone_number: data.phone_number,
-          email: data.email,
-          message: data.message,
-          form_title: "الصفحة الرئيسية",
+          method: "POST",
+          body: finalFormData,
         },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
       );
 
-      toast.success("تم إرسال رسالتك بنجاح!", { position: "top-right" });
-      reset();
+      const responseData = await res.json();
+      console.log("Response from server:", responseData);
+      if (responseData.status === "mail_sent") {
+        toast.success("تم إرسال رسالتك بنجاح!", { position: "top-right" });
+        reset();
+      } else {
+        console.error("Error sending message:", responseData);
+        toast.error(`فشل في إرسال الرسالة: ${responseData.message}`, {
+          position: "top-right",
+        });
+      }
     } catch (error) {
       toast.error("حدث خطأ غير متوقع أثناء الإرسال.", {
         position: "top-right",
