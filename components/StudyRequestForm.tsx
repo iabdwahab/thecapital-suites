@@ -2,7 +2,6 @@
 
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import emailjs from "@emailjs/browser";
 
 interface StudyRequestFormData {
   client_name: string;
@@ -71,31 +70,44 @@ export default function StudyRequestForm() {
           ? `بريد: ${data.send_email}`
           : "";
 
+    const finalFormData = new FormData();
+    finalFormData.append("client_name", data.client_name);
+    finalFormData.append("phone", data.phone);
+    finalFormData.append("region", data.region);
+    finalFormData.append("email", data.email);
+    finalFormData.append("website_url", data.website_url);
+    finalFormData.append("buildings_count", data.buildings_count);
+    finalFormData.append("studio_count", data.studio_count || "0");
+    finalFormData.append("one_bedroom_count", data.one_bedroom_count || "0");
+    finalFormData.append("two_bedroom_count", data.two_bedroom_count || "0");
+    finalFormData.append(
+      "three_bedroom_count",
+      data.three_bedroom_count || "0",
+    );
+    finalFormData.append("other_units", data.other_units || "-");
+    finalFormData.append("rental_types", rentalTypes || "-");
+    finalFormData.append("send_method", sendMethodText);
+    finalFormData.append("_wpcf7_unit_tag", "wpcf7-f1010-p123-o1");
+
     try {
-      await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_FEASIBILITY_STUDY_TEMPLATE_ID!,
+      const res = await fetch(
+        `https://wp.thecapitalsuites.sa/wp-json/contact-form-7/v1/contact-forms/1010/feedback`,
         {
-          client_name: data.client_name,
-          phone: data.phone,
-          region: data.region,
-          email: data.email,
-          website_url: data.website_url,
-          buildings_count: data.buildings_count,
-          studio_count: data.studio_count || "0",
-          one_bedroom_count: data.one_bedroom_count || "0",
-          two_bedroom_count: data.two_bedroom_count || "0",
-          three_bedroom_count: data.three_bedroom_count || "0",
-          other_units: data.other_units || "-",
-          rental_types: rentalTypes || "-",
-          send_method: sendMethodText,
-          form_title: "طلب دراسة جدوى",
+          method: "POST",
+          body: finalFormData,
         },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
       );
 
-      toast.success("تم إرسال طلبك بنجاح!", { position: "top-right" });
-      reset();
+      const responseData = await res.json();
+
+      if (responseData.status === "mail_sent") {
+        toast.success("تم إرسال طلبك بنجاح!", { position: "top-right" });
+        reset();
+      } else {
+        toast.error(`فشل في إرسال الطلب: ${responseData.message}`, {
+          position: "top-right",
+        });
+      }
     } catch (error) {
       toast.error("حدث خطأ غير متوقع أثناء الإرسال.", {
         position: "top-right",
