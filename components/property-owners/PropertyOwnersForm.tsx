@@ -2,11 +2,10 @@
 
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import emailjs from "@emailjs/browser";
 
 interface PropertyOwnersFormData {
-  name: string;
-  phone: string;
+  full_name: string;
+  phone_number: string;
   property_type: string;
   property_location: string;
   additional_details: string;
@@ -20,8 +19,8 @@ export default function PropertyOwnersForm() {
     reset,
   } = useForm<PropertyOwnersFormData>({
     defaultValues: {
-      name: "",
-      phone: "",
+      full_name: "",
+      phone_number: "",
       property_type: "",
       property_location: "",
       additional_details: "",
@@ -29,23 +28,34 @@ export default function PropertyOwnersForm() {
   });
 
   async function onSubmit(data: PropertyOwnersFormData) {
+    const finalFormData = new FormData();
+    finalFormData.append("full_name", data.full_name);
+    finalFormData.append("phone_number", data.phone_number);
+    finalFormData.append("property_type", data.property_type);
+    finalFormData.append("property_location", data.property_location);
+    finalFormData.append("additional_details", data.additional_details);
+    finalFormData.append("_wpcf7_unit_tag", "wpcf7-f1011-p123-o1");
+
     try {
-      await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+      const res = await fetch(
+        `https://wp.thecapitalsuites.sa/wp-json/contact-form-7/v1/contact-forms/1011/feedback`,
         {
-          full_name: data.name,
-          phone_number: data.phone,
-          property_type: data.property_type,
-          property_location: data.property_location,
-          message: data.additional_details,
-          form_title: "ملاك العقارات",
+          method: "POST",
+          body: finalFormData,
         },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
       );
 
-      toast.success("تم إرسال طلبك بنجاح!", { position: "top-right" });
-      reset();
+      const responseData = await res.json();
+      console.log("Response from server:", responseData);
+      if (responseData.status === "mail_sent") {
+        toast.success("تم إرسال طلبك بنجاح!", { position: "top-right" });
+        reset();
+      } else {
+        console.error("Error sending message:", responseData);
+        toast.error(`فشل في إرسال الطلب: ${responseData.message}`, {
+          position: "top-right",
+        });
+      }
     } catch (error) {
       toast.error("حدث خطأ غير متوقع أثناء الإرسال.", {
         position: "top-right",
@@ -60,32 +70,32 @@ export default function PropertyOwnersForm() {
     >
       <div className="grid md:grid-cols-2 gap-3">
         <div className="flex flex-col gap-2">
-          <label htmlFor="name">الاسم الكامل</label>
+          <label htmlFor="full_name">الاسم الكامل</label>
           <input
             type="text"
-            id="name"
+            id="full_name"
             placeholder="أدخل اسمك الكامل"
             className={`bg-black border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
-              errors.name ? "border-red-500" : "border-[#c6c6cd4b]"
+              errors.full_name ? "border-red-500" : "border-[#c6c6cd4b]"
             }`}
-            {...register("name", { required: "يجب إدخال الاسم." })}
+            {...register("full_name", { required: "يجب إدخال الاسم." })}
           />
-          {errors.name && (
-            <p className="text-sm text-red-500">{errors.name.message}</p>
+          {errors.full_name && (
+            <p className="text-sm text-red-500">{errors.full_name.message}</p>
           )}
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="phone">رقم الجوال</label>
+          <label htmlFor="phone_number">رقم الجوال</label>
           <input
             type="text"
-            id="phone"
+            id="phone_number"
             placeholder="+966 5X XXX XXXX"
             dir="ltr"
             className={`bg-black border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
-              errors.phone ? "border-red-500" : "border-[#c6c6cd4b]"
+              errors.phone_number ? "border-red-500" : "border-[#c6c6cd4b]"
             }`}
-            {...register("phone", {
+            {...register("phone_number", {
               required: "يجب إدخال رقم الجوال.",
               pattern: {
                 value: /^[0-9+\-() ]+$/,
@@ -97,8 +107,10 @@ export default function PropertyOwnersForm() {
               },
             })}
           />
-          {errors.phone && (
-            <p className="text-sm text-red-500">{errors.phone.message}</p>
+          {errors.phone_number && (
+            <p className="text-sm text-red-500">
+              {errors.phone_number.message}
+            </p>
           )}
         </div>
       </div>

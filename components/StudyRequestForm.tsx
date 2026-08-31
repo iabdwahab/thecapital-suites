@@ -89,30 +89,30 @@ export default function StudyRequestForm() {
     finalFormData.append("send_method", sendMethodText);
     finalFormData.append("_wpcf7_unit_tag", "wpcf7-f1010-p123-o1");
 
-    try {
-      const res = await fetch(
-        `https://wp.thecapitalsuites.sa/wp-json/contact-form-7/v1/contact-forms/1010/feedback`,
-        {
-          method: "POST",
-          body: finalFormData,
-        },
-      );
+    // try {
+    //   const res = await fetch(
+    //     `https://wp.thecapitalsuites.sa/wp-json/contact-form-7/v1/contact-forms/1010/feedback`,
+    //     {
+    //       method: "POST",
+    //       body: finalFormData,
+    //     },
+    //   );
 
-      const responseData = await res.json();
+    //   const responseData = await res.json();
 
-      if (responseData.status === "mail_sent") {
-        toast.success("تم إرسال طلبك بنجاح!", { position: "top-right" });
-        reset();
-      } else {
-        toast.error(`فشل في إرسال الطلب: ${responseData.message}`, {
-          position: "top-right",
-        });
-      }
-    } catch (error) {
-      toast.error("حدث خطأ غير متوقع أثناء الإرسال.", {
-        position: "top-right",
-      });
-    }
+    //   if (responseData.status === "mail_sent") {
+    //     toast.success("تم إرسال طلبك بنجاح!", { position: "top-right" });
+    //     reset();
+    //   } else {
+    //     toast.error(`فشل في إرسال الطلب: ${responseData.message}`, {
+    //       position: "top-right",
+    //     });
+    //   }
+    // } catch (error) {
+    //   toast.error("حدث خطأ غير متوقع أثناء الإرسال.", {
+    //     position: "top-right",
+    //   });
+    // }
   }
 
   return (
