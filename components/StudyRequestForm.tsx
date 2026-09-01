@@ -112,6 +112,8 @@ export default function StudyRequestForm() {
       toast.error("حدث خطأ غير متوقع أثناء الإرسال.", {
         position: "top-right",
       });
+
+      console.error("Error submitting form:", error);
     }
   }
 
