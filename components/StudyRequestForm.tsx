@@ -220,6 +220,7 @@ export default function StudyRequestForm() {
           <label htmlFor="buildings_count">عدد العمائر</label>
           <input
             type="number"
+            min={0}
             id="buildings_count"
             placeholder="أدخل عدد العمائر"
             className={`bg-black border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
@@ -245,6 +246,7 @@ export default function StudyRequestForm() {
             <label htmlFor="studio_count">استديو (العدد)</label>
             <input
               type="number"
+              min={0}
               id="studio_count"
               placeholder="0"
               className="bg-black border border-[#c6c6cd4b] p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD]"
@@ -256,6 +258,7 @@ export default function StudyRequestForm() {
             <label htmlFor="one_bedroom_count">غرفة وصالة (العدد)</label>
             <input
               type="number"
+              min={0}
               id="one_bedroom_count"
               placeholder="0"
               className="bg-black border border-[#c6c6cd4b] p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD]"
@@ -267,6 +270,7 @@ export default function StudyRequestForm() {
             <label htmlFor="two_bedroom_count">غرفتين وصالة (العدد)</label>
             <input
               type="number"
+              min={0}
               id="two_bedroom_count"
               placeholder="0"
               className="bg-black border border-[#c6c6cd4b] p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD]"
@@ -278,6 +282,7 @@ export default function StudyRequestForm() {
             <label htmlFor="three_bedroom_count">3 غرف وصالة (العدد)</label>
             <input
               type="number"
+              min={0}
               id="three_bedroom_count"
               placeholder="0"
               className="bg-black border border-[#c6c6cd4b] p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD]"
