@@ -89,30 +89,30 @@ export default function StudyRequestForm() {
     finalFormData.append("send_method", sendMethodText);
     finalFormData.append("_wpcf7_unit_tag", "wpcf7-f1010-p123-o1");
 
-    // try {
-    //   const res = await fetch(
-    //     `https://wp.thecapitalsuites.sa/wp-json/contact-form-7/v1/contact-forms/1010/feedback`,
-    //     {
-    //       method: "POST",
-    //       body: finalFormData,
-    //     },
-    //   );
+    try {
+      const res = await fetch(
+        `https://wp.thecapitalsuites.sa/wp-json/contact-form-7/v1/contact-forms/1010/feedback`,
+        {
+          method: "POST",
+          body: finalFormData,
+        },
+      );
 
-    //   const responseData = await res.json();
+      const responseData = await res.json();
 
-    //   if (responseData.status === "mail_sent") {
-    //     toast.success("تم إرسال طلبك بنجاح!", { position: "top-right" });
-    //     reset();
-    //   } else {
-    //     toast.error(`فشل في إرسال الطلب: ${responseData.message}`, {
-    //       position: "top-right",
-    //     });
-    //   }
-    // } catch (error) {
-    //   toast.error("حدث خطأ غير متوقع أثناء الإرسال.", {
-    //     position: "top-right",
-    //   });
-    // }
+      if (responseData.status === "mail_sent") {
+        toast.success("تم إرسال طلبك بنجاح!", { position: "top-right" });
+        reset();
+      } else {
+        toast.error(`فشل في إرسال الطلب: ${responseData.message}`, {
+          position: "top-right",
+        });
+      }
+    } catch (error) {
+      toast.error("حدث خطأ غير متوقع أثناء الإرسال.", {
+        position: "top-right",
+      });
+    }
   }
 
   return (
@@ -339,7 +339,7 @@ export default function StudyRequestForm() {
               type="text"
               placeholder="اكتب رقم الواتساب"
               dir="ltr"
-              className={`bg-[#F7F9FB] border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
+              className={`bg-black border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
                 errors.send_whatsapp_number
                   ? "border-red-500"
                   : "border-[#C6C6CD]"
@@ -371,7 +371,7 @@ export default function StudyRequestForm() {
               type="email"
               placeholder="اكتب بريدك الإلكتروني"
               dir="ltr"
-              className={`bg-[#F7F9FB] border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
+              className={`bg-black border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
                 errors.send_email ? "border-red-500" : "border-[#C6C6CD]"
               }`}
               {...register("send_email", {
