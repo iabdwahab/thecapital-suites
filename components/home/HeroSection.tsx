@@ -18,6 +18,7 @@ export default async function HeroSection() {
         text: string;
         href: string;
       };
+      background_image: string | false;
     };
   } = await sectionHeadingRes.json();
 
@@ -25,7 +26,7 @@ export default async function HeroSection() {
     <section className="min-h-screen py-20 flex flex-col justify-center relative">
       <span>
         <Image
-          src="/home-hero-image.jpg"
+          src={sectionHeading.acf.background_image || "/images/hero-bg.jpg"}
           alt="Hero Image"
           width={4096}
           height={2736}
