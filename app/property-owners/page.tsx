@@ -70,7 +70,7 @@ export default function PropertyOwnersPage() {
             </div>
           </div>
 
-          <div className="max-lg:mt-8">
+          <div id="study-request-form" className="max-lg:mt-8 scroll-mt-40">
             <StudyRequestForm />
           </div>
         </div>
