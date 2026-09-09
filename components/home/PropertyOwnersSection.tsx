@@ -40,12 +40,12 @@ export default async function PropertyOwnersSection() {
         >
           {sectionHeading.acf.link_1?.text}
         </Link>
-        <Link
+        {/* <Link
           href={sectionHeading.acf.link_2?.href || "/contact"}
           className="block px-8 py-4 text-[#E0BC78] border border-[#E0BC78] rounded-lg hover:opacity-90 transition duration-300 text-center"
         >
           {sectionHeading.acf.link_2?.text}
-        </Link>
+        </Link> */}
       </div>
     </section>
   );

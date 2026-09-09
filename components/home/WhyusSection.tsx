@@ -89,7 +89,7 @@ export default async function WhyusSection() {
           ))}
         </div>
 
-        <Link
+        {/* <Link
           href={sectionData.acf.link?.href}
           className="bg-white text-lg mx-auto mt-15 flex items-center rounded-lg gap-2 w-fit text-black py-2 px-14"
         >
@@ -110,7 +110,7 @@ export default async function WhyusSection() {
               />
             </svg>
           </span>
-        </Link>
+        </Link> */}
       </div>
     </section>
   );
