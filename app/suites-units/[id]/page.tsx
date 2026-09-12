@@ -1,3 +1,5 @@
+import ImageSlider from "@/components/global/ImageSlider";
+import FeaturedLocationsCarousel from "@/components/home/featured-locations/FeaturedLocationsCarousel";
 import GallerySection from "@/components/suites-units/GallerySection";
 import VideosList from "@/components/suites-units/VideosList";
 import Image from "next/image";
@@ -11,18 +13,7 @@ export async function generateStaticParams() {
     id: number;
     acf: {
       title: string;
-      images: {
-        image_1: string | false;
-        image_2: string | false;
-        image_3: string | false;
-        image_4: string | false;
-        image_5: string | false;
-        image_6: string | false;
-        image_7: string | false;
-        image_8: string | false;
-        image_9: string | false;
-        image_10: string | false;
-      };
+      images: Record<string, string | false>;
       descripiton: string;
       video: string | false;
     };
@@ -51,10 +42,29 @@ export default async function LocationPage({
       descripiton: string;
       video: string | false;
       videos_list: Record<string, string | false>;
+      "1_room": Record<
+        string,
+        | {
+            url: string;
+          }
+        | false
+      >;
+      "2_rooms": Record<
+        string,
+        | {
+            url: string;
+          }
+        | false
+      >;
+      studio: Record<
+        string,
+        | {
+            url: string;
+          }
+        | false
+      >;
     };
   } = await res.json();
-
-  console.log(id);
 
   return (
     <>
@@ -97,6 +107,21 @@ export default async function LocationPage({
 
       <GallerySection images={locationData.acf.images} />
       <VideosList videos={locationData.acf.videos_list} />
+
+      <section className="py-10 container">
+        <h2 className="text-[40px]">غرفة وصالة</h2>
+        <ImageSlider images={locationData.acf["1_room"]} />
+      </section>
+      <hr className="container border-[#eeeeee38]" />
+      <section className="py-10 container">
+        <h2 className="text-[40px]">غرفتين وصالة</h2>
+        <ImageSlider images={locationData.acf["2_rooms"]} />
+      </section>
+      <hr className="container border-[#eeeeee38]" />
+      <section className="py-10 container">
+        <h2 className="text-[40px]">استوديو</h2>
+        <ImageSlider images={locationData.acf["studio"]} />
+      </section>
     </>
   );
 }
