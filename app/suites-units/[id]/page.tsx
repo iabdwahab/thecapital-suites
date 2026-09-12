@@ -108,20 +108,55 @@ export default async function LocationPage({
       <GallerySection images={locationData.acf.images} />
       <VideosList videos={locationData.acf.videos_list} />
 
-      <section className="py-10 container">
-        <h2 className="text-[40px]">غرفة وصالة</h2>
-        <ImageSlider images={locationData.acf["1_room"]} />
-      </section>
-      <hr className="container border-[#eeeeee38]" />
-      <section className="py-10 container">
-        <h2 className="text-[40px]">غرفتين وصالة</h2>
-        <ImageSlider images={locationData.acf["2_rooms"]} />
-      </section>
-      <hr className="container border-[#eeeeee38]" />
-      <section className="py-10 container">
-        <h2 className="text-[40px]">استوديو</h2>
-        <ImageSlider images={locationData.acf["studio"]} />
-      </section>
+      {/* Object.values(images).filter(
+    (image): image is { url: string } => image !== false,
+  ); */}
+      {Object.values(locationData.acf["1_room"]).filter(
+        (image): image is { url: string } => image !== false,
+      ).length > 0 && (
+        <>
+          <section className="py-10 container">
+            <h2 className="text-[40px]">غرفة وصالة</h2>
+            <ImageSlider images={locationData.acf["1_room"]} />
+          </section>
+          <hr className="container border-[#eeeeee38]" />
+        </>
+      )}
+
+      {Object.values(locationData.acf["2_rooms"]).filter(
+        (image): image is { url: string } => image !== false,
+      ).length > 0 && (
+        <>
+          <section className="py-10 container">
+            <h2 className="text-[40px]">غرفتين وصالة</h2>
+            <ImageSlider images={locationData.acf["2_rooms"]} />
+          </section>
+          <hr className="container border-[#eeeeee38]" />
+        </>
+      )}
+
+      {Object.values(locationData.acf["studio"]).filter(
+        (image): image is { url: string } => image !== false,
+      ).length > 0 && (
+        <>
+          <section className="py-10 container">
+            <h2 className="text-[40px]">استوديو</h2>
+            <ImageSlider images={locationData.acf["studio"]} />
+          </section>
+          <hr className="container border-[#eeeeee38]" />
+        </>
+      )}
+
+      {Object.values(locationData.acf["studio"]).filter(
+        (image): image is { url: string } => image !== false,
+      ).length > 0 && (
+        <>
+          <section className="py-10 container">
+            <h2 className="text-[40px]">استوديو</h2>
+            <ImageSlider images={locationData.acf["studio"]} />
+          </section>
+        </>
+      )}
     </>
   );
 }
