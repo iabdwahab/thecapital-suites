@@ -133,8 +133,18 @@ export default function FeaturedLocationsDraft({
   }, [selectedDistrict, selectedUnit]);
 
   return (
-    <section className="font-thamnyah py-20" dir="rtl">
-      <h2 className="font-black text-5xl leading-[60px] text-center bg-gradient-to-l from-white to-80% to-[#bdbdbd] bg-clip-text text-transparent my-10">
+    <section className="font-thamnyah z-0 relative py-20" dir="rtl">
+      <Image
+        src="/14616436_5459923.jpg"
+        width={1920}
+        height={1080}
+        alt=""
+        className="absolute -z-10 left-0 top-0 w-full h-full object-cover pointer-events-none select-none opacity-5"
+      />
+      <span className="absolute top-0 left-0 w-full h-20 -z-10 bg-linear-to-t from-transparent to-black"></span>
+      <span className="absolute bottom-0 left-0 w-full h-20 -z-10 bg-linear-to-t from-black to-transparent"></span>
+
+      <h2 className="font-black text-5xl leading-[60px] text-center bg-gradient-to-l from-[#cfb000] to-80% to-[#d8b800] bg-clip-text text-transparent my-10">
         مواقعنـــــا المميـــــزة
       </h2>
 
