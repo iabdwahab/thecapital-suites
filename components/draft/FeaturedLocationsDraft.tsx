@@ -78,7 +78,9 @@ export default function FeaturedLocationsDraft({
 }: {
   districts: District[];
 }) {
-  const [city, setCity] = useState("");
+  // "الرياض" مختارة تلقائيًا لأنها الخيار الوحيد المتاح دلوقتي في CITIES.
+  // لو ضفت مدن تانية بعدين، شيل القيمة الافتراضية دي وخليها "" عشان المستخدم يختار بنفسه.
+  const [city, setCity] = useState("riyadh");
   const [districtId, setDistrictId] = useState("");
   const [unitKey, setUnitKey] = useState("");
 
