@@ -96,6 +96,14 @@ export default function FeaturedLocationsDraft({
 
   const showGallery = Boolean(selectedDistrict && galleryImages.length > 0);
 
+  const whatsappHref = useMemo(() => {
+    const message = selectedUnit
+      ? `أرغب في حجز وحدة "${selectedUnit.label}" في ${selectedDistrict?.name}`
+      : `أرغب في الاستفسار عن الوحدات المتاحة في ${selectedDistrict?.name}`;
+
+    return `https://wa.me/+966500000000?text=${encodeURIComponent(message)}`;
+  }, [selectedDistrict, selectedUnit]);
+
   return (
     <section className="font-thamnyah py-20" dir="rtl">
       <h2 className="font-black text-5xl leading-[60px] text-center bg-gradient-to-l from-white to-80% to-[#bdbdbd] bg-clip-text text-transparent my-10">
@@ -171,7 +179,7 @@ export default function FeaturedLocationsDraft({
 
             <div className="mt-8 text-center">
               <Link
-                href={`#`}
+                href={whatsappHref}
                 className="font-alexandria bg-[#B37700] text-white font-bold py-3 px-8 text-lg rounded-xl"
               >
                 احجز هذه الوحدة الآن
