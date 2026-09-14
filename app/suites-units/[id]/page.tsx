@@ -16,6 +16,28 @@ export async function generateStaticParams() {
       images: Record<string, string | false>;
       descripiton: string;
       video: string | false;
+      videos_list: Record<string, string | false>;
+      "1_room"?: Record<
+        string,
+        | {
+            url: string;
+          }
+        | false
+      >;
+      "2_rooms"?: Record<
+        string,
+        | {
+            url: string;
+          }
+        | false
+      >;
+      studio?: Record<
+        string,
+        | {
+            url: string;
+          }
+        | false
+      >;
     };
   }[] = await res.json();
 
@@ -42,21 +64,22 @@ export default async function LocationPage({
       descripiton: string;
       video: string | false;
       videos_list: Record<string, string | false>;
-      "1_room": Record<
+      // الحقول دي ممكن تكون مش موجودة خالص في بعض البوستات، مش بس false
+      "1_room"?: Record<
         string,
         | {
             url: string;
           }
         | false
       >;
-      "2_rooms": Record<
+      "2_rooms"?: Record<
         string,
         | {
             url: string;
           }
         | false
       >;
-      studio: Record<
+      studio?: Record<
         string,
         | {
             url: string;
@@ -65,6 +88,26 @@ export default async function LocationPage({
       >;
     };
   } = await res.json();
+
+  // نجهز نسخة آمنة من كل حقل نوع وحدة، عشان منكررش ?? {} في كل مكان
+  const oneRoomImages = locationData.acf["1_room"] ?? {};
+  const twoRoomsImages = locationData.acf["2_rooms"] ?? {};
+  const studioImages = locationData.acf["studio"] ?? {};
+
+  const hasOneRoom =
+    Object.values(oneRoomImages).filter(
+      (image): image is { url: string } => image !== false,
+    ).length > 0;
+
+  const hasTwoRooms =
+    Object.values(twoRoomsImages).filter(
+      (image): image is { url: string } => image !== false,
+    ).length > 0;
+
+  const hasStudio =
+    Object.values(studioImages).filter(
+      (image): image is { url: string } => image !== false,
+    ).length > 0;
 
   return (
     <>
@@ -108,54 +151,31 @@ export default async function LocationPage({
       <GallerySection images={locationData.acf.images} />
       <VideosList videos={locationData.acf.videos_list} />
 
-      {/* Object.values(images).filter(
-    (image): image is { url: string } => image !== false,
-  ); */}
-      {Object.values(locationData.acf["1_room"]).filter(
-        (image): image is { url: string } => image !== false,
-      ).length > 0 && (
+      {hasOneRoom && (
         <>
           <section className="py-10 container">
             <h2 className="text-[40px]">غرفة وصالة</h2>
-            <ImageSlider images={locationData.acf["1_room"]} />
+            <ImageSlider images={oneRoomImages} />
           </section>
           <hr className="container border-[#eeeeee38]" />
         </>
       )}
 
-      {Object.values(locationData.acf["2_rooms"]).filter(
-        (image): image is { url: string } => image !== false,
-      ).length > 0 && (
+      {hasTwoRooms && (
         <>
           <section className="py-10 container">
             <h2 className="text-[40px]">غرفتين وصالة</h2>
-            <ImageSlider images={locationData.acf["2_rooms"]} />
+            <ImageSlider images={twoRoomsImages} />
           </section>
           <hr className="container border-[#eeeeee38]" />
         </>
       )}
 
-      {Object.values(locationData.acf["studio"]).filter(
-        (image): image is { url: string } => image !== false,
-      ).length > 0 && (
-        <>
-          <section className="py-10 container">
-            <h2 className="text-[40px]">استوديو</h2>
-            <ImageSlider images={locationData.acf["studio"]} />
-          </section>
-          <hr className="container border-[#eeeeee38]" />
-        </>
-      )}
-
-      {Object.values(locationData.acf["studio"]).filter(
-        (image): image is { url: string } => image !== false,
-      ).length > 0 && (
-        <>
-          <section className="py-10 container">
-            <h2 className="text-[40px]">استوديو</h2>
-            <ImageSlider images={locationData.acf["studio"]} />
-          </section>
-        </>
+      {hasStudio && (
+        <section className="py-10 container">
+          <h2 className="text-[40px]">استوديو</h2>
+          <ImageSlider images={studioImages} />
+        </section>
       )}
     </>
   );
