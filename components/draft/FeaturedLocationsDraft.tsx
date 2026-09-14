@@ -1,9 +1,25 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import dynamic from "next/dynamic";
 import type { District } from "@/lib/wp-featured-locations";
+import {
+  DISTRICT_COORDINATES,
+  CITY_COORDINATES,
+  CITY_ZOOM,
+  DISTRICT_ZOOM,
+} from "@/lib/district-coordinates";
 import Image from "next/image";
 import Link from "next/link";
+
+// الخريطة لازم تتحمل client-only لأن Leaflet بيستخدم window مباشرة.
+// ssr: false بتمنع Next.js من محاولة يرندرها على السيرفر.
+const LocationMap = dynamic(() => import("@/components/LocationMap"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-96 rounded-2xl border border-white/10 bg-white/5 animate-pulse" />
+  ),
+});
 
 function Select({
   label,
@@ -63,6 +79,8 @@ export default function FeaturedLocationsDraft({
   const [districtId, setDistrictId] = useState("");
   const [unitKey, setUnitKey] = useState("");
 
+  const selectedCity = CITIES.find((c) => c.value === city);
+
   const selectedDistrict = useMemo(
     () => districts.find((d) => String(d.id) === districtId),
     [districts, districtId],
@@ -84,8 +102,6 @@ export default function FeaturedLocationsDraft({
     setUnitKey("");
   };
 
-  // لو محددش نوع وحدة، تتعرض الجاليري العامة للحي؛ لو حدد نوع، تتعرض صور النوع ده
-  // (أنواع الوحدات اللي مفيهاش صور أصلًا متشالة من القائمة، فمش هتوصل هنا فاضية)
   const galleryImages = selectedUnit
     ? selectedUnit.images
     : (selectedDistrict?.generalImages ?? []);
@@ -94,7 +110,19 @@ export default function FeaturedLocationsDraft({
     ? `${selectedUnit.label} - ${selectedDistrict?.name}`
     : (selectedDistrict?.name ?? "");
 
-  const showGallery = Boolean(selectedDistrict && galleryImages.length > 0);
+  const showGallery = Boolean(
+    unitKey && selectedUnit && galleryImages.length > 0,
+  );
+  const showMap = Boolean(!unitKey && (city || districtId));
+
+  // الإحداثيات ثابتة دلوقتي (مش بتتجاب من geocoding)، فبنحسبها مباشرة بدل ما تتخزن في state.
+  // لو الحي معندوش إحداثيات متسجلة في DISTRICT_COORDINATES، بيرجع لمركز المدينة كـ fallback.
+  const mapCenter = selectedDistrict
+    ? (DISTRICT_COORDINATES[selectedDistrict.name] ?? CITY_COORDINATES[city])
+    : CITY_COORDINATES[city];
+
+  const mapZoom = selectedDistrict ? DISTRICT_ZOOM : CITY_ZOOM;
+  const mapLabel = selectedDistrict?.name ?? selectedCity?.label ?? "";
 
   const whatsappHref = useMemo(() => {
     const message = selectedUnit
@@ -185,6 +213,13 @@ export default function FeaturedLocationsDraft({
                 احجز هذه الوحدة الآن
               </Link>
             </div>
+          </div>
+        ) : showMap && mapCenter ? (
+          <div>
+            <h3 className="text-2xl font-semibold text-gold mb-6">
+              {mapLabel}
+            </h3>
+            <LocationMap center={mapCenter} zoom={mapZoom} label={mapLabel} />
           </div>
         ) : (
           <div className="text-center text-white/40 py-20 border-2 border-dashed border-white/10 rounded-2xl">
