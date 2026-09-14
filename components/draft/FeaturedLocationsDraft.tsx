@@ -70,6 +70,9 @@ function Select({
 // ثابتة دلوقتي — لما تضيف مدن تانية في ووردبريس، تتحول لبيانات جايه من الـ API زي الأحياء
 const CITIES = [{ value: "riyadh", label: "الرياض" }];
 
+// عنصر واحد في الجاليري — ممكن يكون فيديو أو صورة، وبنميزهم عشان نعرف نرندر إيه
+type MediaItem = { type: "video" | "image"; src: string };
+
 export default function FeaturedLocationsDraft({
   districts,
 }: {
@@ -106,12 +109,22 @@ export default function FeaturedLocationsDraft({
     ? selectedUnit.images
     : (selectedDistrict?.generalImages ?? []);
 
+  // بنحط فيديو الحي (لو موجود) أول عنصر في الجاليري، وبعده الصور بالترتيب العادي.
+  // selectedDistrict.mainVideo جاي من الحقل "video" في ووردبريس (string | false في الأصل،
+  // اتحول لـ string | null في طبقة الـ normalization).
+  const galleryMedia: MediaItem[] = [
+    ...(selectedDistrict?.mainVideo
+      ? [{ type: "video" as const, src: selectedDistrict.mainVideo }]
+      : []),
+    ...galleryImages.map((src) => ({ type: "image" as const, src })),
+  ];
+
   const galleryTitle = selectedUnit
     ? `${selectedUnit.label} - ${selectedDistrict?.name}`
     : (selectedDistrict?.name ?? "");
 
   const showGallery = Boolean(
-    unitKey && selectedUnit && galleryImages.length > 0,
+    unitKey && selectedUnit && galleryMedia.length > 0,
   );
   const showMap = Boolean(!unitKey && (city || districtId));
 
@@ -129,7 +142,7 @@ export default function FeaturedLocationsDraft({
       ? `أرغب في حجز وحدة "${selectedUnit.label}" في ${selectedDistrict?.name}`
       : `أرغب في الاستفسار عن الوحدات المتاحة في ${selectedDistrict?.name}`;
 
-    return `https://wa.me/+966500000000?text=${encodeURIComponent(message)}`;
+    return `https://wa.me/+966503070157?text=${encodeURIComponent(message)}`;
   }, [selectedDistrict, selectedUnit]);
 
   return (
@@ -144,7 +157,7 @@ export default function FeaturedLocationsDraft({
       <span className="absolute top-0 left-0 w-full h-20 -z-10 bg-linear-to-t from-transparent to-black"></span>
       <span className="absolute bottom-0 left-0 w-full h-20 -z-10 bg-linear-to-t from-black to-transparent"></span>
 
-      <h2 className="font-black text-5xl leading-[60px] text-center bg-gradient-to-l from-[#cfb000] to-80% to-[#d8b800] bg-clip-text text-transparent my-10">
+      <h2 className="font-black text-5xl leading-[60px] text-center bg-gradient-to-l from-white to-80% to-[#bdbdbd] bg-clip-text text-transparent my-10">
         مواقعنـــــا المميـــــزة
       </h2>
 
@@ -198,19 +211,30 @@ export default function FeaturedLocationsDraft({
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {galleryImages.slice(0, 3).map((src, index) => (
+              {galleryMedia.slice(0, 3).map((item, index) => (
                 <Link
                   href={`/suites-units/${selectedDistrict.id}`}
-                  key={`${index}-${src}`}
+                  key={`${index}-${item.src}`}
                   className="rounded-2xl overflow-hidden border border-white/10 relative group"
                 >
-                  <Image
-                    src={src}
-                    alt={galleryTitle}
-                    width={400}
-                    height={400}
-                    className="w-full h-64 object-cover transform group-hover:scale-105 transition-transform duration-500"
-                  />
+                  {item.type === "video" ? (
+                    <video
+                      src={item.src}
+                      className="w-full h-64 object-cover transform group-hover:scale-105 transition-transform duration-500"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                    />
+                  ) : (
+                    <Image
+                      src={item.src}
+                      alt={galleryTitle}
+                      width={400}
+                      height={400}
+                      className="w-full h-64 object-cover transform group-hover:scale-105 transition-transform duration-500"
+                    />
+                  )}
                 </Link>
               ))}
             </div>
