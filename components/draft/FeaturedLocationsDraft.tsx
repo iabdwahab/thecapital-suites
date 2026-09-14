@@ -82,7 +82,17 @@ export default function FeaturedLocationsDraft({
     setUnitKey("");
   };
 
-  const showGallery = Boolean(selectedUnit && selectedUnit.images.length > 0);
+  // لو محددش نوع وحدة، تتعرض الجاليري العامة للحي؛ لو حدد نوع، تتعرض صور النوع ده
+  // (أنواع الوحدات اللي مفيهاش صور أصلًا متشالة من القائمة، فمش هتوصل هنا فاضية)
+  const galleryImages = selectedUnit
+    ? selectedUnit.images
+    : (selectedDistrict?.generalImages ?? []);
+
+  const galleryTitle = selectedUnit
+    ? `${selectedUnit.label} - ${selectedDistrict?.name}`
+    : (selectedDistrict?.name ?? "");
+
+  const showGallery = Boolean(selectedDistrict && galleryImages.length > 0);
 
   return (
     <section className="font-thamnyah" dir="rtl">
@@ -128,11 +138,11 @@ export default function FeaturedLocationsDraft({
       </div>
 
       <div className="max-w-6xl mx-auto">
-        {showGallery && selectedUnit && selectedDistrict ? (
+        {showGallery && selectedDistrict ? (
           <div>
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-2xl font-semibold text-gold">
-                {selectedUnit.label} - {selectedDistrict.name}
+                {galleryTitle}
               </h3>
               <span className="bg-gold/20 text-gold py-1 px-4 rounded-full text-sm">
                 متاح للحجز
@@ -140,14 +150,14 @@ export default function FeaturedLocationsDraft({
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {selectedUnit.images.map((src) => (
+              {galleryImages.map((src, index) => (
                 <div
-                  key={src}
+                  key={`${index}-${src}`}
                   className="rounded-2xl overflow-hidden border border-white/10 relative group"
                 >
                   <img
                     src={src}
-                    alt={`${selectedUnit.label} - ${selectedDistrict.name}`}
+                    alt={galleryTitle}
                     className="w-full h-64 object-cover transform group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>

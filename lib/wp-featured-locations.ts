@@ -72,7 +72,7 @@ function normalizePost(post: RawPost): District {
       label: UNIT_LABELS[key] ?? key,
       images: collectImages(value as Record<string, RawImageValue>),
     }))
-    // لو نوع الوحدة موجود كحقل بس مفيهوش ولا صورة واحدة، منعرضوش في القائمة
+    // لو نوع الوحدة مفيهوش ولا صورة واحدة، منعرضوش كخيار في القائمة أصلًا
     .filter((unit) => unit.images.length > 0);
 
   const videosList = collectImages(acf.videos_list);
