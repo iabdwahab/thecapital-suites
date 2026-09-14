@@ -204,6 +204,7 @@ export default async function Footer() {
                 </span>
                 <span>
                   <Link
+                    dir="ltr"
                     href={`tel:${footerData.acf.column_contact.contact_info.phone}`}
                     className="underline"
                   >

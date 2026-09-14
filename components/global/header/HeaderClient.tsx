@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 type HeaderData = {
   id: number;
@@ -22,7 +23,13 @@ type HeaderData = {
 
 export default function HeaderClient({ data }: { data: HeaderData }) {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
   const links = Object.values(data.acf.links);
+
+  // بيقارن الـ href بتاع اللينك بالـ path الحالي. الشرط ده بيتعامل مع "/" كحالة خاصة
+  // عشان "/" متبقاش active دايمًا مع كل الصفحات (لأن كل مسار بيبدأ بـ "/").
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
     <header className="text-[#F8F8F8] [text-shadow:0_2px_8px_rgba(0,0,0,0.6)] fixed left-1/2 -translate-x-1/2 rounded-xl lg:rounded-full top-2 z-50 w-[calc(100%-20px)] lg:container bg-[rgba(255,255,255,0.1)] backdrop-blur-xl">
@@ -41,16 +48,23 @@ export default function HeaderClient({ data }: { data: HeaderData }) {
         {/* desktop nav */}
         <nav className="hidden lg:block">
           <ul className="flex items-center gap-4 lg:pr-14">
-            {links.map((link, index) => (
-              <li key={index}>
-                <Link
-                  href={link.href}
-                  className="hover:opacity-80 transition-opacity duration-300"
-                >
-                  {link.text}
-                </Link>
-              </li>
-            ))}
+            {links.map((link, index) => {
+              const active = isActive(link.href);
+              return (
+                <li key={index}>
+                  <Link
+                    href={link.href}
+                    className={`relative   px-1 py-1 transition-all duration-300 hover:opacity-80 ${
+                      active
+                        ? "opacity-100 [text-shadow:0_0_12px_rgba(255,255,255,0.9)] underline underline-offset-8 "
+                        : "opacity-80"
+                    }`}
+                  >
+                    {link.text}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </nav>
 
@@ -112,17 +126,24 @@ export default function HeaderClient({ data }: { data: HeaderData }) {
       >
         <nav className="px-6 py-4">
           <ul className="flex flex-col gap-3">
-            {links.map((link, index) => (
-              <li key={index}>
-                <Link
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="block hover:opacity-80 transition-opacity duration-300"
-                >
-                  {link.text}
-                </Link>
-              </li>
-            ))}
+            {links.map((link, index) => {
+              const active = isActive(link.href);
+              return (
+                <li key={index}>
+                  <Link
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    className={`block transition-all duration-300 hover:opacity-80 ${
+                      active
+                        ? "opacity-100 [text-shadow:0_0_12px_rgba(255,255,255,0.9)] font-bold underline underline-offset-4"
+                        : "opacity-90"
+                    }`}
+                  >
+                    {link.text}
+                  </Link>
+                </li>
+              );
+            })}
             <li>
               <Link
                 href={data.acf.button.href || "#"}
