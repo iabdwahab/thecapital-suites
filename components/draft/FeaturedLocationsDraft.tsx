@@ -2,6 +2,8 @@
 
 import { useMemo, useState } from "react";
 import type { District } from "@/lib/wp-featured-locations";
+import Image from "next/image";
+import Link from "next/link";
 
 function Select({
   label,
@@ -95,7 +97,7 @@ export default function FeaturedLocationsDraft({
   const showGallery = Boolean(selectedDistrict && galleryImages.length > 0);
 
   return (
-    <section className="font-thamnyah" dir="rtl">
+    <section className="font-thamnyah py-20" dir="rtl">
       <h2 className="font-black text-5xl leading-[60px] text-center bg-gradient-to-l from-white to-80% to-[#bdbdbd] bg-clip-text text-transparent my-10">
         مواقعنـــــا المميـــــزة
       </h2>
@@ -144,30 +146,36 @@ export default function FeaturedLocationsDraft({
               <h3 className="text-2xl font-semibold text-gold">
                 {galleryTitle}
               </h3>
-              <span className="bg-gold/20 text-gold py-1 px-4 rounded-full text-sm">
+              <span className="bg-[#B37700] font-bold text-black py-1 px-4 rounded-full text-sm">
                 متاح للحجز
               </span>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {galleryImages.map((src, index) => (
-                <div
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {galleryImages.slice(0, 3).map((src, index) => (
+                <Link
+                  href={`/suites-units/${selectedDistrict.id}`}
                   key={`${index}-${src}`}
                   className="rounded-2xl overflow-hidden border border-white/10 relative group"
                 >
-                  <img
+                  <Image
                     src={src}
                     alt={galleryTitle}
+                    width={400}
+                    height={400}
                     className="w-full h-64 object-cover transform group-hover:scale-105 transition-transform duration-500"
                   />
-                </div>
+                </Link>
               ))}
             </div>
 
             <div className="mt-8 text-center">
-              <button className="bg-gold hover:bg-gold-dark text-black font-bold py-3 px-8 rounded-xl transition-colors shadow-[0_0_15px_rgba(193,154,107,0.3)]">
+              <Link
+                href={`#`}
+                className="font-alexandria bg-[#B37700] text-white font-bold py-3 px-8 text-lg rounded-xl"
+              >
                 احجز هذه الوحدة الآن
-              </button>
+              </Link>
             </div>
           </div>
         ) : (

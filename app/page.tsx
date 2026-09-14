@@ -17,7 +17,7 @@ export default async function Home() {
     <>
       <HeroSection />
       <FeaturedLocationsDraft districts={districts} />
-      <FeaturedLocations />
+      {/* <FeaturedLocations /> */}
       <WhyusSection />
       <PropertyOwnersSection />
       <FeaturesSection />
