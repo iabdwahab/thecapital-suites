@@ -7,11 +7,16 @@ import HeroSection from "@/components/home/HeroSection";
 import PlatformsSection from "@/components/home/PlatformsSection";
 import PropertyOwnersSection from "@/components/home/PropertyOwnersSection";
 import WhyusSection from "@/components/home/WhyusSection";
+import FeaturedLocationsDraft from "@/components/draft/FeaturedLocationsDraft";
+import { getFeaturedLocations } from "@/lib/wp-featured-locations";
 
-export default function Home() {
+export default async function Home() {
+  const districts = await getFeaturedLocations();
+
   return (
     <>
       <HeroSection />
+      <FeaturedLocationsDraft districts={districts} />
       <FeaturedLocations />
       <WhyusSection />
       <PropertyOwnersSection />
