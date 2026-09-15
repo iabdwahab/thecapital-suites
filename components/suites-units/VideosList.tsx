@@ -29,7 +29,7 @@ export default function VideosList({
 
   return (
     <section className="py-12 container">
-      <h2 className="text-[48px] font-bold">فيديوهات من خدماتنا</h2>
+      <h2 className="text-[40px]">فيديوهات من خدماتنا</h2>
 
       <div className="mt-10 cursor-grabbing">
         <Swiper

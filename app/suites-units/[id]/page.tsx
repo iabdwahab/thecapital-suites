@@ -95,7 +95,7 @@ export default async function LocationPage({
       </section>
 
       <section className="min-h-screen container ">
-        <div className="w-full h-120 overflow-hidden -mt-40 bg-white relative rounded-3xl">
+        <div className="w-full h-120 overflow-hidden -mt-40 bg-white relative z-20 rounded-3xl">
           <video
             src={acf.main_video || "/suites-units-video.mp4"}
             className="absolute top-0 left-0 w-full h-full object-cover object-center"
@@ -106,36 +106,70 @@ export default async function LocationPage({
         </div>
       </section>
 
-      {/* <GallerySection images={...} /> — الحقل العام "images" اتشال من الـ schema،
-          لسه مش موجود بديل ليه دلوقتي. */}
-      <VideosList videos={acf.videos_list} />
+      <span className="relative z-10 overflow-hidden">
+        <span className="absolute top-0 w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px]  bg-[#5a5904] left-0 -z-10"></span>
+        <span className="absolute top-[100vh] w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px]  bg-[#5a5904] right-0 -z-10"></span>
+        <span className="absolute top-[200vh] w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px]  bg-[#5a5904] left-0 -z-10"></span>
+        <span className="absolute top-[300vh] w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px]  bg-[#5a5904] right-0 -z-10"></span>
 
-      {hasOneRoom && (
-        <>
-          <section className="py-10 container">
-            <h2 className="text-[40px]">غرفة وصالة</h2>
-            <ImageSlider images={oneRoomImages} />
-          </section>
-          <hr className="container border-[#eeeeee38]" />
-        </>
-      )}
+        <section className="container pb-10">
+          <h2 className="font-black text-4xl leading-[40px] text-center bg-gradient-to-l from-white to-80% to-[#bdbdbd] bg-clip-text text-transparent mb-10">
+            <span className="block text-4xl leading-[50px] mb-4">
+              استكشف ما نقدمه من خدمات
+            </span>
+            {/* <span className="leading-[60px] text-5xl ">التصميمات الداخلية</span> */}
+          </h2>
 
-      {hasTwoRooms && (
-        <>
-          <section className="py-10 container">
-            <h2 className="text-[40px]">غرفتين وصالة</h2>
-            <ImageSlider images={twoRoomsImages} />
-          </section>
-          <hr className="container border-[#eeeeee38]" />
-        </>
-      )}
-
-      {hasStudio && (
-        <section className="py-10 container">
-          <h2 className="text-[40px]">استوديو</h2>
-          <ImageSlider images={studioImages} />
+          <div className="grid md:grid-cols-2 gap-4">
+            <Image
+              src="/featured-1.png"
+              alt=""
+              width={1080}
+              height={1080}
+              className="rounded-2xl object-cover w-full h-full"
+            />
+            <Image
+              src="/featured-2.png"
+              alt=""
+              width={1080}
+              height={1080}
+              className="rounded-2xl object-cover w-full h-full"
+            />
+          </div>
         </section>
-      )}
+
+        {/* <GallerySection images={...} /> — الحقل العام "images" اتشال من الـ schema،
+          لسه مش موجود بديل ليه دلوقتي. */}
+
+        {hasOneRoom && (
+          <>
+            <section className="py-10 container">
+              <h2 className="text-[40px] ">غرفة وصالة</h2>
+              <ImageSlider images={oneRoomImages} />
+            </section>
+            <hr className="container border-[#eeeeee38]" />
+          </>
+        )}
+
+        {hasTwoRooms && (
+          <>
+            <section className="py-10 container">
+              <h2 className="text-[40px]">غرفتين وصالة</h2>
+              <ImageSlider images={twoRoomsImages} />
+            </section>
+            <hr className="container border-[#eeeeee38]" />
+          </>
+        )}
+
+        {hasStudio && (
+          <section className="py-10 container">
+            <h2 className="text-[40px]">استوديو</h2>
+            <ImageSlider images={studioImages} />
+          </section>
+        )}
+
+        <VideosList videos={acf.videos_list} />
+      </span>
     </>
   );
 }
