@@ -4,42 +4,39 @@ import GallerySection from "@/components/suites-units/GallerySection";
 import VideosList from "@/components/suites-units/VideosList";
 import Image from "next/image";
 
+// شكل عنصر الصورة اللي بترجعه ACF Pro Gallery field
+type WpImage = { url: string; [key: string]: unknown };
+
+type Acf = {
+  title: string;
+  descripiton: string;
+  main_video: string | false;
+  videos_list: Record<string, string | false>;
+  has_studio?: boolean;
+  has_1room?: boolean;
+  has_2rooms?: boolean;
+  studio_images?: WpImage[];
+  "1room_images"?: WpImage[];
+  "2rooms_images"?: WpImage[];
+};
+
+// ImageSlider لسه متوقع الشكل القديم (Record<string, {url}|false>)، فبنحول
+// الـ array الجديد لنفس الشكل ده عشان منضطرش نعدّل ImageSlider نفسه دلوقتي.
+function toSliderRecord(
+  images: WpImage[] | undefined,
+): Record<string, { url: string } | false> {
+  if (!Array.isArray(images)) return {};
+  return Object.fromEntries(
+    images.map((img, index) => [`image_${index + 1}`, { url: img.url }]),
+  );
+}
+
 export async function generateStaticParams() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/featured-locations/?_fields=id,acf,date&acf_format=standard`,
   );
 
-  const data: {
-    id: number;
-    acf: {
-      title: string;
-      images: Record<string, string | false>;
-      descripiton: string;
-      video: string | false;
-      videos_list: Record<string, string | false>;
-      "1_room"?: Record<
-        string,
-        | {
-            url: string;
-          }
-        | false
-      >;
-      "2_rooms"?: Record<
-        string,
-        | {
-            url: string;
-          }
-        | false
-      >;
-      studio?: Record<
-        string,
-        | {
-            url: string;
-          }
-        | false
-      >;
-    };
-  }[] = await res.json();
+  const data: { id: number; acf: Acf }[] = await res.json();
 
   return data.map((post) => ({
     id: post.id.toString(),
@@ -57,57 +54,18 @@ export default async function LocationPage({
     `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/featured-locations/${id}?_fields=id,acf&acf_format=standard`,
   );
 
-  const locationData: {
-    acf: {
-      title: string;
-      images: Record<string, string | false>;
-      descripiton: string;
-      video: string | false;
-      videos_list: Record<string, string | false>;
-      // الحقول دي ممكن تكون مش موجودة خالص في بعض البوستات، مش بس false
-      "1_room"?: Record<
-        string,
-        | {
-            url: string;
-          }
-        | false
-      >;
-      "2_rooms"?: Record<
-        string,
-        | {
-            url: string;
-          }
-        | false
-      >;
-      studio?: Record<
-        string,
-        | {
-            url: string;
-          }
-        | false
-      >;
-    };
-  } = await res.json();
+  const locationData: { acf: Acf } = await res.json();
+  const { acf } = locationData;
 
-  // نجهز نسخة آمنة من كل حقل نوع وحدة، عشان منكررش ?? {} في كل مكان
-  const oneRoomImages = locationData.acf["1_room"] ?? {};
-  const twoRoomsImages = locationData.acf["2_rooms"] ?? {};
-  const studioImages = locationData.acf["studio"] ?? {};
+  // الـ toggle (has_studio/has_1room/has_2rooms) هو مصدر الحقيقة، مش مجرد وجود صور
+  // في الحقل — زي ما اتفقنا، عشان نتفادى حالة "مسحت الصور بس فضل عنصر شبح في الـ array".
+  const hasStudio = acf.has_studio === true;
+  const hasOneRoom = acf.has_1room === true;
+  const hasTwoRooms = acf.has_2rooms === true;
 
-  const hasOneRoom =
-    Object.values(oneRoomImages).filter(
-      (image): image is { url: string } => image !== false,
-    ).length > 0;
-
-  const hasTwoRooms =
-    Object.values(twoRoomsImages).filter(
-      (image): image is { url: string } => image !== false,
-    ).length > 0;
-
-  const hasStudio =
-    Object.values(studioImages).filter(
-      (image): image is { url: string } => image !== false,
-    ).length > 0;
+  const studioImages = toSliderRecord(acf.studio_images);
+  const oneRoomImages = toSliderRecord(acf["1room_images"]);
+  const twoRoomsImages = toSliderRecord(acf["2rooms_images"]);
 
   return (
     <>
@@ -125,10 +83,10 @@ export default async function LocationPage({
 
         <div className="container text-center">
           <h1 className="text-3xl md:text-6xl font-extrabold text-[#F8F8F8] leading-[50px] md:leading-[80px]">
-            {locationData.acf.title}
+            {acf.title}
           </h1>
           <p className="text-xl md:text-4xl font-extralight text-[#E7DECA] mt-4 max-w-4xl md:leading-[48px] mx-auto">
-            {locationData.acf.descripiton ||
+            {acf.descripiton ||
               "مجموعة من البنايات الفاخرة بتصاميم معمارية فريدة"}
           </p>
         </div>
@@ -139,7 +97,7 @@ export default async function LocationPage({
       <section className="min-h-screen container ">
         <div className="w-full h-120 overflow-hidden -mt-40 bg-white relative rounded-3xl">
           <video
-            src={locationData.acf.video || "/suites-units-video.mp4"}
+            src={acf.main_video || "/suites-units-video.mp4"}
             className="absolute top-0 left-0 w-full h-full object-cover object-center"
             autoPlay
             loop
@@ -148,8 +106,9 @@ export default async function LocationPage({
         </div>
       </section>
 
-      <GallerySection images={locationData.acf.images} />
-      <VideosList videos={locationData.acf.videos_list} />
+      {/* <GallerySection images={...} /> — الحقل العام "images" اتشال من الـ schema،
+          لسه مش موجود بديل ليه دلوقتي. */}
+      <VideosList videos={acf.videos_list} />
 
       {hasOneRoom && (
         <>

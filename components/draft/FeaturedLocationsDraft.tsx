@@ -107,9 +107,7 @@ export default function FeaturedLocationsDraft({
     setUnitKey("");
   };
 
-  const galleryImages = selectedUnit
-    ? selectedUnit.images
-    : (selectedDistrict?.generalImages ?? []);
+  const galleryImages = selectedUnit ? selectedUnit.images : [];
 
   // بنحط فيديو الحي (لو موجود) أول عنصر في الجاليري، وبعده الصور بالترتيب العادي.
   // selectedDistrict.mainVideo جاي من الحقل "video" في ووردبريس (string | false في الأصل،
@@ -229,6 +227,11 @@ export default function FeaturedLocationsDraft({
                       loop
                       playsInline
                       preload="auto"
+                      onError={(e) => {
+                        // لو الفيديو فشل يحمّل (صيغة مش مدعومة، رابط باظ، إلخ)،
+                        // نخفيه بدل ما يفضل مربع أسود فاضي — أحسن من صفحة فيها عنصر معطوب.
+                        e.currentTarget.style.display = "none";
+                      }}
                     />
                   ) : (
                     <Image
