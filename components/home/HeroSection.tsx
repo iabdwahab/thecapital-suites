@@ -33,7 +33,7 @@ export default async function HeroSection() {
           className="absolute inset-0 w-full h-full object-cover -z-10"
         />
       </span>
-      <span className="absolute left-0 top-0 w-full h-full bg-black/70 -z-10"></span>
+      <span className="absolute left-0 top-0 w-full h-full bg-black/50 -z-10"></span>
 
       <div className="container">
         <h1 className="text-3xl md:text-6xl font-extrabold max-w-5xl text-[#F8F8F8] text-center md:text-right leading-[50px] md:leading-[80px]">

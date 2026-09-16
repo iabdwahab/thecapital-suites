@@ -29,7 +29,7 @@ export default async function StudyRequestLink() {
       <Link
         href={"/property-owners/#study-request-form"}
         aria-label="دراسة مبنى مجانية"
-        className="study-request-btn fixed bottom-6 right-6 z-50 flex items-center justify-center rounded-full text-black px-4 py-1 font-bold bg-[#B37700] hover:scale-110 transition-transform duration-200"
+        className="study-request-btn fixed bottom-6 right-6 z-50 flex items-center justify-center rounded-full text-black px-4 py-1 font-bold bg-[#C9A455] hover:scale-110 transition-transform duration-200"
       >
         دراسة مبنى مجانية
       </Link>
