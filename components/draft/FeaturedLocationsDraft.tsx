@@ -146,7 +146,7 @@ export default function FeaturedLocationsDraft({
   }, [selectedDistrict, selectedUnit]);
 
   return (
-    <section className="font-thamnyah z-0 relative py-20" dir="rtl">
+    <section className="font-thamnyah z-0 container relative py-20" dir="rtl">
       <Image
         src="/14616436_5459923.jpg"
         width={1920}
@@ -201,19 +201,28 @@ export default function FeaturedLocationsDraft({
       <div className="max-w-6xl mx-auto">
         {showGallery && selectedDistrict ? (
           <div>
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="text-2xl font-semibold text-gold">
-                {galleryTitle}
-              </h3>
-              <span className="bg-[#B37700] font-bold text-black py-1 px-4 rounded-full text-sm">
-                متاح للحجز
-              </span>
+            <div className="flex flex-wrap justify-between gap-4 items-center mb-6">
+              <div className="flex items-center gap-4">
+                <h3 className="text-2xl font-semibold text-gold">
+                  {galleryTitle}
+                </h3>
+                <span className="bg-[#BFA045] font-bold text-black mt-2 py-1 px-4 rounded-full text-sm">
+                  متاح للحجز
+                </span>
+              </div>
+
+              <Link
+                href={`/suites-units/${selectedDistrict.id}`}
+                className="bg-[#BFA045] px-4 py-3 rounded-md text-black font-bold hover:opacity-90 transition-opacity duration-200"
+              >
+                عرض المزيد من الصور
+              </Link>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {galleryMedia.slice(0, 3).map((item, index) => (
-                <Link
-                  href={`/suites-units/${selectedDistrict.id}`}
+              {galleryMedia.slice(0, 6).map((item, index) => (
+                <div
+                  // href={`/suites-units/${selectedDistrict.id}`}
                   key={`${index}-${item.src}`}
                   className="rounded-2xl overflow-hidden border border-white/10 relative group"
                 >
@@ -242,14 +251,14 @@ export default function FeaturedLocationsDraft({
                       className="w-full h-64 object-cover transform group-hover:scale-105 transition-transform duration-500"
                     />
                   )}
-                </Link>
+                </div>
               ))}
             </div>
 
             <div className="mt-8 text-center">
               <Link
                 href={whatsappHref}
-                className="font-alexandria bg-[#B37700] text-white font-bold py-3 px-8 text-lg rounded-xl"
+                className="font-alexandria bg-[#BFA045] text-black font-bold py-3 px-8 text-lg rounded-xl"
               >
                 احجز هذه الوحدة الآن
               </Link>
