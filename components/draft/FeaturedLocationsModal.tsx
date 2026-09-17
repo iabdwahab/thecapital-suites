@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import {
   Dialog,
@@ -7,6 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import ImageLightbox from "./ImageLightbox";
 
 export default function FeaturedLocationsModal({
   open,
@@ -19,6 +21,9 @@ export default function FeaturedLocationsModal({
   title: string;
   images: string[];
 }) {
+  // null = اللايتبوكس مقفول. رقم = مفتوح ومركّز على صورة معينة
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       {/* dir="rtl" هنا عشان المحتوى جوه المودال يتماشى مع اتجاه باقي الموقع.
@@ -26,7 +31,7 @@ export default function FeaturedLocationsModal({
           فمش محتاجين نعمل أي حاجة من دول يدوي زي المرة اللي فاتت. */}
       <DialogContent
         dir="rtl"
-        className="dark-scrollbar bg-[#0a0a0a]  text-white sm:max-w-[1100px] max-h-[85vh] overflow-y-auto"
+        className="dark-scrollbar bg-[#0a0a0a]  border-white/10 text-white sm:max-w-[1100px] max-h-[85vh] overflow-y-auto"
       >
         {/* سكرول بار داكن بدل الافتراضي — يعتمد على الكلاس dark-scrollbar فوق */}
         <style jsx global>{`
@@ -50,7 +55,7 @@ export default function FeaturedLocationsModal({
             background-color: #444444;
           }
         `}</style>
-        <DialogHeader className="mt-6 mb-6">
+        <DialogHeader className="mt-6">
           <DialogTitle className="text-2xl text-[#BFA045] font-thamnyah md:text-3xl font-semibold">
             {title}
           </DialogTitle>
@@ -58,9 +63,11 @@ export default function FeaturedLocationsModal({
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-2">
           {images.map((src, index) => (
-            <div
+            <button
               key={`${index}-${src}`}
-              className="rounded-xl overflow-hidden border border-white/10 relative"
+              type="button"
+              onClick={() => setLightboxIndex(index)}
+              className="rounded-xl overflow-hidden border border-white/10 relative cursor-pointer"
             >
               <Image
                 src={src}
@@ -69,10 +76,16 @@ export default function FeaturedLocationsModal({
                 height={500}
                 className="w-full h-56 object-cover"
               />
-            </div>
+            </button>
           ))}
         </div>
       </DialogContent>
+
+      <ImageLightbox
+        images={images}
+        index={lightboxIndex}
+        onClose={() => setLightboxIndex(null)}
+      />
     </Dialog>
   );
 }

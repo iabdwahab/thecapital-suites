@@ -12,6 +12,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import FeaturedLocationsModal from "./FeaturedLocationsModal";
+import ImageLightbox from "./ImageLightbox";
 
 // Plyr بيلمس document وقت الـ import نفسه، فمينفعش يترندر على السيرفر خالص —
 // لازم يتحمّل client-only بنفس طريقة LocationMap فوق.
@@ -94,6 +95,8 @@ export default function FeaturedLocationsDraft({
   const [districtId, setDistrictId] = useState("");
   const [unitKey, setUnitKey] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // null = اللايتبوكس مقفول. رقم = مفتوح ومركّز على صورة معينة في visibleImages تحت
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const selectedCity = CITIES.find((c) => c.value === city);
 
@@ -133,6 +136,12 @@ export default function FeaturedLocationsDraft({
   const galleryTitle = selectedUnit
     ? `${selectedUnit.label} - ${selectedDistrict?.name}`
     : (selectedDistrict?.name ?? "");
+
+  // بس الصور (من غير الفيديو) اللي ظاهرة فعليًا في الـ 6 كروت — اللايتبوكس بيتنقل بينهم بس
+  const visibleImages = galleryMedia
+    .slice(0, 6)
+    .filter((item) => item.type === "image")
+    .map((item) => item.src);
 
   const showGallery = Boolean(
     unitKey && selectedUnit && galleryMedia.length > 0,
@@ -233,24 +242,41 @@ export default function FeaturedLocationsDraft({
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {galleryMedia.slice(0, 6).map((item, index) => (
-                <div
-                  key={`${index}-${item.src}`}
-                  className="rounded-2xl overflow-hidden border border-white/10 relative group"
-                >
-                  {item.type === "video" ? (
-                    <VideoPlayer src={item.src} />
-                  ) : (
-                    <Image
-                      src={item.src}
-                      alt={galleryTitle}
-                      width={400}
-                      height={400}
-                      className="w-full h-64 object-cover transform group-hover:scale-105 transition-transform duration-500"
-                    />
-                  )}
-                </div>
-              ))}
+              {(() => {
+                // عداد منفصل للصور بس (من غير الفيديو)، عشان نعرف نبعت للايتبوكس
+                // الـ index الصح جوه visibleImages، مش الـ index العام في galleryMedia
+                let imageCounter = -1;
+
+                return galleryMedia.slice(0, 6).map((item, index) => {
+                  if (item.type === "image") imageCounter += 1;
+                  const currentImageIndex = imageCounter;
+
+                  return (
+                    <div
+                      key={`${index}-${item.src}`}
+                      className="rounded-2xl overflow-hidden border border-white/10 relative group"
+                    >
+                      {item.type === "video" ? (
+                        <VideoPlayer src={item.src} />
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={() => setLightboxIndex(currentImageIndex)}
+                          className="block w-full h-full cursor-pointer"
+                        >
+                          <Image
+                            src={item.src}
+                            alt={galleryTitle}
+                            width={400}
+                            height={400}
+                            className="w-full h-64 object-cover transform group-hover:scale-105 transition-transform duration-500"
+                          />
+                        </button>
+                      )}
+                    </div>
+                  );
+                });
+              })()}
             </div>
 
             <div className="mt-8 text-center">
@@ -299,6 +325,12 @@ export default function FeaturedLocationsDraft({
           images={selectedUnit.images}
         />
       )}
+
+      <ImageLightbox
+        images={visibleImages}
+        index={lightboxIndex}
+        onClose={() => setLightboxIndex(null)}
+      />
     </section>
   );
 }
