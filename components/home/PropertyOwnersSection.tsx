@@ -23,9 +23,9 @@ export default async function PropertyOwnersSection() {
 
   return (
     <section className="container py-20">
-      <span className="text-[14px] text-[#C9A455] text-center block">
+      {/* <span className="text-[14px] text-[#C9A455] text-center block">
         {sectionHeading.acf.badge}
-      </span>
+      </span> */}
       <h2 className="font-bold max-w-2xl mx-auto text-3xl md:text-4xl text-[#E0BC78] text-center mt-4 leading-[46px]">
         {sectionHeading.acf.title}
       </h2>
