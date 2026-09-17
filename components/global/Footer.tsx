@@ -96,11 +96,11 @@ export default async function Footer() {
     <footer className="py-30 relative">
       <span>
         <Image
-          src={"/footer-image.jpg"}
+          src={"/services-section/4.jpg"}
           alt="Footer Image"
           width={2160}
           height={1216}
-          className="absolute top-0 left-0 w-full h-full object-cover -z-10 "
+          className="absolute top-0 left-0 w-full h-full object-cover  -z-10 "
         />
       </span>
       <span className="absolute left-0 top-0 w-full h-full bg-black/70 -z-10"></span>
