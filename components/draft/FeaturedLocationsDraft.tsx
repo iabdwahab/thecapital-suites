@@ -172,9 +172,13 @@ export default function FeaturedLocationsDraft({
         width={1920}
         height={1080}
         alt=""
-        className="absolute -z-10 left-0 top-0 w-full h-full object-cover pointer-events-none select-none opacity-5"
+        className="absolute -z-10 left-0 top-0 w-full h-full object-cover pointer-events-none select-none opacity-2"
       />
-      <span className="absolute top-0 left-0 w-full h-20 -z-10 bg-linear-to-t from-transparent to-black"></span>
+      <span className="absolute top-0 w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px]  bg-[#bfa0455e] left-0 -z-10"></span>
+      <span className="absolute bottom-0 w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px]  bg-[#bfa0455e] right-0 -z-10"></span>
+      {/* <span className="absolute top-[100vh] w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px]  bg-[#807e0886] right-0 -z-10"></span> */}
+
+      {/* <span className="absolute top-0 left-0 w-full h-20 -z-10 bg-linear-to-t from-transparent to-black"></span> */}
       <span className="absolute bottom-0 left-0 w-full h-20 -z-10 bg-linear-to-t from-black to-transparent"></span>
 
       <h2 className="font-black text-5xl leading-[60px] text-center bg-gradient-to-l from-white to-80% to-[#bdbdbd] bg-clip-text text-transparent my-10">

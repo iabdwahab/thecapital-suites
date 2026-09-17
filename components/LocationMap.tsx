@@ -41,7 +41,7 @@ export default function LocationMap({
         center={center}
         zoom={zoom}
         scrollWheelZoom={true}
-        className="dark-map w-full h-full"
+        className="w-full h-full"
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

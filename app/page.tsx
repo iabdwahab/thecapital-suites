@@ -19,9 +19,18 @@ export default async function Home() {
       <FeaturedLocationsDraft districts={districts} />
       {/* <FeaturedLocations /> */}
       <WhyusSection />
-      <PropertyOwnersSection />
-      <FeaturesSection />
-      <PlatformsSection />
+      <div className="relative">
+        <span className="absolute top-0 w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px]  bg-[#bfa04565] left-0 -z-10"></span>
+        <span className="absolute top-[100vh] w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px]  bg-[#bfa04565] right-0 -z-10"></span>
+        <span className="absolute top-[200vh] w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px]  bg-[#bfa04565] left-0 -z-10"></span>
+
+        <span className="absolute top-0 left-0 w-full h-20 -z-10 bg-linear-to-t from-transparent to-black"></span>
+        <span className="absolute bottom-0 left-0 w-full h-20 -z-10 bg-linear-to-t from-black to-transparent"></span>
+
+        <PropertyOwnersSection />
+        <FeaturesSection />
+        <PlatformsSection />
+      </div>
       {/* <section
         id="contact"
         className="container py-20 grid lg:grid-cols-[570px_1fr] gap-4 scroll-mt-10"
