@@ -13,6 +13,15 @@ import Image from "next/image";
 import Link from "next/link";
 import FeaturedLocationsModal from "./FeaturedLocationsModal";
 
+// Plyr بيلمس document وقت الـ import نفسه، فمينفعش يترندر على السيرفر خالص —
+// لازم يتحمّل client-only بنفس طريقة LocationMap فوق.
+const VideoPlayer = dynamic(() => import("@/components/VideoPlayer"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-64 bg-white/5 animate-pulse rounded-2xl" />
+  ),
+});
+
 // الخريطة لازم تتحمل client-only لأن Leaflet بيستخدم window مباشرة.
 // ssr: false بتمنع Next.js من محاولة يرندرها على السيرفر.
 const LocationMap = dynamic(() => import("@/components/LocationMap"), {
@@ -230,21 +239,7 @@ export default function FeaturedLocationsDraft({
                   className="rounded-2xl overflow-hidden border border-white/10 relative group"
                 >
                   {item.type === "video" ? (
-                    <video
-                      key={item.src}
-                      src={item.src}
-                      className="w-full h-64 object-cover transform group-hover:scale-105 transition-transform duration-500"
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      preload="auto"
-                      onError={(e) => {
-                        // لو الفيديو فشل يحمّل (صيغة مش مدعومة، رابط باظ، إلخ)،
-                        // نخفيه بدل ما يفضل مربع أسود فاضي — أحسن من صفحة فيها عنصر معطوب.
-                        e.currentTarget.style.display = "none";
-                      }}
-                    />
+                    <VideoPlayer src={item.src} />
                   ) : (
                     <Image
                       src={item.src}
