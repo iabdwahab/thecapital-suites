@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Alexandria } from "next/font/google";
+import { Alexandria, Geist } from "next/font/google";
 import { thamnyahFont } from "./fonts";
 import "./globals.css";
 import Footer from "@/components/global/Footer";
@@ -10,6 +10,9 @@ import "leaflet/dist/leaflet.css";
 import { ToastContainer } from "react-toastify";
 import WhatsAppLink from "@/components/global/WhatsAppLink";
 import StudyRequestLink from "@/components/global/StudyRequestLink";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const alexandria = Alexandria({
   variable: "--font-alexandria",
@@ -30,7 +33,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="ar"
       dir="rtl"
-      className={`${alexandria.variable} ${thamnyahFont.variable} h-full antialiased `}
+      className={cn("h-full", "antialiased", alexandria.variable, thamnyahFont.variable, "font-sans", geist.variable)}
     >
       <head>
         <link rel="icon" href="/logo.png" />

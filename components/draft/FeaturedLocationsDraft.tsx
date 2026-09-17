@@ -11,6 +11,7 @@ import {
 } from "@/lib/district-coordinates";
 import Image from "next/image";
 import Link from "next/link";
+import FeaturedLocationsModal from "./FeaturedLocationsModal";
 
 // الخريطة لازم تتحمل client-only لأن Leaflet بيستخدم window مباشرة.
 // ssr: false بتمنع Next.js من محاولة يرندرها على السيرفر.
@@ -83,6 +84,7 @@ export default function FeaturedLocationsDraft({
   const [city, setCity] = useState("riyadh");
   const [districtId, setDistrictId] = useState("");
   const [unitKey, setUnitKey] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const selectedCity = CITIES.find((c) => c.value === city);
 
@@ -211,25 +213,26 @@ export default function FeaturedLocationsDraft({
                 </span>
               </div>
 
-              <Link
-                href={`/suites-units/${selectedDistrict.id}`}
+              {/* بدل ما كانت Link بتودّي لصفحة تفاصيل منفصلة، بقت زرار بيفتح المودال */}
+              <button
+                type="button"
+                onClick={() => setIsModalOpen(true)}
                 className="bg-[#BFA045] px-4 py-3 rounded-md text-black font-bold hover:opacity-90 transition-opacity duration-200"
               >
                 عرض المزيد من الصور
-              </Link>
+              </button>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {galleryMedia.slice(0, 6).map((item, index) => (
                 <div
-                  // href={`/suites-units/${selectedDistrict.id}`}
                   key={`${index}-${item.src}`}
                   className="rounded-2xl overflow-hidden border border-white/10 relative group"
                 >
                   {item.type === "video" ? (
                     <video
                       key={item.src}
-                      src={item.src}
+                      src={item.src + "s"}
                       className="w-full h-64 object-cover transform group-hover:scale-105 transition-transform duration-500"
                       autoPlay
                       muted
@@ -292,6 +295,15 @@ export default function FeaturedLocationsDraft({
           </div>
         )}
       </div>
+
+      {selectedUnit && (
+        <FeaturedLocationsModal
+          open={isModalOpen}
+          onOpenChange={setIsModalOpen}
+          title={galleryTitle}
+          images={selectedUnit.images}
+        />
+      )}
     </section>
   );
 }
