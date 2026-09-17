@@ -1,4 +1,5 @@
 import HeroSection from "@/components/about/HeroSection";
+import ServicesSection from "@/components/about/ServicesSection";
 import ValuesSection from "@/components/about/ValuesSection";
 import Image from "next/image";
 
@@ -6,6 +7,7 @@ export default function AboutPage() {
   return (
     <>
       <HeroSection />
+      <ServicesSection />
       <ValuesSection />
 
       <section className="container pb-20 pt-10 text-center">

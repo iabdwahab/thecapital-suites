@@ -25,28 +25,31 @@ export default async function ValuesSection() {
   } = await sectionHeadingRes.json();
 
   return (
-    <section className="py-20 container relative ">
-      <span className="absolute top-0 w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px]  bg-[#bfa04533] left-0 -z-10"></span>
-      <span className="absolute top-[100vh] w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px]  bg-[#bfa04533] right-0 -z-10"></span>
+    <section className="py-20 relative ">
+      <div className="container">
+        <span className="absolute top-0 w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px]  bg-[#bfa04567] left-0 -z-10"></span>
+        <span className="absolute top-[100vh] w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px]  bg-[#bfa04567] right-0 -z-10"></span>
 
-      <div>
-        <Image
-          src="/logo.png"
-          alt="Logo"
-          width={668}
-          height={566}
-          className="w-25 h-25 object-contain mx-auto"
-        />
-        <h2 className="font-bold text-3xl md:text-4xl text-[#E0BC78] text-center mt-2">
-          {/* {sectionHeading.acf.title} */}
-          قيم ذا كابيــــــتال
-        </h2>
-        <p className="text-[#A09080] font-light text-center text-lg mt-2">
-          {sectionHeading.acf.description}
-        </p>
-      </div>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
-        {/* {featuresList.map((feature) => (
+        <span className="absolute top-0 left-0 w-full h-20 -z-10 bg-linear-to-t from-transparent to-black"></span>
+
+        <div>
+          <Image
+            src="/logo.png"
+            alt="Logo"
+            width={668}
+            height={566}
+            className="w-25 h-25 object-contain mx-auto"
+          />
+          <h2 className="font-bold text-3xl md:text-4xl text-[#E0BC78] text-center mt-2">
+            {/* {sectionHeading.acf.title} */}
+            قيم ذا كابيــــــتال
+          </h2>
+          <p className="text-[#A09080] font-light text-center text-lg mt-2">
+            {sectionHeading.acf.description}
+          </p>
+        </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
+          {/* {featuresList.map((feature) => (
           <ValuesCard
             key={feature.id}
             icon={feature.acf.icon}
@@ -55,30 +58,31 @@ export default async function ValuesSection() {
           />
         ))} */}
 
-        <ValuesCard
-          title="الاحترافية"
-          description="تحقيق أعلى مستوى من الجودة في كل عملية تشغيلية."
-        />
-        <ValuesCard
-          title="النزاهة"
-          description="الشفافية في التعامل مع الملاك والضيوف."
-        />
-        <ValuesCard
-          title="الابتكار"
-          description="تبني التكنولوجيا الحديثة وتحسين العمليات."
-        />
-        <ValuesCard
-          title="الاستدامة"
-          description="ممارسات صديقة للبيئة وكفاءة في استهلاك الموارد."
-        />
-        <ValuesCard
-          title="روح الفريق"
-          description="تكمين الموظفين وتعزيز ثقافة المبادرة."
-        />
-        <ValuesCard
-          title="التركيز على الضيف"
-          description="تقديم خدمات مخصصة تتجاوز التوقعات."
-        />
+          <ValuesCard
+            title="الاحترافية"
+            description="تحقيق أعلى مستوى من الجودة في كل عملية تشغيلية."
+          />
+          <ValuesCard
+            title="النزاهة"
+            description="الشفافية في التعامل مع الملاك والضيوف."
+          />
+          <ValuesCard
+            title="الابتكار"
+            description="تبني التكنولوجيا الحديثة وتحسين العمليات."
+          />
+          <ValuesCard
+            title="الاستدامة"
+            description="ممارسات صديقة للبيئة وكفاءة في استهلاك الموارد."
+          />
+          <ValuesCard
+            title="روح الفريق"
+            description="تكمين الموظفين وتعزيز ثقافة المبادرة."
+          />
+          <ValuesCard
+            title="التركيز على الضيف"
+            description="تقديم خدمات مخصصة تتجاوز التوقعات."
+          />
+        </div>
       </div>
     </section>
   );
