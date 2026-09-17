@@ -1,5 +1,6 @@
 import MapLoader from "@/components/global/MapLoader";
 import ContactForm from "@/components/home/ContactForm";
+import Image from "next/image";
 
 export default function page() {
   return (
@@ -7,6 +8,9 @@ export default function page() {
       id="contact"
       className="container py-40 grid lg:grid-cols-[570px_1fr] gap-4 scroll-mt-10"
     >
+      <span className="absolute top-0 w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px] bg-[#bfa04554] md:bg-[#bfa0458c] left-0 -z-10"></span>
+      <span className="absolute top-[130vh] lg:top-[100vh] w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px]  bg-[#bfa04554] right-0 -z-10"></span>
+
       <div>
         <h2 className="text-[#E0BC78] mb-8 text-6xl font-extrabold leading-[70px]">
           تواصل <br /> معنــــــــا
