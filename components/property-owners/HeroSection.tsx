@@ -17,7 +17,7 @@ export default async function HeroSection() {
     <section className="min-h-screen py-20 flex flex-col justify-center relative">
       <span>
         <Image
-          src="/home-hero-image.jpg"
+          src="/services-section/4.jpg"
           alt="Hero Image"
           width={4096}
           height={2736}
