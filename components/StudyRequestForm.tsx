@@ -405,7 +405,7 @@ export default function StudyRequestForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full mt-8 flex items-center justify-center gap-2 bg-[#B37700] text-white px-8 py-3 rounded-lg cursor-pointer hover:opacity-90 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] disabled:opacity-60"
+        className="w-full mt-8 flex items-center justify-center gap-2 bg-[#BFA045] text-black px-8 py-3 rounded-lg cursor-pointer hover:opacity-90 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] disabled:opacity-60"
       >
         <span>{isSubmitting ? "جاري الإرسال..." : "إرسال الطلب"}</span>
       </button>

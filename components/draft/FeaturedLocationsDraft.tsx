@@ -217,7 +217,7 @@ export default function FeaturedLocationsDraft({
               <button
                 type="button"
                 onClick={() => setIsModalOpen(true)}
-                className="bg-[#BFA045] px-4 py-3 rounded-md text-black font-bold hover:opacity-90 transition-opacity duration-200"
+                className="bg-[#BFA045] cursor-pointer px-4 py-3 rounded-md text-black font-bold hover:opacity-90 transition-opacity duration-200"
               >
                 عرض المزيد من الصور
               </button>

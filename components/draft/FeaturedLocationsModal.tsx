@@ -26,9 +26,31 @@ export default function FeaturedLocationsModal({
           فمش محتاجين نعمل أي حاجة من دول يدوي زي المرة اللي فاتت. */}
       <DialogContent
         dir="rtl"
-        className="bg-[#0a0a0a]  border-white/10 text-white sm:max-w-[1100px] max-h-[85vh] overflow-y-auto"
+        className="dark-scrollbar bg-[#0a0a0a]  text-white sm:max-w-[1100px] max-h-[85vh] overflow-y-auto"
       >
-        <DialogHeader className="mt-6">
+        {/* سكرول بار داكن بدل الافتراضي — يعتمد على الكلاس dark-scrollbar فوق */}
+        <style jsx global>{`
+          .dark-scrollbar {
+            /* Firefox */
+            scrollbar-width: thin;
+            scrollbar-color: #333333 #0a0a0a;
+          }
+          .dark-scrollbar::-webkit-scrollbar {
+            width: 10px;
+          }
+          .dark-scrollbar::-webkit-scrollbar-track {
+            background: #0a0a0a;
+          }
+          .dark-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #333333;
+            border-radius: 999px;
+            border: 2px solid #0a0a0a;
+          }
+          .dark-scrollbar::-webkit-scrollbar-thumb:hover {
+            background-color: #444444;
+          }
+        `}</style>
+        <DialogHeader className="mt-6 mb-6">
           <DialogTitle className="text-2xl text-[#BFA045] font-thamnyah md:text-3xl font-semibold">
             {title}
           </DialogTitle>
