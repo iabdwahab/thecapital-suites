@@ -1,3 +1,4 @@
+import CompanyProfileDownload from "@/components/about/CompanyProfileDownload";
 import HeroSection from "@/components/about/HeroSection";
 import ServicesSection from "@/components/about/ServicesSection";
 import ValuesSection from "@/components/about/ValuesSection";
@@ -10,7 +11,7 @@ export default function AboutPage() {
       <ServicesSection />
       <ValuesSection />
 
-      <section className="container pb-20 pt-10 text-center">
+      <section className="container pb-10 pt-10 text-center">
         <h2 className="text-2xl mb-4 text-[#E0BC78]">
           الاستدامة والمسؤولية المجتمعية
         </h2>
@@ -22,6 +23,8 @@ export default function AboutPage() {
           المجتمعية.
         </p>
       </section>
+
+      <CompanyProfileDownload />
     </>
   );
 }
