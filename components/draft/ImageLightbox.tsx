@@ -19,6 +19,8 @@ export default function ImageLightbox({
       index={index ?? 0}
       close={onClose}
       slides={images.map((src) => ({ src }))}
+      // الضغط على الخلفية (المساحة اللي حوالين الصورة) بيقفل اللايتبوكس
+      controller={{ closeOnBackdropClick: true }}
       // ألوان بسيطة تتماشى مع الثيم الداكن — الخلفية نفسها سودا شبه شفافة افتراضيًا،
       // فمش محتاجين override كتير هنا
       styles={{
