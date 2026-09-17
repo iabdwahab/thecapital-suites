@@ -28,10 +28,20 @@ export default function VideoPlayer({ src }: { src: string }) {
         }}
       />
 
-      {/* Plyr بيعمل الـ aspect ratio بتقنية padding-bottom percentage (مش height عادي)،
-          فلازم نلغي الـ padding ده ونجبر الفيديو ياخد position: absolute ويملأ
-          الحاوية بالكامل، بدل ما نحاول بس نتحكم في height. */}
+      {/* ألوان Plyr بتتحدد عن طريق CSS custom properties — بنظبطها هنا عشان تتماشى
+          مع لون الموقع (#BFA045) بدل الأزرق الافتراضي */}
       <style jsx global>{`
+        .plyr-fixed-height {
+          --plyr-color-main: #bfa045;
+          --plyr-video-control-color: #ffffff;
+          --plyr-video-control-color-hover: #0a0a0a;
+          --plyr-video-control-background-hover: #bfa045;
+          --plyr-audio-control-background-hover: #bfa045;
+          --plyr-menu-background: #0a0a0a;
+          --plyr-menu-color: #ffffff;
+          --plyr-tooltip-background: #0a0a0a;
+          --plyr-tooltip-color: #ffffff;
+        }
         .plyr-fixed-height {
           position: relative;
         }
