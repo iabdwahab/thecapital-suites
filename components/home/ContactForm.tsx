@@ -63,7 +63,7 @@ export default function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="bg-black py-8 px-6 border border-[#c6c6cd3f] rounded-md"
+      className="bg-black/20 py-8 px-6 border border-[#c6c6cd3f] rounded-md"
     >
       <div className="grid md:grid-cols-2 gap-3">
         <div className="flex flex-col gap-2">
@@ -72,7 +72,7 @@ export default function ContactForm() {
             type="text"
             id="name"
             placeholder="أدخل اسمك الكامل"
-            className={`bg-black border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
+            className={` border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
               errors.full_name ? "border-red-500" : "border-[#c6c6cd3f]"
             }`}
             {...register("full_name", { required: "يجب إدخال الاسم." })}
@@ -89,7 +89,7 @@ export default function ContactForm() {
             id="phone"
             placeholder="+966 5X XXX XXXX"
             dir="ltr"
-            className={`bg-black border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
+            className={`border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
               errors.phone_number ? "border-red-500" : "border-[#c6c6cd3f]"
             }`}
             {...register("phone_number", {
@@ -119,7 +119,7 @@ export default function ContactForm() {
             type="email"
             id="email"
             placeholder="أدخل بريدك الإلكتروني"
-            className={`bg-black border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
+            className={`border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
               errors.email ? "border-red-500" : "border-[#c6c6cd3f]"
             }`}
             {...register("email", {
@@ -141,7 +141,7 @@ export default function ContactForm() {
         <textarea
           id="message"
           placeholder="أدخل رسالتك..."
-          className={`bg-black border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] resize-none ${
+          className={`border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] resize-none ${
             errors.message ? "border-red-500" : "border-[#c6c6cd3f]"
           }`}
           rows={6}
