@@ -23,8 +23,8 @@ const redIcon = new L.DivIcon({
   html: `<div style="
     width: 20px;
     height: 20px;
-    background: #e53935;
-    border: 2px solid #ffffff;
+    background: #735f26;
+    border: 2px solid #0a0a0a;
     border-radius: 50% 50% 50% 0;
     transform: rotate(-45deg);
     box-shadow: 0 1px 4px rgba(0,0,0,0.5);
