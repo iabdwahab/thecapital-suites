@@ -12,7 +12,7 @@ const goldIcon = new L.DivIcon({
   html: `<div style="
     width: 20px;
     height: 20px;
-    background: #E0BC78;
+    background: #836e31;
     border: 2px solid #0a0a0a;
     border-radius: 50% 50% 50% 0;
     transform: rotate(-45deg);
@@ -41,7 +41,7 @@ export default function LocationMap({
         center={center}
         zoom={zoom}
         scrollWheelZoom={true}
-        className="w-full h-full"
+        className="dark-map w-full h-full"
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
