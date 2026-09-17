@@ -23,7 +23,7 @@ const redIcon = new L.DivIcon({
   html: `<div style="
     width: 20px;
     height: 20px;
-    background: #735f26;
+    background: #BFA045;
     border: 2px solid #0a0a0a;
     border-radius: 50% 50% 50% 0;
     transform: rotate(-45deg);
@@ -52,7 +52,7 @@ export default function Map() {
       zoom={10}
       scrollWheelZoom={true}
       style={{ height: "500px", width: "100%" }}
-      className="dark-map"
+      // className="dark-map"
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
