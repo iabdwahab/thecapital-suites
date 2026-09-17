@@ -232,7 +232,7 @@ export default function FeaturedLocationsDraft({
                   {item.type === "video" ? (
                     <video
                       key={item.src}
-                      src={item.src + "s"}
+                      src={item.src}
                       className="w-full h-64 object-cover transform group-hover:scale-105 transition-transform duration-500"
                       autoPlay
                       muted
