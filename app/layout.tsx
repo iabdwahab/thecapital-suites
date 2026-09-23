@@ -12,7 +12,7 @@ import WhatsAppLink from "@/components/global/WhatsAppLink";
 import StudyRequestLink from "@/components/global/StudyRequestLink";
 import { cn } from "@/lib/utils";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 const alexandria = Alexandria({
   variable: "--font-alexandria",
@@ -26,6 +26,30 @@ export const metadata: Metadata = {
   icons: {
     icon: "/logo.png",
   },
+  openGraph: {
+    title: "ذا كابيتال سويتس - The Capital Suites",
+    description:
+      "خيارك المميز في المملكة العربية السعودية للضيافة المتميزة وإدارة الأصول الفندقية.",
+    images: [
+      {
+        url: "/logo-bg.jpg",
+        width: 1200,
+        height: 630,
+        alt: "The Capital Suites",
+      },
+    ],
+    url: "https://thecapitalsuites.sa",
+    siteName: "The Capital Suites",
+    locale: "ar_SA",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ذا كابيتال سويتس - The Capital Suites",
+    description:
+      "خيارك المميز في المملكة العربية السعودية للضيافة المتميزة وإدارة الأصول الفندقية.",
+    images: ["/logo-bg.jpg"],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -33,7 +57,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="ar"
       dir="rtl"
-      className={cn("h-full", "antialiased", alexandria.variable, thamnyahFont.variable, "font-sans", geist.variable)}
+      className={cn(
+        "h-full",
+        "antialiased",
+        alexandria.variable,
+        thamnyahFont.variable,
+        "font-sans",
+        geist.variable,
+      )}
     >
       <head>
         <link rel="icon" href="/logo.png" />
