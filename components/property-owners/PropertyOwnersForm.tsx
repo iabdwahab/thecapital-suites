@@ -66,7 +66,7 @@ export default function PropertyOwnersForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="bg-black text-white py-8 px-6 border border-[#c6c6cd4b] rounded-md"
+      className="bg-black/20 text-white py-8 px-6 border border-[#c6c6cd4b] rounded-md"
     >
       <div className="grid md:grid-cols-2 gap-3">
         <div className="flex flex-col gap-2">
@@ -75,7 +75,7 @@ export default function PropertyOwnersForm() {
             type="text"
             id="full_name"
             placeholder="أدخل اسمك الكامل"
-            className={`bg-black border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
+            className={` border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
               errors.full_name ? "border-red-500" : "border-[#c6c6cd4b]"
             }`}
             {...register("full_name", { required: "يجب إدخال الاسم." })}
@@ -92,7 +92,7 @@ export default function PropertyOwnersForm() {
             id="phone_number"
             placeholder="+966 5X XXX XXXX"
             dir="ltr"
-            className={`bg-black border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
+            className={` border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
               errors.phone_number ? "border-red-500" : "border-[#c6c6cd4b]"
             }`}
             {...register("phone_number", {
@@ -122,7 +122,7 @@ export default function PropertyOwnersForm() {
             type="text"
             id="property_type"
             placeholder="اختر نوع العقار"
-            className={`bg-black border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
+            className={`border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
               errors.property_type ? "border-red-500" : "border-[#c6c6cd4b]"
             }`}
             {...register("property_type", {
@@ -142,7 +142,7 @@ export default function PropertyOwnersForm() {
             type="text"
             id="property_location"
             placeholder="اختر موقع العقار"
-            className={`bg-black border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
+            className={` border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
               errors.property_location ? "border-red-500" : "border-[#c6c6cd4b]"
             }`}
             {...register("property_location", {
@@ -162,7 +162,7 @@ export default function PropertyOwnersForm() {
         <textarea
           id="additional_details"
           placeholder="أي تفاصيل أخرى تود إضافتها عن العقار.."
-          className={`bg-black border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] resize-none ${
+          className={`border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] resize-none ${
             errors.additional_details ? "border-red-500" : "border-[#c6c6cd4b]"
           }`}
           rows={6}

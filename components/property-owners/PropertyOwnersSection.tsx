@@ -2,8 +2,8 @@ import PropertyOwnersForm from "./PropertyOwnersForm";
 
 export default function PropertyOwnersSection() {
   return (
-    <section className="bg-black text-white py-6 lg:py-20">
-      <div className="container bg-black border border-[#c6c6cd28] p-10! rounded-lg  lg:grid lg:grid-cols-[480px_1fr] gap-4">
+    <section className=" text-white py-6 lg:py-20 relative z-10">
+      <div className="container border border-[#c6c6cd28] p-10! rounded-lg  lg:grid lg:grid-cols-[480px_1fr] gap-4">
         <div className="pt-6 lg:pt-10">
           <h2 className="text-3xl">نموذج تقديم العقار</h2>
           <p className="text-white mt-6">
