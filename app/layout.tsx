@@ -32,7 +32,7 @@ export const metadata: Metadata = {
       "خيارك المميز في المملكة العربية السعودية للضيافة المتميزة وإدارة الأصول الفندقية.",
     images: [
       {
-        url: "https://thecapitalsuites.sa/logo-bg.jpg",
+        url: "https://thecapitalsuites.sa/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "The Capital Suites",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     title: "ذا كابيتال سويتس - The Capital Suites",
     description:
       "خيارك المميز في المملكة العربية السعودية للضيافة المتميزة وإدارة الأصول الفندقية.",
-    images: ["https://thecapitalsuites.sa/logo-bg.jpg"],
+    images: ["https://thecapitalsuites.sa/og-image.jpg"],
   },
 };
 
