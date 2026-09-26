@@ -123,12 +123,12 @@ export default function FeaturedLocationsDraft({
 
   const galleryImages = selectedUnit ? selectedUnit.images : [];
 
-  // بنحط فيديو الحي (لو موجود) أول عنصر في الجاليري، وبعده الصور بالترتيب العادي.
-  // selectedDistrict.mainVideo جاي من الحقل "video" في ووردبريس (string | false في الأصل،
-  // اتحول لـ string | null في طبقة الـ normalization).
+  // الفيديو بقى تابع لنوع الوحدة نفسه (selectedUnit.video) مش للحي ككل —
+  // كل نوع وحدة (استديو / غرفة وصالة / غرفتين وصالة) ليه فيديو خاص بيه في ووردبريس،
+  // فبيتحط أول عنصر في الجاليري بتاعت النوع ده بس.
   const galleryMedia: MediaItem[] = [
-    ...(selectedDistrict?.mainVideo
-      ? [{ type: "video" as const, src: selectedDistrict.mainVideo }]
+    ...(selectedUnit?.video
+      ? [{ type: "video" as const, src: selectedUnit.video }]
       : []),
     ...galleryImages.map((src) => ({ type: "image" as const, src })),
   ];
