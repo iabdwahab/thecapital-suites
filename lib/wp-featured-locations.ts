@@ -116,7 +116,7 @@ function normalizePost(post: RawPost): District {
 export async function getFeaturedLocations(): Promise<District[]> {
   const res = await fetch(WP_API_URL, {
     // عدّل الوقت حسب احتياجك — أو استخدم { cache: "no-store" } لو عايز بيانات لحظية
-    cache: "no-store",
+    next: { revalidate: 3600 }, // إعادة التحقق كل ساعة
   });
 
   if (!res.ok) {
