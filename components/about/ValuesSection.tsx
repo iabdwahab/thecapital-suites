@@ -30,7 +30,7 @@ export default async function ValuesSection() {
         <span className="absolute top-0 w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px]  bg-[#bfa04567] left-0 -z-10"></span>
         <span className="absolute top-[100vh] w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px]  bg-[#bfa04567] right-0 -z-10"></span>
 
-        <span className="absolute top-0 left-0 w-full h-20 -z-10 bg-linear-to-t from-transparent to-black"></span>
+        {/* <span className="absolute top-0 left-0 w-full h-20 -z-10 bg-linear-to-t from-transparent to-[#030303]"></span> */}
 
         <div>
           <Image

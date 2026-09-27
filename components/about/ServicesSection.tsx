@@ -59,13 +59,16 @@ const features: Feature[] = [
 
 export default function ServicesSection() {
   // Fast Performance (third item) is selected by default, matching this design's markup
-  const [activeIndex, setActiveIndex] = useState(2);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   return (
     <section
       dir="rtl"
-      className="w-full py-12 md:py-24 lg:py-20 bg-black relative"
+      className="w-full py-12 md:py-24 lg:py-20  relative overflow-hidden"
     >
+      <span className="absolute top-0 w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px]  bg-[#bfa04565] left-0 -z-10"></span>
+      <span className="absolute top-0 left-0 w-full h-20 -z-10 bg-linear-to-t from-transparent to-[#030303]"></span>
+
       <div className="container mx-auto px-4">
         {/* Heading */}
         <div className="mb-8 text-center md:mb-12">

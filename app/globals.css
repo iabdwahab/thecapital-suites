@@ -50,7 +50,7 @@
 }
 
 body {
-  @apply font-alexandria bg-black text-white;
+  @apply font-alexandria bg-[#0c0c0c] text-white;
 }
 
 .container {
