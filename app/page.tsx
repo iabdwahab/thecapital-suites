@@ -9,6 +9,7 @@ import PropertyOwnersSection from "@/components/home/PropertyOwnersSection";
 import WhyusSection from "@/components/home/WhyusSection";
 import FeaturedLocationsDraft from "@/components/draft/FeaturedLocationsDraft";
 import { getFeaturedLocations } from "@/lib/wp-featured-locations";
+import Image from "next/image";
 
 export default async function Home() {
   const districts = await getFeaturedLocations();
@@ -20,17 +21,28 @@ export default async function Home() {
       {/* <FeaturedLocations /> */}
       <WhyusSection />
       <div className="relative">
-        <span className="absolute top-0 w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px]  bg-[#bfa04565] left-0 -z-10"></span>
+        {/* <span className="absolute top-0 w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px]  bg-[#bfa04565] left-0 -z-10"></span>
         <span className="absolute top-[100vh] w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px]  bg-[#bfa04565] right-0 -z-10"></span>
-        <span className="absolute top-[200vh] w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px]  bg-[#bfa04565] left-0 -z-10"></span>
+        <span className="absolute top-[200vh] w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px]  bg-[#bfa04565] left-0 -z-10"></span> */}
 
+        <Image
+          src="/services-section/1.jpg"
+          alt="Why Us Background"
+          width={1920}
+          height={1080}
+          className="absolute inset-0 w-full h-full object-cover -z-10 opacity-20"
+        />
+        {/* 
         <span className="absolute top-0 left-0 w-full h-20 -z-10 bg-linear-to-t from-transparent to-black"></span>
+        <span className="absolute bottom-0 left-0 w-full h-20 -z-10 bg-linear-to-t from-black to-transparent"></span> */}
+
+        <span className="absolute top-0 left-0 w-full h-10 -z-10 bg-linear-to-t from-transparent to-black"></span>
         <span className="absolute bottom-0 left-0 w-full h-20 -z-10 bg-linear-to-t from-black to-transparent"></span>
 
         <PropertyOwnersSection />
         <FeaturesSection />
-        <PlatformsSection />
       </div>
+      <PlatformsSection />
       {/* <section
         id="contact"
         className="container py-20 grid lg:grid-cols-[570px_1fr] gap-4 scroll-mt-10"

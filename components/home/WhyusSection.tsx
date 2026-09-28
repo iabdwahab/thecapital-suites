@@ -36,14 +36,14 @@ export default async function WhyusSection() {
         alt="Why Us Background"
         width={1920}
         height={1080}
-        className="absolute inset-0 w-full h-full object-cover -z-10 opacity-20"
+        className="absolute inset-0 w-full h-full object-cover -z-10 opacity-15"
       />
 
       {/* <span className="absolute w-full h-20 top-0 left-0 bg-linear-to-b from-black to-transparent -z-10"></span> */}
 
       <span className="absolute  w-full h-1/2 blur-[140px] bg-[#FFAA00] opacity-20 -z-10"></span>
       <span className="absolute left-0 top-0  w-full h-20  -z-10 bg-linear-to-t from-transparent  to-black"></span>
-      <span className="absolute left-0 bottom-0  w-full h-1/2  -z-10 bg-linear-to-t from-black via-black to-transparent"></span>
+      <span className="absolute left-0 bottom-0  w-full h-20  -z-10 bg-linear-to-t from-black via-black to-transparent"></span>
 
       <Image
         src="/whyus-section-lines-pattern.svg"

@@ -25,31 +25,44 @@ export default async function FeaturesSection() {
   } = await sectionHeadingRes.json();
 
   return (
-    <section className="py-10 container">
-      <div>
-        <Image
-          src="/logo.png"
-          alt="Logo"
-          width={668}
-          height={566}
-          className="w-25 h-25 object-contain mx-auto"
-        />
-        <h2 className="font-bold text-3xl md:text-4xl text-[#E0BC78] text-center mt-2">
-          {sectionHeading.acf.title}
-        </h2>
-        <p className="text-[#A09080] font-light text-center text-lg mt-2">
-          {sectionHeading.acf.description}
-        </p>
-      </div>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
-        {featuresList.map((feature) => (
-          <FeatureCard
-            key={feature.id}
-            icon={feature.acf.icon}
-            title={feature.acf.title}
-            description={feature.acf.description}
+    <section className="py-10 relative">
+      {/* <Image
+        src="/services-section/1.jpg"
+        alt="Why Us Background"
+        width={1920}
+        height={1080}
+        className="absolute inset-0 w-full h-full object-cover -z-10 opacity-25"
+      />
+
+      <span className="absolute top-0 left-0 w-full h-20 -z-10 bg-linear-to-t from-transparent to-black"></span>
+      <span className="absolute bottom-0 left-0 w-full h-20 -z-10 bg-linear-to-t from-black to-transparent"></span> */}
+
+      <div className="container">
+        <div>
+          <Image
+            src="/logo.png"
+            alt="Logo"
+            width={668}
+            height={566}
+            className="w-25 h-25 object-contain mx-auto"
           />
-        ))}
+          <h2 className="font-bold text-3xl md:text-4xl text-[#E0BC78] text-center mt-2">
+            {sectionHeading.acf.title}
+          </h2>
+          <p className="text-[#A09080] font-light text-center text-lg mt-2">
+            {sectionHeading.acf.description}
+          </p>
+        </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
+          {featuresList.map((feature) => (
+            <FeatureCard
+              key={feature.id}
+              icon={feature.acf.icon}
+              title={feature.acf.title}
+              description={feature.acf.description}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
