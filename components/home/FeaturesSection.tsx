@@ -25,7 +25,7 @@ export default async function FeaturesSection() {
   } = await sectionHeadingRes.json();
 
   return (
-    <section className="py-10 relative">
+    <section className="py-20 relative bg-[#141313]">
       {/* <Image
         src="/services-section/1.jpg"
         alt="Why Us Background"

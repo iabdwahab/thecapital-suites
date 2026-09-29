@@ -17,9 +17,9 @@ export default async function Home() {
   return (
     <>
       <HeroSection />
-      <FeaturedLocationsDraft districts={districts} />
+      {/* <FeaturedLocationsDraft districts={districts} /> */}
       {/* <FeaturedLocations /> */}
-      <WhyusSection />
+      {/* <WhyusSection /> */}
       <div className="relative">
         {/* <span className="absolute top-0 w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px]  bg-[#bfa04565] left-0 -z-10"></span>
         <span className="absolute top-[100vh] w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px]  bg-[#bfa04565] right-0 -z-10"></span>

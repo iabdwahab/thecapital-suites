@@ -33,23 +33,25 @@ export default async function PlatformsSection() {
   } = await sectionHeadingRes.json();
 
   return (
-    <section className="py-20 relative">
+    <section className="py-20 relative z-10 overflow-hidden bg-white">
       <div className="container">
-        <Image
+        {/* <Image
           src="/services-section/2.jpg"
           alt="Why Us Background"
           width={1920}
           height={1080}
           className="absolute inset-0 w-full h-full object-cover -z-10 opacity-20"
-        />
+        /> */}
 
-        <span className="absolute top-0 left-0 w-full h-20 -z-10 bg-linear-to-t from-transparent to-black"></span>
-        <span className="absolute bottom-0 left-0 w-full h-20 -z-10 bg-linear-to-t from-black to-transparent"></span>
+        {/* <span className="absolute top-0 left-0 w-full h-20 -z-10 bg-linear-to-t from-transparent to-black"></span>
+        <span className="absolute bottom-0 left-0 w-full h-20 -z-10 bg-linear-to-t from-black to-transparent"></span> */}
 
-        <h2 className="font-bold text-3xl md:text-4xl text-[#E0BC78] text-center mt-4 leading-[46px]">
+        <span className="absolute top-0 w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px] bg-[#bfa04554] md:bg-[#BFA045] left-0 -z-10 "></span>
+
+        <h2 className="font-bold text-3xl md:text-4xl text-[#BFA045] text-center mt-4 leading-[46px]">
           {sectionHeading.acf.title}
         </h2>
-        <p className="text-[#C8BFB0] font-light text-center text-lg mt-4">
+        <p className="text-[#333333] font-light text-center text-lg mt-4">
           {sectionHeading.acf.description}
         </p>
 
@@ -59,9 +61,9 @@ export default async function PlatformsSection() {
               key={platform.id}
               className="p-8 md:p-10  space-y-2 border-l border-[#c9a45541]"
             >
-              <h4 className="text-[#C9A455] font-bold">{platform.acf.title}</h4>
+              <h4 className="text-[#BFA045] font-bold">{platform.acf.title}</h4>
               <hr className="border-[#c9a45541]" />
-              <ul className="text-[#C0B09A] space-y-2">
+              <ul className="text-[#333333] space-y-2">
                 {Object.values(platform.acf.platforms_list).map(
                   (platformName, index) =>
                     platformName && <li key={index}>{platformName}</li>,
