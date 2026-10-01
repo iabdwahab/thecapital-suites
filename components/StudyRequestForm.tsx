@@ -2,6 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { SendHorizontal } from "lucide-react";
 
 interface StudyRequestFormData {
   client_name: string;
@@ -22,6 +23,39 @@ interface StudyRequestFormData {
   send_whatsapp_number: string;
   send_email: string;
 }
+
+// ===== ستايل الحقول =====
+const fieldClass = (hasError = false) =>
+  `w-full rounded-xl border bg-[#C9A455]/[0.06] p-3 text-[#F0E0C0] placeholder:text-[#8a7a62] transition duration-200 hover:border-[#C9A455]/40 focus:bg-[#C9A455]/10 focus:outline-none focus:shadow-[0_0_0_3px_rgba(201,164,85,0.15)] ${
+    hasError
+      ? "border-red-400/70 focus:border-red-400"
+      : "border-[#C9A455]/20 focus:border-[#E0BC78]"
+  }`;
+
+const labelClass = "text-sm text-[#B5A590]";
+const errorClass = "text-sm text-red-400";
+
+const groupTitleClass =
+  "mb-4 flex items-center gap-2 font-medium text-[#E0BC78]";
+
+// خيار (checkbox / radio) على شكل كارت صغير يضيء عند الاختيار
+const optionClass =
+  "flex cursor-pointer items-center gap-3 rounded-xl border border-[#C9A455]/20 bg-[#C9A455]/[0.04] px-4 py-3 text-[#F0E0C0] transition duration-200 hover:border-[#C9A455]/40 has-checked:border-[#E0BC78]/70 has-checked:bg-[#C9A455]/10";
+
+const optionInputClass = "size-4 shrink-0 accent-[#C9A455]";
+
+const submitClass =
+  "mt-8 flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-linear-to-b from-[#E0BC78] to-[#BFA045] px-8 py-3.5 font-bold text-[#1A1208] shadow-[0_10px_30px_-10px_rgba(224,188,120,0.5)] transition duration-300 hover:shadow-[0_15px_40px_-8px_rgba(224,188,120,0.7)] focus:outline-none focus:ring-2 focus:ring-[#E0BC78]/50 disabled:cursor-not-allowed disabled:opacity-60";
+
+const unitFields = [
+  { name: "studio_count", label: "استديو" },
+  { name: "one_bedroom_count", label: "غرفة وصالة" },
+  { name: "two_bedroom_count", label: "غرفتين وصالة" },
+  { name: "three_bedroom_count", label: "3 غرف وصالة" },
+] as const;
+
+// معيّن ذهبي صغير بجانب عناوين المجموعات
+const GroupMark = () => <span className="size-1.5 rotate-45 bg-[#E0BC78]" />;
 
 export default function StudyRequestForm() {
   const {
@@ -118,38 +152,40 @@ export default function StudyRequestForm() {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className=" py-8 px-6 border text-white border-[#c6c6cd4b] rounded-md"
-    >
-      {/* البيانات الأساسية */}
-      <div className="grid md:grid-cols-2 gap-3">
+    <form onSubmit={handleSubmit(onSubmit)}>
+      {/* ===== البيانات الأساسية ===== */}
+      <p className={groupTitleClass}>
+        <GroupMark />
+        البيانات الأساسية
+      </p>
+
+      <div className="grid gap-4 md:grid-cols-2">
         <div className="flex flex-col gap-2">
-          <label htmlFor="client_name">اسم العميل</label>
+          <label htmlFor="client_name" className={labelClass}>
+            اسم العميل
+          </label>
           <input
             type="text"
             id="client_name"
             placeholder="أدخل اسمك الكامل"
-            className={` border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
-              errors.client_name ? "border-red-500" : "border-[#c6c6cd4b]"
-            }`}
+            className={fieldClass(!!errors.client_name)}
             {...register("client_name", { required: "يجب إدخال الاسم." })}
           />
           {errors.client_name && (
-            <p className="text-sm text-red-500">{errors.client_name.message}</p>
+            <p className={errorClass}>{errors.client_name.message}</p>
           )}
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="phone">رقم الجوال</label>
+          <label htmlFor="phone" className={labelClass}>
+            رقم الجوال
+          </label>
           <input
             type="text"
             id="phone"
             placeholder="+966 5X XXX XXXX"
             dir="ltr"
-            className={`border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
-              errors.phone ? "border-red-500" : "border-[#c6c6cd4b]"
-            }`}
+            className={`${fieldClass(!!errors.phone)} text-right`}
             {...register("phone", {
               required: "يجب إدخال رقم الجوال.",
               pattern: {
@@ -159,38 +195,34 @@ export default function StudyRequestForm() {
               minLength: { value: 7, message: "رقم الجوال قصير جدًا." },
             })}
           />
-          {errors.phone && (
-            <p className="text-sm text-red-500">{errors.phone.message}</p>
-          )}
+          {errors.phone && <p className={errorClass}>{errors.phone.message}</p>}
         </div>
-      </div>
 
-      <div className="grid md:grid-cols-2 gap-3 mt-3">
         <div className="flex flex-col gap-2">
-          <label htmlFor="region">المنطقة</label>
+          <label htmlFor="region" className={labelClass}>
+            المنطقة
+          </label>
           <input
             type="text"
             id="region"
             placeholder="أدخل المنطقة"
-            className={`border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
-              errors.region ? "border-red-500" : "border-[#c6c6cd4b]"
-            }`}
+            className={fieldClass(!!errors.region)}
             {...register("region", { required: "يجب إدخال المنطقة." })}
           />
           {errors.region && (
-            <p className="text-sm text-red-500">{errors.region.message}</p>
+            <p className={errorClass}>{errors.region.message}</p>
           )}
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="email">البريد الإلكتروني</label>
+          <label htmlFor="email" className={labelClass}>
+            البريد الإلكتروني
+          </label>
           <input
             type="email"
             id="email"
             placeholder="أدخل بريدك الإلكتروني"
-            className={`border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
-              errors.email ? "border-red-500" : "border-[#c6c6cd4b]"
-            }`}
+            className={fieldClass(!!errors.email)}
             {...register("email", {
               required: "البريد الإلكتروني مطلوب",
               pattern: {
@@ -199,188 +231,181 @@ export default function StudyRequestForm() {
               },
             })}
           />
-          {errors.email && (
-            <p className="text-sm text-red-500">{errors.email.message}</p>
-          )}
+          {errors.email && <p className={errorClass}>{errors.email.message}</p>}
         </div>
-      </div>
 
-      <div className="grid md:grid-cols-2 gap-3 mt-3">
         <div className="flex flex-col gap-2">
-          <label htmlFor="website_url">رابط الموقع</label>
+          <label htmlFor="website_url" className={labelClass}>
+            رابط الموقع
+          </label>
           <input
             type="text"
             id="website_url"
             placeholder="أدخل رابط الموقع (إن وجد)"
             dir="ltr"
-            className="border border-[#c6c6cd4b] p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD]"
+            className={`${fieldClass()} text-right`}
             {...register("website_url")}
           />
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="buildings_count">عدد العمائر</label>
+          <label htmlFor="buildings_count" className={labelClass}>
+            عدد العمائر
+          </label>
           <input
             type="number"
             min={0}
             id="buildings_count"
             placeholder="أدخل عدد العمائر"
-            className={`border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
-              errors.buildings_count ? "border-red-500" : "border-[#c6c6cd4b]"
-            }`}
+            className={fieldClass(!!errors.buildings_count)}
             {...register("buildings_count", {
               required: "يجب إدخال عدد العمائر.",
             })}
           />
           {errors.buildings_count && (
-            <p className="text-sm text-red-500">
-              {errors.buildings_count.message}
-            </p>
+            <p className={errorClass}>{errors.buildings_count.message}</p>
           )}
         </div>
       </div>
 
-      {/* تقسيم العمائر */}
-      <div className="mt-6">
-        <p className="mb-3 font-medium">تقسيم العمائر إلى</p>
-        <div className="grid md:grid-cols-2 gap-3">
-          <div className="flex flex-col gap-2">
-            <label htmlFor="studio_count">استديو (العدد)</label>
-            <input
-              type="number"
-              min={0}
-              id="studio_count"
-              placeholder="0"
-              className="border border-[#c6c6cd4b] p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD]"
-              {...register("studio_count")}
-            />
-          </div>
+      {/* ===== تقسيم العمائر ===== */}
+      <div className="mt-8 border-t border-[#C9A455]/15 pt-8">
+        <p className={groupTitleClass}>
+          <GroupMark />
+          تقسيم العمائر إلى
+        </p>
 
-          <div className="flex flex-col gap-2">
-            <label htmlFor="one_bedroom_count">غرفة وصالة (العدد)</label>
-            <input
-              type="number"
-              min={0}
-              id="one_bedroom_count"
-              placeholder="0"
-              className=" border border-[#c6c6cd4b] p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD]"
-              {...register("one_bedroom_count")}
-            />
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <label htmlFor="two_bedroom_count">غرفتين وصالة (العدد)</label>
-            <input
-              type="number"
-              min={0}
-              id="two_bedroom_count"
-              placeholder="0"
-              className="border border-[#c6c6cd4b] p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD]"
-              {...register("two_bedroom_count")}
-            />
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <label htmlFor="three_bedroom_count">3 غرف وصالة (العدد)</label>
-            <input
-              type="number"
-              min={0}
-              id="three_bedroom_count"
-              placeholder="0"
-              className="border border-[#c6c6cd4b] p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD]"
-              {...register("three_bedroom_count")}
-            />
-          </div>
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+          {unitFields.map(({ name, label }) => (
+            <div key={name} className="flex flex-col gap-2">
+              <label htmlFor={name} className={labelClass}>
+                {label}
+              </label>
+              <input
+                type="number"
+                min={0}
+                id={name}
+                placeholder="0"
+                className={`${fieldClass()} text-center`}
+                {...register(name)}
+              />
+            </div>
+          ))}
         </div>
 
-        <div className="flex flex-col gap-2 mt-3">
-          <label htmlFor="other_units">وحدات أخرى (اذكر الوصف)</label>
+        <div className="mt-4 flex flex-col gap-2">
+          <label htmlFor="other_units" className={labelClass}>
+            وحدات أخرى (اذكر الوصف)
+          </label>
           <input
             type="text"
             id="other_units"
             placeholder="اكتب وصف الوحدات الأخرى إن وجدت"
-            className="border border-[#c6c6cd4b] p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD]"
+            className={fieldClass()}
             {...register("other_units")}
           />
         </div>
       </div>
 
-      {/* نوع التأجير */}
-      <div className="mt-6">
-        <p className="mb-3 font-medium">نوع التأجير</p>
-        <div className="flex flex-col gap-3">
-          <label className="flex items-center gap-2">
-            <input type="checkbox" {...register("rental_daily")} />
-            <span>يومي</span>
-            <span className="text-xs text-red-500">
-              (يلزم وجود ترخيص سياحي)
+      {/* ===== نوع التأجير ===== */}
+      <div className="mt-8 border-t border-[#C9A455]/15 pt-8">
+        <p className={groupTitleClass}>
+          <GroupMark />
+          نوع التأجير
+        </p>
+
+        <div className="grid gap-3 sm:grid-cols-3">
+          <label className={optionClass}>
+            <input
+              type="checkbox"
+              className={optionInputClass}
+              {...register("rental_daily")}
+            />
+            <span className="flex flex-col">
+              <span>يومي</span>
+              <span className="text-xs text-[#E0BC78]/80">
+                يلزم وجود ترخيص سياحي
+              </span>
             </span>
           </label>
-          <label className="flex items-center gap-2">
-            <input type="checkbox" {...register("rental_monthly")} />
+          <label className={optionClass}>
+            <input
+              type="checkbox"
+              className={optionInputClass}
+              {...register("rental_monthly")}
+            />
             <span>شهري</span>
           </label>
-          <label className="flex items-center gap-2">
-            <input type="checkbox" {...register("rental_yearly")} />
+          <label className={optionClass}>
+            <input
+              type="checkbox"
+              className={optionInputClass}
+              {...register("rental_yearly")}
+            />
             <span>سنوي</span>
           </label>
         </div>
       </div>
 
-      {/* وسيلة إرسال الدراسة */}
-      <div className="mt-6">
-        <p className="mb-3 font-medium">وسيلة إرسال الدراسة المناسبة</p>
-        <div className="flex flex-col gap-3">
-          <label className="flex items-center gap-2">
+      {/* ===== وسيلة إرسال الدراسة ===== */}
+      <div className="mt-8 border-t border-[#C9A455]/15 pt-8">
+        <p className={groupTitleClass}>
+          <GroupMark />
+          وسيلة إرسال الدراسة المناسبة
+        </p>
+
+        <div className="grid gap-3 sm:grid-cols-2">
+          <label className={optionClass}>
             <input
               type="radio"
               value="whatsapp"
+              className={optionInputClass}
               {...register("send_method", {
                 required: "يجب اختيار وسيلة الإرسال.",
               })}
             />
-            <span>واتس</span>
+            <span>واتساب</span>
           </label>
-          {sendMethod === "whatsapp" && (
+          <label className={optionClass}>
+            <input
+              type="radio"
+              value="email"
+              className={optionInputClass}
+              {...register("send_method", {
+                required: "يجب اختيار وسيلة الإرسال.",
+              })}
+            />
+            <span>البريد الإلكتروني</span>
+          </label>
+        </div>
+
+        {sendMethod === "whatsapp" && (
+          <div className="mt-4 flex flex-col gap-2">
             <input
               type="text"
               placeholder="اكتب رقم الواتساب"
               dir="ltr"
-              className={`border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
-                errors.send_whatsapp_number
-                  ? "border-red-500"
-                  : "border-[#C6C6CD]"
-              }`}
+              className={`${fieldClass(!!errors.send_whatsapp_number)} text-right`}
               {...register("send_whatsapp_number", {
                 required:
                   sendMethod === "whatsapp" ? "يجب إدخال رقم الواتساب." : false,
               })}
             />
-          )}
-          {errors.send_whatsapp_number && (
-            <p className="text-sm text-red-500">
-              {errors.send_whatsapp_number.message}
-            </p>
-          )}
+            {errors.send_whatsapp_number && (
+              <p className={errorClass}>
+                {errors.send_whatsapp_number.message}
+              </p>
+            )}
+          </div>
+        )}
 
-          <label className="flex items-center gap-2">
-            <input
-              type="radio"
-              value="email"
-              {...register("send_method", {
-                required: "يجب اختيار وسيلة الإرسال.",
-              })}
-            />
-            <span>بريد</span>
-          </label>
-          {sendMethod === "email" && (
+        {sendMethod === "email" && (
+          <div className="mt-4 flex flex-col gap-2">
             <input
               type="email"
               placeholder="اكتب بريدك الإلكتروني"
               dir="ltr"
-              className={`border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
-                errors.send_email ? "border-red-500" : "border-[#C6C6CD]"
-              }`}
+              className={`${fieldClass(!!errors.send_email)} text-right`}
               {...register("send_email", {
                 required:
                   sendMethod === "email"
@@ -392,22 +417,22 @@ export default function StudyRequestForm() {
                 },
               })}
             />
-          )}
-          {errors.send_email && (
-            <p className="text-sm text-red-500">{errors.send_email.message}</p>
-          )}
-          {errors.send_method && (
-            <p className="text-sm text-red-500">{errors.send_method.message}</p>
-          )}
-        </div>
+            {errors.send_email && (
+              <p className={errorClass}>{errors.send_email.message}</p>
+            )}
+          </div>
+        )}
+
+        {errors.send_method && (
+          <p className={`${errorClass} mt-2`}>{errors.send_method.message}</p>
+        )}
       </div>
 
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="w-full mt-8 flex items-center justify-center gap-2 bg-[#BFA045] text-black px-8 py-3 rounded-lg cursor-pointer hover:opacity-90 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] disabled:opacity-60"
-      >
+      <button type="submit" disabled={isSubmitting} className={submitClass}>
         <span>{isSubmitting ? "جاري الإرسال..." : "إرسال الطلب"}</span>
+        {!isSubmitting && (
+          <SendHorizontal className="size-5 rotate-180" aria-hidden="true" />
+        )}
       </button>
     </form>
   );

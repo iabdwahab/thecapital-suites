@@ -36,10 +36,13 @@ export default function PropertyOwnersSection() {
       <div className="container">
         {/* الكارت — حدود متدرجة */}
         <div className="rounded-2xl bg-linear-to-b from-[#C9A455]/45 via-[#C9A455]/10 to-[#C9A455]/5 p-px shadow-[0_30px_80px_-30px_rgba(201,164,85,0.35)]">
-          <div className="relative overflow-hidden rounded-2xl bg-[#100d09]/90 p-6 backdrop-blur-sm md:p-10 lg:grid lg:grid-cols-[480px_1fr] lg:gap-10">
+          <div className="relative overflow-hidden rounded-2xl bg-[#16120b]/80 p-6 backdrop-blur-sm md:p-10 lg:grid lg:grid-cols-[480px_1fr] lg:gap-10">
             {/* لمعة علوية */}
             <span className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-linear-to-b from-[#C9A455]/[0.07] to-transparent" />
             <span className="pointer-events-none absolute inset-x-16 top-0 h-px bg-linear-to-r from-transparent via-[#E0BC78]/70 to-transparent" />
+
+            {/* توهج داخلي يضيء خلفية الكارت */}
+            <span className="pointer-events-none absolute -top-24 left-1/2 size-[480px] -translate-x-1/2 rounded-full bg-[#bfa045]/15 blur-[100px]" />
 
             {/* العمود النصي */}
             <div className="relative pt-2 lg:pt-6">

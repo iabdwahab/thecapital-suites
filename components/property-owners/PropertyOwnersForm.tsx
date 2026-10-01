@@ -2,6 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { SendHorizontal } from "lucide-react";
 
 interface PropertyOwnersFormData {
   full_name: string;
@@ -10,6 +11,20 @@ interface PropertyOwnersFormData {
   property_location: string;
   additional_details: string;
 }
+
+// ===== ستايل الحقول =====
+const fieldClass = (hasError = false) =>
+  `w-full rounded-xl border bg-[#C9A455]/[0.06] p-3 text-[#F0E0C0] placeholder:text-[#8a7a62] transition duration-200 hover:border-[#C9A455]/40 focus:bg-[#C9A455]/10 focus:outline-none focus:shadow-[0_0_0_3px_rgba(201,164,85,0.15)] ${
+    hasError
+      ? "border-red-400/70 focus:border-red-400"
+      : "border-[#C9A455]/20 focus:border-[#E0BC78]"
+  }`;
+
+const labelClass = "text-sm text-[#B5A590]";
+const errorClass = "text-sm text-red-400";
+
+const submitClass =
+  "mt-8 flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-linear-to-b from-[#E0BC78] to-[#BFA045] px-8 py-3.5 font-bold text-[#1A1208] shadow-[0_10px_30px_-10px_rgba(224,188,120,0.5)] transition duration-300 hover:shadow-[0_15px_40px_-8px_rgba(224,188,120,0.7)] focus:outline-none focus:ring-2 focus:ring-[#E0BC78]/50 disabled:cursor-not-allowed disabled:opacity-60";
 
 export default function PropertyOwnersForm() {
   const {
@@ -46,7 +61,6 @@ export default function PropertyOwnersForm() {
       );
 
       const responseData = await res.json();
-      console.log("Response from server:", responseData);
       if (responseData.status === "mail_sent") {
         toast.success("تم إرسال طلبك بنجاح!", { position: "top-right" });
         reset();
@@ -56,7 +70,7 @@ export default function PropertyOwnersForm() {
           position: "top-right",
         });
       }
-    } catch (error) {
+    } catch {
       toast.error("حدث خطأ غير متوقع أثناء الإرسال.", {
         position: "top-right",
       });
@@ -64,37 +78,34 @@ export default function PropertyOwnersForm() {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="bg-black/20 text-white py-8 px-6 border border-[#c6c6cd4b] rounded-md"
-    >
-      <div className="grid md:grid-cols-2 gap-3">
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="grid gap-4 md:grid-cols-2">
         <div className="flex flex-col gap-2">
-          <label htmlFor="full_name">الاسم الكامل</label>
+          <label htmlFor="full_name" className={labelClass}>
+            الاسم الكامل
+          </label>
           <input
             type="text"
             id="full_name"
             placeholder="أدخل اسمك الكامل"
-            className={` border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
-              errors.full_name ? "border-red-500" : "border-[#c6c6cd4b]"
-            }`}
+            className={fieldClass(!!errors.full_name)}
             {...register("full_name", { required: "يجب إدخال الاسم." })}
           />
           {errors.full_name && (
-            <p className="text-sm text-red-500">{errors.full_name.message}</p>
+            <p className={errorClass}>{errors.full_name.message}</p>
           )}
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="phone_number">رقم الجوال</label>
+          <label htmlFor="phone_number" className={labelClass}>
+            رقم الجوال
+          </label>
           <input
             type="text"
             id="phone_number"
             placeholder="+966 5X XXX XXXX"
             dir="ltr"
-            className={` border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
-              errors.phone_number ? "border-red-500" : "border-[#c6c6cd4b]"
-            }`}
+            className={`${fieldClass(!!errors.phone_number)} text-right`}
             {...register("phone_number", {
               required: "يجب إدخال رقم الجوال.",
               pattern: {
@@ -108,97 +119,72 @@ export default function PropertyOwnersForm() {
             })}
           />
           {errors.phone_number && (
-            <p className="text-sm text-red-500">
-              {errors.phone_number.message}
-            </p>
+            <p className={errorClass}>{errors.phone_number.message}</p>
           )}
         </div>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-3 mt-3">
+      <div className="mt-4 grid gap-4 md:grid-cols-2">
         <div className="flex flex-col gap-2">
-          <label htmlFor="property_type">نوع العقار</label>
+          <label htmlFor="property_type" className={labelClass}>
+            نوع العقار
+          </label>
           <input
             type="text"
             id="property_type"
-            placeholder="اختر نوع العقار"
-            className={`border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
-              errors.property_type ? "border-red-500" : "border-[#c6c6cd4b]"
-            }`}
+            placeholder="مثال: عمارة سكنية، فيلا..."
+            className={fieldClass(!!errors.property_type)}
             {...register("property_type", {
               required: "يجب إدخال نوع العقار.",
             })}
           />
           {errors.property_type && (
-            <p className="text-sm text-red-500">
-              {errors.property_type.message}
-            </p>
+            <p className={errorClass}>{errors.property_type.message}</p>
           )}
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="property_location">موقع العقار</label>
+          <label htmlFor="property_location" className={labelClass}>
+            موقع العقار
+          </label>
           <input
             type="text"
             id="property_location"
-            placeholder="اختر موقع العقار"
-            className={` border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] ${
-              errors.property_location ? "border-red-500" : "border-[#c6c6cd4b]"
-            }`}
+            placeholder="المدينة والحي"
+            className={fieldClass(!!errors.property_location)}
             {...register("property_location", {
               required: "يجب إدخال موقع العقار.",
             })}
           />
           {errors.property_location && (
-            <p className="text-sm text-red-500">
-              {errors.property_location.message}
-            </p>
+            <p className={errorClass}>{errors.property_location.message}</p>
           )}
         </div>
       </div>
 
-      <div className="flex flex-col gap-2 mt-3">
-        <label htmlFor="additional_details">تفاصيل إضافية</label>
+      <div className="mt-4 flex flex-col gap-2">
+        <label htmlFor="additional_details" className={labelClass}>
+          تفاصيل إضافية
+        </label>
         <textarea
           id="additional_details"
           placeholder="أي تفاصيل أخرى تود إضافتها عن العقار.."
-          className={`border p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] resize-none ${
-            errors.additional_details ? "border-red-500" : "border-[#c6c6cd4b]"
-          }`}
+          className={`${fieldClass(!!errors.additional_details)} resize-none`}
           rows={6}
           {...register("additional_details", {
             required: "يجب إدخال التفاصيل.",
             minLength: { value: 10, message: "التفاصيل قصيرة جدًا." },
           })}
-        ></textarea>
+        />
         {errors.additional_details && (
-          <p className="text-sm text-red-500">
-            {errors.additional_details.message}
-          </p>
+          <p className={errorClass}>{errors.additional_details.message}</p>
         )}
       </div>
 
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="w-full mt-8 flex items-center justify-center gap-2 bg-[#BFA045] text-black px-8 py-3 rounded-lg cursor-pointer hover:opacity-90 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#C6C6CD] disabled:opacity-60"
-      >
+      <button type="submit" disabled={isSubmitting} className={submitClass}>
         <span>{isSubmitting ? "جاري الإرسال..." : "إرسال الطلب"}</span>
         {!isSubmitting && (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="size-6 rotate-180"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"
-            />
-          </svg>
+          <SendHorizontal className="size-5 rotate-180" aria-hidden="true" />
         )}
       </button>
     </form>

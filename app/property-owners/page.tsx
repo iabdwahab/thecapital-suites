@@ -36,17 +36,20 @@ export default function PropertyOwnersPage() {
         {/* شبكة خطوط رفيعة */}
         <div className="pointer-events-none absolute inset-0 -z-10 opacity-[0.1] [background-image:linear-gradient(#C9A455_1px,transparent_1px),linear-gradient(90deg,#C9A455_1px,transparent_1px)] [background-size:64px_64px] [mask-image:radial-gradient(ellipse_at_center,black_15%,transparent_100%)]" />
 
-        {/* خط فاصل علوي بين القسم الفاتح والداكن */}
+        {/* خط فاصل علوي بين النموذجين */}
         <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-[#C9A455]/60 to-transparent" />
 
         {/* ===== المحتوى ===== */}
         <div className="container">
           {/* الكارت — حدود متدرجة */}
           <div className="rounded-2xl bg-linear-to-b from-[#C9A455]/45 via-[#C9A455]/10 to-[#C9A455]/5 p-px shadow-[0_30px_80px_-30px_rgba(201,164,85,0.35)]">
-            <div className="relative overflow-hidden rounded-2xl bg-[#100d09]/90 p-6 backdrop-blur-sm md:p-10 lg:grid lg:grid-cols-[480px_1fr] lg:gap-10">
+            <div className="relative overflow-hidden rounded-2xl bg-[#16120b]/80 p-6 backdrop-blur-sm md:p-10 lg:grid lg:grid-cols-[480px_1fr] lg:gap-10">
               {/* لمعة علوية */}
               <span className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-linear-to-b from-[#C9A455]/[0.07] to-transparent" />
               <span className="pointer-events-none absolute inset-x-16 top-0 h-px bg-linear-to-r from-transparent via-[#E0BC78]/70 to-transparent" />
+
+              {/* توهج داخلي يضيء خلفية الكارت */}
+              <span className="pointer-events-none absolute -top-24 left-1/2 size-[480px] -translate-x-1/2 rounded-full bg-[#bfa045]/15 blur-[100px]" />
 
               {/* العمود النصي */}
               <div className="relative pt-2 lg:pt-6">
