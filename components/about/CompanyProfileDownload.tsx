@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function CompanyProfileDownload() {
   return (
-    <div className="flex justify-center pb-20" dir="rtl">
+    <div className="flex justify-center " dir="rtl">
       <Link
         href="/profile-capital-suites-2026.pdf"
         download
