@@ -1,4 +1,13 @@
 import Image from "next/image";
+import {
+  Award,
+  HeartHandshake,
+  Leaf,
+  Lightbulb,
+  ShieldCheck,
+  Users,
+  type LucideIcon,
+} from "lucide-react";
 
 // نمط معيّنات ذهبي (SVG مُضمّن)
 const diamondPattern = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Cpath d='M24 0L48 24L24 48L0 24Z' fill='none' stroke='%23c9a455' stroke-width='1'/%3E%3C/svg%3E")`;
@@ -6,19 +15,40 @@ const diamondPattern = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 // حبيبات خفيفة (noise)
 const noiseTexture = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`;
 
-export default async function ValuesSection() {
-  const featuresListRes = await fetch(
-    `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/dealing-features?_fields=id,acf&acf_format=standard`,
-  );
-  const featuresList: {
-    id: number;
-    acf: {
-      icon: string;
-      title: string;
-      description: string;
-    };
-  }[] = await featuresListRes.json();
+const values: { icon: LucideIcon; title: string; description: string }[] = [
+  {
+    icon: Award,
+    title: "الاحترافية",
+    description: "تحقيق أعلى مستوى من الجودة في كل عملية تشغيلية.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "النزاهة",
+    description: "الشفافية في التعامل مع الملاك والضيوف.",
+  },
+  {
+    icon: Lightbulb,
+    title: "الابتكار",
+    description: "تبني التكنولوجيا الحديثة وتحسين العمليات.",
+  },
+  {
+    icon: Leaf,
+    title: "الاستدامة",
+    description: "ممارسات صديقة للبيئة وكفاءة في استهلاك الموارد.",
+  },
+  {
+    icon: Users,
+    title: "روح الفريق",
+    description: "تمكين الموظفين وتعزيز ثقافة المبادرة.",
+  },
+  {
+    icon: HeartHandshake,
+    title: "التركيز على الضيف",
+    description: "تقديم خدمات مخصصة تتجاوز التوقعات.",
+  },
+];
 
+export default async function ValuesSection() {
   const sectionHeadingRes = await fetch(
     `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/section-info/174?_fields=id,acf&acf_format=standard`,
   );
@@ -36,7 +66,7 @@ export default async function ValuesSection() {
       {/* ===== طبقات الخلفية ===== */}
 
       {/* توهج ذهبي رئيسي خلف العنوان */}
-      <span className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[420px] w-[90%] max-w-[100pxs] -translate-x-1/2 rounded-full bg-[#bfa045]/20 blur-[120px]" />
+      <span className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[420px] w-[90%] max-w-[900px] -translate-x-1/2 rounded-full bg-[#bfa045]/20 blur-[120px]" />
 
       {/* توهجات جانبية خفيفة */}
       <span className="pointer-events-none absolute -left-40 bottom-0 -z-10 size-[400px] rounded-full bg-[#bfa045]/10 blur-[140px]" />
@@ -88,53 +118,26 @@ export default async function ValuesSection() {
         </div>
 
         <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {/* {featuresList.map((feature) => (
+          {values.map((value) => (
             <ValuesCard
-              key={feature.id}
-              icon={feature.acf.icon}
-              title={feature.acf.title}
-              description={feature.acf.description}
+              key={value.title}
+              icon={value.icon}
+              title={value.title}
+              description={value.description}
             />
-          ))} */}
-
-          <ValuesCard
-            title="الاحترافية"
-            description="تحقيق أعلى مستوى من الجودة في كل عملية تشغيلية."
-          />
-          <ValuesCard
-            title="النزاهة"
-            description="الشفافية في التعامل مع الملاك والضيوف."
-          />
-          <ValuesCard
-            title="الابتكار"
-            description="تبني التكنولوجيا الحديثة وتحسين العمليات."
-          />
-          <ValuesCard
-            title="الاستدامة"
-            description="ممارسات صديقة للبيئة وكفاءة في استهلاك الموارد."
-          />
-          <ValuesCard
-            title="روح الفريق"
-            description="تمكين الموظفين وتعزيز ثقافة المبادرة."
-          />
-          <ValuesCard
-            title="التركيز على الضيف"
-            description="تقديم خدمات مخصصة تتجاوز التوقعات."
-          />
+          ))}
         </div>
       </div>
-
-      {/* <span className="absolute bottom-0 left-0 w-full h-20 z-10 bg-linear-to-t from-[#000000] to-transparent"></span> */}
     </section>
   );
 }
 
 function ValuesCard({
-  icon,
+  icon: Icon,
   title,
   description,
 }: {
-  icon?: string;
+  icon: LucideIcon;
   title: string;
   description: string;
 }) {
@@ -152,14 +155,8 @@ function ValuesCard({
         <span className="pointer-events-none absolute -top-16 left-1/2 size-40 -translate-x-1/2 rounded-full bg-[#ffa600]/20 opacity-0 blur-3xl transition duration-300 group-hover:opacity-100" />
 
         {/* الأيقونة داخل badge */}
-        <div className="relative grid size-14 place-items-center rounded-xl border border-[#C9A455]/30 bg-[#C9A455]/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition duration-300 group-hover:border-[#E0BC78]/60 group-hover:bg-[#C9A455]/15">
-          <Image
-            src={icon || "/feature-placeholder.svg"}
-            alt={title}
-            width={28}
-            height={28}
-            className="size-7 object-contain"
-          />
+        <div className="relative grid size-14 place-items-center rounded-xl border border-[#C9A455]/30 bg-[#C9A455]/10 text-[#E0BC78] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition duration-300 group-hover:border-[#E0BC78]/60 group-hover:bg-[#C9A455]/15 group-hover:text-[#F5DFA8]">
+          <Icon className="size-7" strokeWidth={1.5} aria-hidden="true" />
         </div>
 
         <h3 className="relative mt-5 text-lg font-semibold text-[#F0E0C0]">

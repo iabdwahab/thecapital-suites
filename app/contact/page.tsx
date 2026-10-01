@@ -48,6 +48,9 @@ export default function page() {
             <span className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-linear-to-b from-[#C9A455]/[0.07] to-transparent" />
             <span className="pointer-events-none absolute inset-x-16 top-0 h-px bg-linear-to-r from-transparent via-[#E0BC78]/70 to-transparent" />
 
+            {/* توهج داخلي يضيء خلفية النموذج */}
+            <span className="pointer-events-none absolute -top-24 left-1/2 size-[420px] -translate-x-1/2 rounded-full bg-[#bfa045]/15 blur-[100px]" />
+
             <div className="relative">
               <ContactForm />
             </div>
