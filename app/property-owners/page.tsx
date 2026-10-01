@@ -1,93 +1,95 @@
 import HeroSection from "@/components/property-owners/HeroSection";
 import PropertyOwnersSection from "@/components/property-owners/PropertyOwnersSection";
 import StudyRequestForm from "@/components/StudyRequestForm";
+import { Headset, ShieldCheck } from "lucide-react";
+
+const perks = [
+  {
+    icon: Headset,
+    title: "دعم فني مخصص",
+    description: "فريقنا متواجد للرد على استفساراتكم.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "سرية تامة",
+    description: "بياناتك محمية ولن يتم مشاركتها.",
+  },
+];
 
 export default function PropertyOwnersPage() {
   return (
     <>
       <HeroSection />
 
-      <div className="relative z-10 overflow-hidden">
-        <span className="absolute top-0 left-0 w-full h-20 z-10 bg-linear-to-b from-black to-transparent"></span>
+      <PropertyOwnersSection />
 
-        <span className="absolute top-0 w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px] bg-[#bfa04554] md:bg-[#bfa0456e] left-0 -z-10"></span>
-        <span className="absolute top-[130vh] lg:top-[100vh] w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px]  bg-[#bfa0456e] right-0 -z-10"></span>
-        <span className="absolute top-[200vh] w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px] bg-[#bfa04554] md:bg-[#bfa0456e] left-0 -z-10"></span>
+      <section className="relative isolate overflow-hidden bg-linear-to-b from-[#100d09] via-[#16120b] to-[#100d09] py-16 text-white lg:py-24">
+        {/* ===== طبقات الخلفية ===== */}
 
-        <PropertyOwnersSection />
+        {/* توهج رئيسي خلف النموذج */}
+        <span className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[500px] w-[85%] max-w-[1000px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#bfa045]/15 blur-[140px]" />
 
-        <section className=" text-white py-6 lg:py-10">
-          <div className="container bg-black/20 border border-[#c6c6cd4b] p-10! rounded-lg  lg:grid lg:grid-cols-[480px_1fr] gap-4">
-            <div className="pt-6 lg:pt-10">
-              <h2 className="text-3xl">نموذج دراسة المبنى </h2>
-              <p className="text-white mt-6">
-                املأ النموذج التالي ببياناتك وتفاصيل عقارك، وسيقوم فريقنا المختص
-                بالتواصل معك في أقرب وقت لدراسة المبنى من حيث الإيرادات و
-                المصروفات المتوقعة.
-              </p>
+        {/* توهجات جانبية */}
+        <span className="pointer-events-none absolute -right-40 top-0 -z-10 size-[420px] rounded-full bg-[#bfa045]/15 blur-[140px]" />
+        <span className="pointer-events-none absolute -left-40 bottom-0 -z-10 size-[420px] rounded-full bg-[#bfa045]/15 blur-[140px]" />
 
-              <div className="flex flex-col gap-6 mt-10">
-                <div className="flex items-center gap-4">
-                  <div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="size-8"
+        {/* شبكة خطوط رفيعة */}
+        <div className="pointer-events-none absolute inset-0 -z-10 opacity-[0.1] [background-image:linear-gradient(#C9A455_1px,transparent_1px),linear-gradient(90deg,#C9A455_1px,transparent_1px)] [background-size:64px_64px] [mask-image:radial-gradient(ellipse_at_center,black_15%,transparent_100%)]" />
+
+        {/* خط فاصل علوي بين القسم الفاتح والداكن */}
+        <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-[#C9A455]/60 to-transparent" />
+
+        {/* ===== المحتوى ===== */}
+        <div className="container">
+          {/* الكارت — حدود متدرجة */}
+          <div className="rounded-2xl bg-linear-to-b from-[#C9A455]/45 via-[#C9A455]/10 to-[#C9A455]/5 p-px shadow-[0_30px_80px_-30px_rgba(201,164,85,0.35)]">
+            <div className="relative overflow-hidden rounded-2xl bg-[#100d09]/90 p-6 backdrop-blur-sm md:p-10 lg:grid lg:grid-cols-[480px_1fr] lg:gap-10">
+              {/* لمعة علوية */}
+              <span className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-linear-to-b from-[#C9A455]/[0.07] to-transparent" />
+              <span className="pointer-events-none absolute inset-x-16 top-0 h-px bg-linear-to-r from-transparent via-[#E0BC78]/70 to-transparent" />
+
+              {/* العمود النصي */}
+              <div className="relative pt-2 lg:pt-6">
+                <h2 className="bg-linear-to-b from-[#F5DFA8] to-[#C9A455] bg-clip-text text-3xl font-bold text-transparent">
+                  نموذج دراسة المبنى
+                </h2>
+                <p className="mt-6 font-light leading-8 text-[#B5A590]">
+                  املأ النموذج التالي ببياناتك وتفاصيل عقارك، وسيقوم فريقنا
+                  المختص بالتواصل معك في أقرب وقت لدراسة المبنى من حيث الإيرادات
+                  والمصروفات المتوقعة.
+                </p>
+
+                <div className="mt-10 flex flex-col gap-4">
+                  {perks.map(({ icon: Icon, title, description }) => (
+                    <div
+                      key={title}
+                      className="flex items-center gap-4 rounded-xl border border-[#C9A455]/15 bg-[#C9A455]/[0.04] p-4"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-medium text-white">
-                      دعم فني مخصص
-                    </h4>
-                    <p className="text-white">
-                      فريقنا متواجد للرد على استفساراتكم.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="size-8"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-medium text-white">
-                      سرية تامة
-                    </h4>
-                    <p className="text-white">
-                      بياناتك محمية ولن يتم مشاركتها.
-                    </p>
-                  </div>
+                      <div className="grid size-12 shrink-0 place-items-center rounded-xl border border-[#C9A455]/30 bg-[#C9A455]/10 text-[#E0BC78] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+                        <Icon className="size-6" aria-hidden="true" />
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-medium text-[#F0E0C0]">
+                          {title}
+                        </h4>
+                        <p className="text-sm text-[#A09080]">{description}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
-            </div>
 
-            <div id="study-request-form" className="max-lg:mt-8 scroll-mt-40">
-              <StudyRequestForm />
+              {/* النموذج */}
+              <div
+                id="study-request-form"
+                className="relative scroll-mt-40 max-lg:mt-10"
+              >
+                <StudyRequestForm />
+              </div>
             </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </>
   );
 }

@@ -1,36 +1,59 @@
 import MapLoader from "@/components/global/MapLoader";
 import ContactForm from "@/components/home/ContactForm";
-import Image from "next/image";
 
 export default function page() {
   return (
     <section
       id="contact"
-      className="container py-40 grid lg:grid-cols-[570px_1fr] gap-4 scroll-mt-10"
+      className="relative isolate scroll-mt-10 overflow-hidden bg-linear-to-b from-[#100d09] via-[#16120b] to-[#100d09] pt-40 pb-24"
     >
-      <span className="absolute top-0 w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px] bg-[#bfa04554] md:bg-[#bfa0458c] left-0 -z-10"></span>
-      <span className="absolute top-[130vh] lg:top-[100vh] w-[200px] md:w-[calc(50%)] h-[350px] blur-[180px] md:blur-[350px]  bg-[#bfa04554] right-0 -z-10"></span>
+      {/* ===== طبقات الخلفية ===== */}
 
-      <div>
-        <h2 className="text-[#E0BC78] mb-8 text-6xl font-extrabold leading-[70px]">
-          تواصل <br /> معنــــــــا
-        </h2>
+      {/* توهج خلف العنوان والخريطة */}
+      <span className="pointer-events-none absolute -right-20 top-20 -z-10 size-[520px] rounded-full bg-[#bfa045]/20 blur-[140px]" />
 
-        <div className="w-full h-90 rounded-2xl overflow-hidden z-10 relative">
-          <MapLoader />
-          {/* <iframe
-              src={
-                "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d927791.1826067893!2d45.63954355802078!3d24.72055203332265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f03890d489399%3A0xba974d1c98e79fd5!2sRiyadh%20Saudi%20Arabia!5e0!3m2!1sen!2seg!4v1761863338612!5m2!1sen!2seg"
-              }
-              allowFullScreen={undefined}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="rounded-card-radius border-secondary-light h-full w-full border shadow-sm"
-            ></iframe> */}
+      {/* توهج خلف النموذج */}
+      <span className="pointer-events-none absolute -left-20 bottom-0 -z-10 size-[520px] rounded-full bg-[#bfa045]/15 blur-[140px]" />
+
+      {/* توهج علوي عام */}
+      <span className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[300px] w-[80%] max-w-[900px] -translate-x-1/2 rounded-full bg-[#bfa045]/10 blur-[120px]" />
+
+      {/* شبكة خطوط رفيعة */}
+      <div className="pointer-events-none absolute inset-0 -z-10 opacity-[0.1] [background-image:linear-gradient(#C9A455_1px,transparent_1px),linear-gradient(90deg,#C9A455_1px,transparent_1px)] [background-size:64px_64px] [mask-image:radial-gradient(ellipse_at_center,black_15%,transparent_100%)]" />
+
+      {/* ===== المحتوى ===== */}
+      <div className="container grid gap-8 lg:grid-cols-[570px_1fr] lg:gap-10">
+        <div>
+          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#C9A455]/25 bg-[#C9A455]/10 px-4 py-1 text-xs text-[#E0BC78]">
+            <span className="size-1.5 rotate-45 bg-[#E0BC78]" />
+            نسعد بتواصلك
+          </span>
+
+          <h2 className="mb-8 bg-linear-to-b from-[#F5DFA8] to-[#C9A455] bg-clip-text text-5xl font-extrabold leading-[70px] text-transparent md:text-6xl">
+            تواصل <br /> معنــــــــا
+          </h2>
+
+          {/* الخريطة — إطار بحدود متدرجة */}
+          <div className="rounded-2xl bg-linear-to-b from-[#C9A455]/50 via-[#C9A455]/15 to-[#C9A455]/30 p-px shadow-[0_30px_80px_-30px_rgba(201,164,85,0.4)]">
+            <div className="relative z-10 h-90 w-full overflow-hidden rounded-2xl">
+              <MapLoader />
+            </div>
+          </div>
+        </div>
+
+        {/* النموذج داخل كارت بحدود متدرجة */}
+        <div className="rounded-2xl bg-linear-to-b from-[#C9A455]/45 via-[#C9A455]/10 to-[#C9A455]/5 p-px shadow-[0_30px_80px_-30px_rgba(201,164,85,0.35)]">
+          <div className="relative h-full overflow-hidden rounded-2xl bg-[#100d09]/90 p-6 backdrop-blur-sm md:p-10">
+            {/* لمعة علوية */}
+            <span className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-linear-to-b from-[#C9A455]/[0.07] to-transparent" />
+            <span className="pointer-events-none absolute inset-x-16 top-0 h-px bg-linear-to-r from-transparent via-[#E0BC78]/70 to-transparent" />
+
+            <div className="relative">
+              <ContactForm />
+            </div>
+          </div>
         </div>
       </div>
-      <ContactForm />
-      {/* <StudyRequestForm /> */}
     </section>
   );
 }
