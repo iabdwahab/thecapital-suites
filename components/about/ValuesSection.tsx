@@ -123,6 +123,8 @@ export default async function ValuesSection() {
           />
         </div>
       </div>
+
+      {/* <span className="absolute bottom-0 left-0 w-full h-20 z-10 bg-linear-to-t from-[#000000] to-transparent"></span> */}
     </section>
   );
 }
